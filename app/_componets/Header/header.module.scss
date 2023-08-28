@@ -1,0 +1,23 @@
+.header_wrapp {
+    width: 228px;
+    padding: 18px;
+}
+.wrapper {
+    display: flex;
+    align-items: center;
+}
+.navigation {
+    margin-left: auto;
+
+    color: var(--white, #fff);
+
+    font-family: Muller;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+
+    & a {
+        padding: 20px;
+    }
+}

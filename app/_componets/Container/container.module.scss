@@ -1,0 +1,8 @@
+.container {
+    margin: 0 auto;
+    min-width: var(--small-screen);
+
+    @media (min-width: 1700px) {
+        max-width: var(--large-screen);
+    }
+}
