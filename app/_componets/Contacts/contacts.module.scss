@@ -1,0 +1,28 @@
+.item {
+    padding: 7px 0;
+}
+.link {
+    position: relative;
+    color: var(--white, #fff);
+    text-align: right;
+
+    font-family: Muller;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+    &::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        background-image: url("../../../public/images/mdi_arrow-r.svg");
+        transform: translate(5px, -50%);
+
+        width: 32px;
+        height: 32px;
+
+        background-size: auto;
+        background-repeat: no-repeat;
+    }
+}

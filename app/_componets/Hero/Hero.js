@@ -1,3 +1,4 @@
+import Contacts from "../Contacts/Contacts";
 import Container from "../Container/Container";
 import style from "./hero.module.scss";
 
@@ -10,6 +11,7 @@ const Hero = ({ font }) => {
                         WITH DELIVERY TO ANY LOCATION
                     </h1>
                     <h1 className={style.title}>Rent a car in Dubai</h1>
+                    <Contacts />
                 </Container>
             </section>
         </div>

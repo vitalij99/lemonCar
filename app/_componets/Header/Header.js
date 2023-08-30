@@ -5,6 +5,7 @@ import LogoSec from "@/public/images/logo-sec.svg";
 
 import Container from "../Container/Container";
 import style from "./header.module.scss";
+import Image from "next/image";
 
 export const Header = () => {
     return (
@@ -14,8 +15,8 @@ export const Header = () => {
                     <div className={style.wrapper}>
                         <Link href="/">
                             <div className={style.header_wrapp}>
-                                <Logo />
-                                <LogoSec />
+                                <Image src={Logo} alt="logo" />
+                                <Image src={LogoSec} alt="logo" />
                             </div>
                         </Link>
                         <div className={style.navigation}>
