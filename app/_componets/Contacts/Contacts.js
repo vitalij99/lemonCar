@@ -1,8 +1,8 @@
 import style from "./contacts.module.scss";
 
-const Contacts = () => {
+const Contacts = ({ className }) => {
     return (
-        <address>
+        <address className={className}>
             <nav>
                 <ul>
                     <li className={style.item}>

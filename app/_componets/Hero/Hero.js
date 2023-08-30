@@ -10,8 +10,8 @@ const Hero = ({ font }) => {
                     <h1 className={style.title}>
                         WITH DELIVERY TO ANY LOCATION
                     </h1>
-                    <h1 className={style.title}>Rent a car in Dubai</h1>
-                    <Contacts />
+                    <h1 className={style.title_sec}>Rent a car in Dubai</h1>
+                    <Contacts className={style.contacts} />
                 </Container>
             </section>
         </div>
