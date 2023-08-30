@@ -1,5 +1,14 @@
-import styles from "./page.module.css";
+import localFont from "next/font/local";
+import Hero from "./_componets/Hero/Hero";
+
+const heroFont = localFont({
+    src: "../fonts/AllrounderMonumentTest-Book.otf",
+});
 
 export default function Home() {
-    return <main className={styles.main}>Home</main>;
+    return (
+        <main>
+            <Hero font={heroFont.className} />
+        </main>
+    );
 }

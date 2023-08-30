@@ -1,3 +1,15 @@
+.header_section {
+    display: none;
+    position: absolute;
+    width: 100%;
+    border-bottom: 0.5px solid var(--white, #fff);
+    background: rgba(23, 23, 23, 0.1);
+    backdrop-filter: blur(10px);
+
+    @media (min-width: 1700px) {
+        display: block;
+    }
+}
 .header_wrapp {
     width: 228px;
     padding: 18px;

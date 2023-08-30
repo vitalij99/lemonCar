@@ -1,0 +1,29 @@
+.section {
+    min-height: 700px;
+
+    padding-top: 133px;
+    background-image: image-set(
+        url(../../../public/images/hero/herobg_mob@1x.jpg) 1x,
+        url(../../../public/images/hero/herobg_mob@2x.jpg) 2x
+    );
+    background-repeat: no-repeat;
+    background-position: center;
+
+    @media (min-width: 1700px) {
+        padding-top: 101px;
+        min-height: 920px;
+    }
+}
+.title {
+    width: 290px;
+    color: var(--white, #fff);
+
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 350;
+    line-height: 1.68;
+
+    &:last-child {
+        font-size: 26px;
+    }
+}

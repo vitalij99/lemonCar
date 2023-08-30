@@ -9,24 +9,26 @@ import style from "./header.module.scss";
 export const Header = () => {
     return (
         <header>
-            <Container>
-                <div className={style.wrapper}>
-                    <Link href="/">
-                        <div className={style.header_wrapp}>
-                            <Logo />
-                            <LogoSec />
+            <div className={style.header_section}>
+                <Container>
+                    <div className={style.wrapper}>
+                        <Link href="/">
+                            <div className={style.header_wrapp}>
+                                <Logo />
+                                <LogoSec />
+                            </div>
+                        </Link>
+                        <div className={style.navigation}>
+                            <Link href="/carlist">Car List</Link>
+                            <Link href="/viptransfer">VIP Transfer</Link>
+                            <Link href="/yachts">Yachts</Link>
+                            <Link href="/photshoots">Photshoots with car</Link>
+                            <Link href="/about">About Us</Link>
+                            <Link href="/contact">Contact Us</Link>
                         </div>
-                    </Link>
-                    <div className={style.navigation}>
-                        <Link href="/carlist">Car List</Link>
-                        <Link href="/viptransfer">VIP Transfer</Link>
-                        <Link href="/yachts">Yachts</Link>
-                        <Link href="/photshoots">Photshoots with car</Link>
-                        <Link href="/about">About Us</Link>
-                        <Link href="/contact">Contact Us</Link>
                     </div>
-                </div>
-            </Container>
+                </Container>
+            </div>
         </header>
     );
 };
