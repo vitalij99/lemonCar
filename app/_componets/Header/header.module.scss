@@ -2,7 +2,7 @@
     display: none;
     position: absolute;
     width: 100%;
-    border-bottom: 0.5px solid var(--white, #fff);
+    border-bottom: 0.5px solid var(--text, #fff);
     background: rgba(23, 23, 23, 0.1);
     backdrop-filter: blur(10px);
 
@@ -21,7 +21,7 @@
 .navigation {
     margin-left: auto;
 
-    color: var(--white, #fff);
+    color: var(--text, #fff);
 
     font-size: 18px;
     font-style: normal;
