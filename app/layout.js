@@ -1,8 +1,28 @@
-import { Header } from "./_componets/Header/Header";
-import "./globals.css";
-import { Inter } from "next/font/google";
+import localFont from "next/font/local";
 
-const inter = Inter({ subsets: ["latin"] });
+import "./globals.css";
+
+import { Header } from "./_componets/Header/Header";
+
+const myFont = localFont({
+    src: [
+        {
+            path: "../fonts/MullerRegular.ttf",
+            weight: "400",
+            style: "normal",
+        },
+        {
+            path: "../fonts/MullerMedium.ttf",
+            weight: "500",
+            style: "normal",
+        },
+        {
+            path: "../fonts/MullerBold.ttf",
+            weight: "700",
+            style: "normal",
+        },
+    ],
+});
 
 export const metadata = {
     title: "Limon Car",
@@ -12,7 +32,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
     return (
         <html lang="en">
-            <body className={inter.className}>
+            <body className={myFont.className}>
                 <Header />
 
                 {children}
