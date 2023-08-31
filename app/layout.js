@@ -5,6 +5,7 @@ import "./globals.css";
 import { Header } from "./_componets/Header/Header";
 
 const myFont = localFont({
+    variable: "--font-muller",
     src: [
         {
             path: "../fonts/MullerRegular.ttf",
@@ -32,7 +33,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
     return (
         <html lang="en">
-            <body className={myFont.className}>
+            <body className={myFont.variable}>
                 <Header />
 
                 {children}

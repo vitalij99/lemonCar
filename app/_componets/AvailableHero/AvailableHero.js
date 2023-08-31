@@ -8,7 +8,12 @@ const AvailableHero = () => {
             <Container>
                 <h3 className={style.title}>AVAILABLE</h3>
                 <h2 className={style.info}>40+ luxury cars</h2>
-                <LinkArrow className={style.link} href="/carlist" big blank>
+                <LinkArrow
+                    className={style.link}
+                    href="/carlist"
+                    big={true}
+                    blank={true}
+                >
                     Car List
                 </LinkArrow>
             </Container>

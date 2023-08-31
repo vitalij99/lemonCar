@@ -15,7 +15,7 @@
 }
 .name {
     color: var(--white, #fff);
-    font-family: Muller;
+    font-family: var(--font-mull);
     font-size: 18px;
     font-weight: 300;
     & span {

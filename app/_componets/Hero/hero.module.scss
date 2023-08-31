@@ -19,15 +19,17 @@
 .title {
     width: 290px;
     color: var(--text, #fff);
-
+    font-family: var(--font-monument);
     font-size: 14px;
-    font-style: normal;
+
     font-weight: 350;
     line-height: 1.68;
 
     &_sec {
         font-size: 26px;
+        font-weight: 350;
         margin-bottom: 327px;
+        font-family: var(--font-monument);
     }
 }
 .link {
@@ -46,7 +48,7 @@
     & span {
         text-align: center;
         color: var(--background, #000);
-        font-family: Muller;
+        font-family: var(--font-mull);
         font-size: 14px;
         font-style: normal;
     }
