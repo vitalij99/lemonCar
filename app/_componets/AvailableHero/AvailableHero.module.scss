@@ -1,3 +1,10 @@
 .wrapp {
-    padding: 45px 0 60px;
+    margin: 45px 0 60px;
+    padding: 60px 35px 25px;
+    height: 508px;
+    background-image: image-set(
+        url("../../../public/images/available/bgmob@1x.jpg") 1x,
+        url("../../../public/images/available/bgmob@2x.jpg") 2x
+    );
+    background-repeat: no-repeat;
 }

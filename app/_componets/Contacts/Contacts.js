@@ -1,45 +1,24 @@
-import style from "./contacts.module.scss";
-
-const Contacts = ({ className }) => {
+import LinkArrow from "../LinkArrow/LinkArrow";
+const CONTACT = [
+    { href: "https://web.telegram.org/", name: "Telegram" },
+    { href: "https://www.instagram.com/", name: "Instagram" },
+    { href: "https://www.whatsapp.com/", name: "WhatsApp" },
+    { href: "tel:123-456-7890", name: " +123-456-7890" },
+];
+const Contacts = ({ className, list = CONTACT }) => {
     return (
         <address className={className}>
             <nav>
                 <ul>
-                    <li className={style.item}>
-                        <a
-                            className={style.link}
-                            href="https://web.telegram.org/"
-                            target="_blank"
-                            rel="noreferrer noopener"
-                        >
-                            Telegram
-                        </a>
-                    </li>
-                    <li className={style.item}>
-                        <a
-                            className={style.link}
-                            href="https://www.instagram.com/"
-                            target="_blank"
-                            rel="noreferrer noopener"
-                        >
-                            Instagram
-                        </a>
-                    </li>
-                    <li className={style.item}>
-                        <a
-                            className={style.link}
-                            href="https://www.whatsapp.com/"
-                            target="_blank"
-                            rel="noreferrer noopener"
-                        >
-                            WhatsApp
-                        </a>
-                    </li>
-                    <li className={style.item}>
-                        <a className={style.link} href="tel:123-456-7890">
-                            +123-456-7890
-                        </a>
-                    </li>
+                    {list.map((link, i) => {
+                        return (
+                            <li key={i}>
+                                <LinkArrow href={link.href}>
+                                    {link.name}
+                                </LinkArrow>
+                            </li>
+                        );
+                    })}
                 </ul>
             </nav>
         </address>
