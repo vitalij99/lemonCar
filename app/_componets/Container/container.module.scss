@@ -1,6 +1,6 @@
 .container {
     margin: 0 auto;
-    width: var(--small-screen);
+
     padding: 0 15px;
     @media (min-width: 1700px) {
         max-width: var(--large-screen);

@@ -1,13 +1,15 @@
 .section {
-    min-height: 700px;
-
+    position: relative;
+    min-width: var(--small-screen);
     padding-top: 133px;
+    padding-bottom: 50px;
     background-image: image-set(
         url(../../../public/images/hero/herobg_mob@1x.jpg) 1x,
         url(../../../public/images/hero/herobg_mob@2x.jpg) 2x
     );
     background-repeat: no-repeat;
     background-position: center;
+    background-size: cover;
 
     @media (min-width: 1700px) {
         padding-top: 101px;
@@ -29,6 +31,10 @@
     }
 }
 .link {
+    position: absolute;
+    right: 15px;
+    bottom: 0;
+    transform: translateY(50%);
     display: flex;
     align-items: center;
     justify-content: center;
