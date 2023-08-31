@@ -1,7 +1,7 @@
-import Link from "next/link";
 import Contacts from "../Contacts/Contacts";
 import Container from "../Container/Container";
 import style from "./hero.module.scss";
+import LinkCircle from "../LinkCircle/LinkCircle";
 
 const Hero = () => {
     return (
@@ -13,9 +13,9 @@ const Hero = () => {
                     </h1>
                     <h1 className={style.title_sec}>Rent a car in Dubai</h1>
                     <Contacts className={style.contacts} />
-                    <Link className={style.link} href="/carlist">
-                        <span>Rent a car</span>
-                    </Link>
+                    <div className={style.wrapp}>
+                        <LinkCircle href="/carlist">Rent a car</LinkCircle>
+                    </div>
                 </Container>
             </section>
         </div>

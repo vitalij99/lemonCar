@@ -1,0 +1,17 @@
+.link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 100px;
+
+    background-color: var(--text);
+    border-radius: 50%;
+    & > span {
+        text-align: center;
+        color: var(--background, #000);
+        font-family: var(--font-mull);
+        font-size: 14px;
+        font-style: normal;
+    }
+}

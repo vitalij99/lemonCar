@@ -1,0 +1,28 @@
+.wrapp {
+    min-height: 208px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    border: 1px solid #2f2f2f;
+    background: rgba(47, 47, 47, 0.5);
+}
+.number,
+.title {
+    font-family: var(--font-monument);
+    font-size: 20px;
+
+    font-weight: 350;
+}
+.title {
+    margin-bottom: 20px;
+}
+.par {
+    font-family: var(--font-muller);
+
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 140%;
+}
