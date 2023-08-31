@@ -29,7 +29,7 @@ const Steps = () => {
                     showroom or we will deliver it to you.
                 </StepCard>
                 <dic className={style.link_wrap}>
-                    <LinkCircle href="/carlist">
+                    <LinkCircle width={178} href="/carlist">
                         <p className={style.link}>Rent a car</p>
                     </LinkCircle>
                 </dic>
