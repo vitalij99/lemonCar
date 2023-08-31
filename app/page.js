@@ -8,8 +8,8 @@ const heroFont = localFont({
 
 export default function Home() {
     return (
-        <main>
-            <Hero font={heroFont.className} />
+        <main className={heroFont.className}>
+            <Hero />
             <Available />
         </main>
     );

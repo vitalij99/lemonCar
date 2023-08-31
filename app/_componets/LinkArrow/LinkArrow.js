@@ -1,16 +1,16 @@
 import Link from "next/link";
 import style from "./LinkArrow.module.scss";
 
-const LinkArrow = ({ href, children }) => {
+const LinkArrow = ({ href, children, className, big, blank }) => {
     return (
         <div className={style.item}>
             <Link
-                className={style.link}
+                className={big ? style.big : style.link}
                 href={href}
-                target="_blank"
-                rel="noreferrer noopener"
+                target={!blank && "_blank"}
+                rel={!blank && "noreferrer noopener"}
             >
-                {children}
+                <span className={className}>{children}</span>
             </Link>
         </div>
     );

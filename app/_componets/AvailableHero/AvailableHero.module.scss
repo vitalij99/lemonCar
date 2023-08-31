@@ -1,10 +1,30 @@
 .wrapp {
-    margin: 45px 0 60px;
-    padding: 60px 35px 25px;
+    margin: 45px auto;
+    padding: 50px 35px 25px;
+    max-width: var(--small-screen);
     height: 508px;
     background-image: image-set(
         url("../../../public/images/available/bgmob@1x.jpg") 1x,
         url("../../../public/images/available/bgmob@2x.jpg") 2x
     );
     background-repeat: no-repeat;
+    background-position: center;
+}
+
+.title {
+    font-size: 14px;
+
+    font-weight: 350;
+
+    margin-bottom: 14px;
+}
+.info {
+    font-size: 40px;
+
+    font-weight: 350;
+    line-height: 1;
+    margin-bottom: 280px;
+}
+.link {
+    font-size: 26px;
 }

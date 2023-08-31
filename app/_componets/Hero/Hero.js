@@ -3,9 +3,9 @@ import Contacts from "../Contacts/Contacts";
 import Container from "../Container/Container";
 import style from "./hero.module.scss";
 
-const Hero = ({ font }) => {
+const Hero = () => {
     return (
-        <div className={font}>
+        <div>
             <section className={style.section}>
                 <Container>
                     <h1 className={style.title}>
