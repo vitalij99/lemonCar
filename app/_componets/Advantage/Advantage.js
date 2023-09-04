@@ -6,7 +6,7 @@ const Advantage = () => {
         <section className={style.section}>
             <Container>
                 <h3 className={style.title}>WHY CHOOSE US</h3>
-                <h2 className={style.advantage}>
+                <h2 className={`${style.title_sec} ${style.title_adv}`}>
                     We offer the best experience with our rental deals offer the
                     best
                 </h2>

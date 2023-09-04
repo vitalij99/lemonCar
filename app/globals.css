@@ -46,3 +46,6 @@ ul {
         color-scheme: dark;
     }
 }
+section {
+    padding: 30px 0;
+}

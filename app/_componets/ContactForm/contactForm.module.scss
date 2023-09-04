@@ -1,0 +1,44 @@
+.form {
+  & input {
+    width: 100%;
+    border: 1px solid #2f2f2f;
+    background: rgba(47, 47, 47, 0.5);
+    padding: 30px 15px;
+    color: var(--text, #fff);
+    font-size: 18px;
+    &::placeholder {
+      color: var(--text, #fff);
+      font-size: 18px;
+    }
+  }
+  & input:last-of-type {
+    margin: 30px 0;
+    min-height: 200px;
+  }
+  & button {
+    position: relative;
+    color: var(--text, #fff);
+    background-color: transparent;
+    font-family: var(--font-muller);
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    padding-right: 54px;
+    border: transparent;
+    &::after {
+      content: '';
+      position: absolute;
+      top: 40%;
+      right: 0;
+      background-image: url('../../../public/images/mdi_arrow-r.svg');
+      transform: translate(0, -50%) rotate(-45deg);
+
+      width: 40px;
+      height: 40px;
+
+      background-size: auto;
+      background-repeat: no-repeat;
+    }
+  }
+}
