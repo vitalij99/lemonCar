@@ -21,30 +21,26 @@ const ContactForm = () => {
     setComment(event.target.value.replace(/^\s+/, ''));
   };
   return (
-    <section>
-      <Container>
-        <form className={style.form} onSubmit={onSubmit}>
-          <input
-            placeholder="Phone"
-            type="tel"
-            name="phone"
-            pattern="^\+\d+$"
-            required={true}
-          />
+    <form className={style.form} onSubmit={onSubmit}>
+      <input
+        placeholder="Phone"
+        type="tel"
+        name="phone"
+        pattern="^\+\d+$"
+        required={true}
+      />
 
-          <textarea
-            placeholder="Comment"
-            type="text"
-            name="comment"
-            required={true}
-            value={comment}
-            onChange={handleComment}
-          />
+      <textarea
+        placeholder="Comment"
+        type="text"
+        name="comment"
+        required={true}
+        value={comment}
+        onChange={handleComment}
+      />
 
-          <button type="submit">Contact Us</button>
-        </form>
-      </Container>
-    </section>
+      <button type="submit">Contact Us</button>
+    </form>
   );
 };
 

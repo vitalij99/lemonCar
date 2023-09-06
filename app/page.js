@@ -7,6 +7,7 @@ import Steps from './_componets/Steps/Steps';
 import Reviews from './_componets/Reviews/Reviews';
 
 import Contact from './_componets/Contact/Contact';
+import Faq from './_componets/Faq/Faq';
 
 const heroFont = localFont({
   variable: '--font-monument',
@@ -24,6 +25,7 @@ export default function Home() {
       <Steps />
       <Reviews />
       <Contact />
+      <Faq />
     </main>
   );
 }
