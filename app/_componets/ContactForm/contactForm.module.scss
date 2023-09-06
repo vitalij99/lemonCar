@@ -1,5 +1,6 @@
 .form {
-  & input {
+  & input,
+  & textarea {
     width: 100%;
     border: 1px solid #2f2f2f;
     background: rgba(47, 47, 47, 0.5);
@@ -11,9 +12,10 @@
       font-size: 18px;
     }
   }
-  & input:last-of-type {
+  & textarea {
     margin: 30px 0;
     min-height: 200px;
+    resize: vertical;
   }
   & button {
     position: relative;

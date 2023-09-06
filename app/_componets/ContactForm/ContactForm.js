@@ -32,7 +32,7 @@ const ContactForm = () => {
             required={true}
           />
 
-          <input
+          <textarea
             placeholder="Comment"
             type="text"
             name="comment"
