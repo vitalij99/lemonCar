@@ -1,0 +1,52 @@
+.button {
+  width: 100%;
+  padding: 20px 10px;
+  position: relative;
+
+  background-color: transparent;
+  border: none;
+  border-top: 1px solid #2f2f2f;
+  border-bottom: 1px solid #2f2f2f;
+  cursor: pointer;
+
+  text-align: start;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 0;
+    background-image: url('../../../public/images/mdi_arrow-r.svg');
+    transform: translate(0, -50%) rotate(90deg);
+
+    width: 32px;
+    height: 32px;
+
+    background-size: auto;
+    background-repeat: no-repeat;
+  }
+  &.visible::after {
+    transform: translate(0, -50%) rotate(-90deg);
+  }
+}
+.title {
+  color: var(--text, #fff);
+  font-family: var(--font-muller);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+.wrapp {
+  display: none;
+  padding: 20px 0;
+  transform: translateY(-100%);
+  opacity: 0;
+}
+.visible {
+  display: block;
+  opacity: 1;
+
+  transform: scale(1) translate(0, 0);
+  transition: transform 0.5s ease-in-out;
+}
