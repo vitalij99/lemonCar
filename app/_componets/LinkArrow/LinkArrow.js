@@ -7,8 +7,8 @@ const LinkArrow = ({ href = '/', children, className, big, blank }) => {
       <Link
         className={big ? style.big : style.link}
         href={href}
-        target={blank ? '_self' : '_blank'}
-        rel={blank ? 'false' : 'noreferrer noopener'}
+        target={blank ? '_blank' : '_self'}
+        rel={blank ? 'noreferrer noopener' : 'false'}
       >
         <span className={className}>{children}</span>
       </Link>

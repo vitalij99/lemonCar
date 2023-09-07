@@ -10,3 +10,10 @@
   white-space: nowrap;
   overflow: hidden;
 }
+.wrapp {
+  display: flex;
+  justify-content: space-between;
+}
+.list {
+  margin-top: 60px;
+}
