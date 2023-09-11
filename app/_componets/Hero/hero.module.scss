@@ -1,3 +1,5 @@
+@import '../../styles/mixins';
+
 .section {
   position: relative;
   min-width: var(--small-screen);
@@ -10,8 +12,7 @@
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-
-  @media (min-width: 1700px) {
+  @include pc {
     padding-top: 101px;
     min-height: 920px;
   }

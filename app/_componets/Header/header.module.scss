@@ -1,34 +1,47 @@
+@import '../../styles/mixins';
 .header_section {
-    display: none;
-    position: absolute;
-    width: 100%;
-    border-bottom: 0.5px solid var(--text, #fff);
-    background: rgba(23, 23, 23, 0.1);
-    backdrop-filter: blur(10px);
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 2;
+  border-bottom: 0.5px solid var(--text, #fff);
+  background: rgba(23, 23, 23, 0.1);
 
-    @media (min-width: 1700px) {
-        display: block;
-    }
+  @include tablet {
+    display: block;
+  }
 }
 .header_wrapp {
-    width: 228px;
-    padding: 18px;
+  width: 228px;
+  padding: 18px;
 }
 .wrapper {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 .navigation {
-    margin-left: auto;
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  color: var(--text, #fff);
 
-    color: var(--text, #fff);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
 
-    font-size: 18px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
+  @media screen and (min-width: 900px) {
+    font-size: 14px;
+  }
 
-    & a {
-        padding: 20px;
-    }
+  @include pc {
+    font-size: 16px;
+  }
+
+  & a {
+    padding: 10px;
+    text-align: center;
+  }
 }

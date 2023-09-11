@@ -36,7 +36,6 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={myFont.variable}>
         <Header />
-
         {children}
         <Footer />
       </body>

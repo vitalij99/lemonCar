@@ -1,6 +1,12 @@
 $base-width: 750px;
-@mixin pc {
+$pc-width: 1200px;
+@mixin tablet {
   @media screen and (min-width: $base-width) {
+    @content;
+  }
+}
+@mixin pc {
+  @media screen and (min-width: $pc-width) {
     @content;
   }
 }
