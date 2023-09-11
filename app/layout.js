@@ -5,6 +5,11 @@ import './styles/globals.scss';
 import { Header } from './_componets/Header/Header';
 import Footer from './_componets/Footer/Footer';
 
+const heroFont = localFont({
+  variable: '--font-monument',
+  src: '../fonts/AllrounderMonumentTest-Book.otf',
+});
+
 const myFont = localFont({
   variable: '--font-muller',
   src: [
@@ -34,7 +39,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={myFont.variable}>
+      <body className={`${myFont.variable} ${heroFont.variable}`}>
         <Header />
         {children}
         <Footer />
