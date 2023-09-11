@@ -21,31 +21,18 @@ const Footer = () => {
   return (
     <footer>
       <Container>
-        <div className={style.text}>
+        <p className={style.text}>
           lemann • lemann • lemann • lemann • lemann • lemann
-        </div>
+        </p>
         <Dropdown title="For Customers">
-          <Contacts
-            className={style.list}
-            title="For Customers"
-            list={CUSTOMERS}
-            blank={false}
-          />
+          <Contacts title="For Customers" list={CUSTOMERS} blank={false} />
         </Dropdown>
         <Dropdown title="Car List">
-          <Contacts
-            className={style.list}
-            title="Car List"
-            list={CARLIST}
-            blank={false}
-          />
+          <Contacts title="Car List" list={CARLIST} blank={false} />
         </Dropdown>
         <Dropdown title="Contacts">
-          <Contacts className={style.list} title="Car List" />
+          <Contacts title="Car List" />
         </Dropdown>
-        <LinkCircle width="178px">
-          <span className={style.link}>Rent a car</span>
-        </LinkCircle>
         {/* <div className={style.wrapp}>
           <Contacts
             className={style.list}
@@ -64,6 +51,9 @@ const Footer = () => {
             <span className={style.link}>Rent a car</span>
           </LinkCircle>
         </div> */}
+        <LinkCircle className={style.circle} width="178px">
+          <span className={style.link}>Rent a car</span>
+        </LinkCircle>
       </Container>
     </footer>
   );

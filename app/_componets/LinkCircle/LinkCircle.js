@@ -5,10 +5,11 @@ const LinkCircle = ({
   href = '/carlist',
   children = 'Rent a car',
   width = '100px',
+  className,
 }) => {
   return (
     <Link
-      className={style.link}
+      className={className ? `${style.link} ${className}` : style.link}
       style={{
         width: width,
         height: width,

@@ -7,23 +7,21 @@ const CONTACT = [
 ];
 const Contacts = ({ className, list = CONTACT, blank = true }) => {
   return (
-    <div>
-      <address className={className}>
-        <nav>
-          <ul>
-            {list.map((link, i) => {
-              return (
-                <li key={i}>
-                  <LinkArrow blank={blank} href={link.href}>
-                    {link.name}
-                  </LinkArrow>
-                </li>
-              );
-            })}
-          </ul>
-        </nav>
-      </address>
-    </div>
+    <address className={className}>
+      <nav>
+        <ul>
+          {list.map((link, i) => {
+            return (
+              <li key={i}>
+                <LinkArrow blank={blank} href={link.href}>
+                  {link.name}
+                </LinkArrow>
+              </li>
+            );
+          })}
+        </ul>
+      </nav>
+    </address>
   );
 };
 
