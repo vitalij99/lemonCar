@@ -1,40 +1,40 @@
 .section {
-    position: relative;
-    min-width: var(--small-screen);
-    padding-top: 133px;
-    padding-bottom: 50px;
-    background-image: image-set(
-        url(../../../public/images/hero/herobg_mob@1x.jpg) 1x,
-        url(../../../public/images/hero/herobg_mob@2x.jpg) 2x
-    );
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
+  position: relative;
+  min-width: var(--small-screen);
+  padding-top: 133px;
+  padding-bottom: 50px;
+  background-image: image-set(
+    url(../../../public/images/hero/herobg_mob@1x.jpg) 1x,
+    url(../../../public/images/hero/herobg_mob@2x.jpg) 2x
+  );
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 
-    @media (min-width: 1700px) {
-        padding-top: 101px;
-        min-height: 920px;
-    }
+  @media (min-width: 1700px) {
+    padding-top: 101px;
+    min-height: 920px;
+  }
 }
 .title {
-    width: 290px;
-    color: var(--text, #fff);
-    font-family: var(--font-monument);
-    font-size: 14px;
+  width: 290px;
+  color: var(--text, #fff);
+  font-family: var(--font-monument);
+  font-size: 14px;
 
+  font-weight: 350;
+  line-height: 1.68;
+
+  &_sec {
+    font-size: 26px;
     font-weight: 350;
-    line-height: 1.68;
-
-    &_sec {
-        font-size: 26px;
-        font-weight: 350;
-        margin-bottom: 327px;
-        font-family: var(--font-monument);
-    }
+    margin-bottom: 327px;
+    font-family: var(--font-monument);
+  }
 }
 .wrapp {
-    position: absolute;
-    right: 15px;
-    bottom: 0;
-    transform: translateY(50%);
+  position: absolute;
+  right: 15px;
+  bottom: 0;
+  transform: translateY(50%);
 }

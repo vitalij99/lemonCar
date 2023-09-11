@@ -1,0 +1,6 @@
+$base-width: 750px;
+@mixin pc {
+  @media screen and (min-width: $base-width) {
+    @content;
+  }
+}

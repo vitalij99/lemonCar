@@ -1,8 +1,10 @@
+@import '../../styles/mixins';
 .container {
-    margin: 0 auto;
+  margin: 0 auto;
 
-    padding: 0 15px;
-    @media (min-width: 1700px) {
-        max-width: var(--large-screen);
-    }
+  padding: 0 15px;
+
+  @include pc {
+    max-width: var(--large-screen);
+  }
 }
