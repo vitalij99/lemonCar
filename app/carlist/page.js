@@ -7,7 +7,7 @@ const page = () => {
     <section className={style.section}>
       <Container>
         <h1 className={style.title}>Rent a car in Dubai</h1>
-        {/* <Carlist /> */}
+        <Carlist />
       </Container>
     </section>
   );
