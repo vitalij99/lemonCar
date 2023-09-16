@@ -7,7 +7,7 @@ generator client {
 
 datasource db {
   provider = "mongodb"
-  url      = "mongodb+srv://vitalisklymko:CdItxRk59pIEgT1O@cluster0.vv3uss3.mongodb.net/limcar?retryWrites=true&w=majority"
+  url      = env("DATABASE_URL")
 }
 
 model CarList {
