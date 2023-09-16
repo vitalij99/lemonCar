@@ -4,12 +4,11 @@ import style from './carlist.module.scss';
 import { getCarList } from '@/lib/carList';
 
 const Carlist = async () => {
-  // const list = await getCarList();
-  const list = [];
+  const list = await getCarList();
 
   return (
     <>
-      {list.length > 0 ? (
+      {list ? (
         <ul className={style.list}>
           {list?.map((car, i) => (
             <li key={i}>
