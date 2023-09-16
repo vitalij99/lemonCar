@@ -18,4 +18,18 @@ model CarList {
   power  String
   engine String
   image  String
+
+  carBrand String
+  brand    Brand  @relation(fields: [carBrand], references: [id], onDelete: Cascade)
+
+  @@index([carBrand])
+}
+
+model Brand {
+  id     String @id @map("_id")
+  name   String
+  logo   String
+  number String
+
+  cars CarList[]
 }
