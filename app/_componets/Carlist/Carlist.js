@@ -4,8 +4,7 @@ import style from './carlist.module.scss';
 import { getCarList } from '@/lib/carList';
 
 const Carlist = async () => {
-  // const list = (await getCarList()) ?? [];
-  const list = [];
+  const list = (await getCarList()) ?? [];
 
   return (
     <>
