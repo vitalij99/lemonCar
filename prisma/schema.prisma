@@ -33,3 +33,10 @@ model Brand {
 
   cars CarList[]
 }
+
+model Admin {
+  id String @id @map("_id")
+
+  login    String
+  password String
+}
