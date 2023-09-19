@@ -11,7 +11,9 @@ const Hero = () => {
         <h1 className={style.title_sec}>Rent a car in Dubai</h1>
         <Contacts className={style.contacts} />
         <div className={style.wrapp}>
-          <LinkCircle href="/carlist">Rent a car</LinkCircle>
+          <LinkCircle className={style.link} href="/carlist">
+            Rent a car
+          </LinkCircle>
         </div>
       </Container>
     </section>

@@ -1,28 +1,43 @@
+@import '../../styles/mixins';
 .wrapp {
-    min-height: 208px;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+  min-height: 208px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 
-    border: 1px solid #2f2f2f;
-    background: rgba(47, 47, 47, 0.5);
+  border: 1px solid #2f2f2f;
+  background: rgba(47, 47, 47, 0.5);
+
+  @include tablet {
+    display: block;
+  }
 }
 .number,
 .title {
-    font-family: var(--font-monument);
-    font-size: 20px;
+  font-family: var(--font-monument);
+  font-size: 20px;
 
-    font-weight: 350;
+  font-weight: 350;
 }
 .title {
-    margin-bottom: 20px;
-}
-.par {
-    font-family: var(--font-muller);
+  margin-bottom: 20px;
 
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 140%;
+  @include tablet {
+    margin-bottom: 150px;
+  }
+}
+.number {
+  @include tablet {
+    display: none;
+  }
+}
+
+.par {
+  font-family: var(--font-muller);
+
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 140%;
 }

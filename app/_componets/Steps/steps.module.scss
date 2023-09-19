@@ -1,25 +1,54 @@
+@import '../../styles/mixins';
 .section {
-    padding: 30px 0;
+  padding: 30px 0;
 }
-
+.wrap {
+  @include tablet {
+    display: flex;
+  }
+}
 .title {
-    width: 300px;
-    font-family: var(--font-monument);
-    font-size: 26px;
-    font-weight: 350;
-    line-height: 100%;
-    margin-bottom: 50px;
+  width: 300px;
+  font-family: var(--font-monument);
+  font-size: 26px;
+  font-weight: 350;
+  line-height: 100%;
+  margin-bottom: 50px;
+  @include tablet {
+    font-size: 60px;
+    width: 560px;
+  }
 }
 .link {
-    font-size: 18px;
+  font-size: 18px;
 
-    &_wrap {
-        padding: 92px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        border: 1px solid #2f2f2f;
-        background: rgba(47, 47, 47, 0.5);
-        align-items: center;
+  &_wrap {
+    padding: 92px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 1px solid #2f2f2f;
+    background: rgba(47, 47, 47, 0.5);
+    align-items: center;
+
+    @include tablet {
+      background-image: image-set(
+        url(../../../public/images/steps/bg@1x.jpg) 1x,
+        url(../../../public/images/steps/bg@2x.jpg) 2x
+      );
+      background-size: cover;
     }
+  }
+}
+.link {
+  @include tablet {
+    border-radius: 200px;
+    border: 1px solid var(--text, #fff);
+    background: rgba(119, 119, 119, 0.2);
+    backdrop-filter: blur(6px);
+
+    & p {
+      color: var(--text, #fff);
+    }
+  }
 }
