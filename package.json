@@ -7,8 +7,7 @@
         "build": "prisma generate && next build",
         "start": "next start",
         "lint": "next lint",
-        "postinstall": "prisma generate",
-        "deploy": "vercel"
+        "postinstall": "prisma generate"
     },
     "dependencies": {
         "@emotion/react": "^11.11.1",
@@ -22,8 +21,7 @@
         "next": "13.4.19",
         "react": "18.2.0",
         "react-dom": "18.2.0",
-        "sass": "^1.66.1",
-        "vercel": "^32.2.4"
+        "sass": "^1.66.1"
     },
     "devDependencies": {
         "prisma": "^5.3.1"
