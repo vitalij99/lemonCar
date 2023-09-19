@@ -12,9 +12,13 @@
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  @include pc {
-    padding-top: 101px;
-    min-height: 920px;
+  @include tablet {
+    padding-top: 605px;
+    height: 920px;
+    background-image: image-set(
+      url(../../../public/images/hero/herobg_des@1x.jpg) 1x,
+      url(../../../public/images/hero/herobg_des@2x.jpg) 2x
+    );
   }
 }
 .title {
@@ -26,11 +30,29 @@
   font-weight: 350;
   line-height: 1.68;
 
+  @include tablet {
+    width: auto;
+    font-size: 60px;
+  }
+
   &_sec {
     font-size: 26px;
     font-weight: 350;
     margin-bottom: 327px;
     font-family: var(--font-monument);
+
+    @include tablet {
+      margin-bottom: 0;
+    }
+  }
+}
+.contacts {
+  position: absolute;
+  bottom: 15px;
+
+  @include tablet {
+    right: 15px;
+    text-align: right;
   }
 }
 .wrapp {
@@ -38,4 +60,7 @@
   right: 15px;
   bottom: 0;
   transform: translateY(50%);
+  @include tablet {
+    left: 15px;
+  }
 }
