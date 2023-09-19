@@ -1,9 +1,19 @@
+@import '../../styles/mixins';
 .list {
   display: grid;
   grid-auto-flow: column;
   overflow-x: scroll;
   padding: 20px 0;
   gap: 10px;
+
+  @include tablet {
+    overflow-x: visible;
+    gap: 0;
+    padding: 0;
+    & li {
+      height: fit-content;
+    }
+  }
 }
 .list {
   &::-webkit-scrollbar {

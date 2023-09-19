@@ -1,4 +1,10 @@
+@import '../../styles/mixins';
 .section {
-    padding-top: 95px;
-    padding-bottom: 30px;
+  padding-top: 95px;
+  padding-bottom: 30px;
+
+  @include tablet {
+    display: flex;
+    flex-direction: row-reverse;
+  }
 }
