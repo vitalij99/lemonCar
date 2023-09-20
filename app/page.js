@@ -7,6 +7,7 @@ import Reviews from './_componets/Reviews/Reviews';
 
 import Contact from './_componets/Contact/Contact';
 import Faq from './_componets/Faq/Faq';
+import Carlist from './_componets/Carlist/Carlist';
 
 export default function Home() {
   return (
@@ -15,7 +16,7 @@ export default function Home() {
       <Available />
       <Advantage />
       <Box />
-      {/* listcar */}
+      <Carlist />
       <Steps />
       <Reviews />
       <Contact />
