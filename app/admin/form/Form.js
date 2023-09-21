@@ -1,55 +1,73 @@
 'use client';
 
-import { Button, Card, TextField } from '@mui/material';
+import { Alert, Button, Card, TextField } from '@mui/material';
 import axios from 'axios';
 import { Formik } from 'formik';
+import { useState } from 'react';
 
 const Form = () => {
+  const [error, setError] = useState(null);
+
   const handleSubmit = async value => {
-    if (!value) return;
+    setError(null);
+    if (value.login === '' || value.password === '') {
+      setError('empty login or password');
+      return;
+    }
     try {
       const result = await axios.post('/api/admin', value);
-      console.log(result);
+
+      if (result) {
+        localStorage.setItem('token', result.data.token);
+        window.location.reload();
+      }
     } catch (error) {
-      return console.log(error.massage);
+      setError(error.message);
     }
   };
   return (
-    <Card sx={{ m: '0 auto', width: 'fit-content' }}>
-      <Formik
-        initialValues={{
-          login: '',
-          password: '',
-        }}
-        onSubmit={handleSubmit}
-      >
-        {({ values, handleChange, handleSubmit }) => (
-          <form onSubmit={handleSubmit}>
-            <div>
-              <TextField
-                id="login"
-                sx={{ m: 1 }}
-                label="login"
-                variant="outlined"
-                value={values.login}
-                onChange={handleChange}
-              />
-              <TextField
-                sx={{ m: 1 }}
-                id="password"
-                label="password"
-                variant="outlined"
-                value={values.password}
-                onChange={handleChange}
-              />
-            </div>
-            <Button sx={{ m: 1 }} type="submit" variant="contained">
-              Go
-            </Button>
-          </form>
-        )}
-      </Formik>
-    </Card>
+    <>
+      {error && (
+        <Alert sx={{ m: 10 }} severity="error">
+          {error}
+        </Alert>
+      )}
+      <Card sx={{ m: '0 auto', width: 'fit-content' }}>
+        <Formik
+          initialValues={{
+            login: '',
+            password: '',
+          }}
+          onSubmit={handleSubmit}
+        >
+          {({ values, handleChange, handleSubmit }) => (
+            <form onSubmit={handleSubmit}>
+              <div>
+                <TextField
+                  id="login"
+                  sx={{ m: 1 }}
+                  label="login"
+                  variant="outlined"
+                  value={values.login}
+                  onChange={handleChange}
+                />
+                <TextField
+                  sx={{ m: 1 }}
+                  id="password"
+                  label="password"
+                  variant="outlined"
+                  value={values.password}
+                  onChange={handleChange}
+                />
+              </div>
+              <Button sx={{ m: 1 }} type="submit" variant="contained">
+                Go
+              </Button>
+            </form>
+          )}
+        </Formik>
+      </Card>
+    </>
   );
 };
 
