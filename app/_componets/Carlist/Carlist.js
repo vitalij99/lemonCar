@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import CarCard from '../CarCard/CarCard';
 import Loading from '../Loading/Loading';
 import style from './carlist.module.scss';
