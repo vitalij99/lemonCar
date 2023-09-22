@@ -3,8 +3,11 @@ import Loading from '../Loading/Loading';
 import style from './carlist.module.scss';
 import { getCarList } from '@/lib/carList';
 
-const Carlist = async () => {
-  const list = (await getCarList()) ?? [];
+const Carlist = async ({ repo }) => {
+  let list = [];
+  if (repo) {
+    list = repo;
+  } else list = (await getCarList()) ?? [];
 
   return (
     <>
