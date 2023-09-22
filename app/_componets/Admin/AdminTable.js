@@ -64,7 +64,7 @@ export default function AdminTable({ params }) {
     })();
   }, [params]);
 
-  const handleProcessRowUpdate = updatedRow => {
+  const handleProcessRowUpdate = async updatedRow => {
     const idBrand = brands.find(brand => {
       return brand.name === updatedRow.carBrand;
     });
@@ -72,7 +72,7 @@ export default function AdminTable({ params }) {
     const newCar = { ...updatedRow, carBrand: idBrand.id };
 
     // push
-    console.log(newCar);
+    const result = await axios.patch(`/api/carlist`, newCar);
   };
   const handleProcessRowUpdateError = err => {
     console.log(err);
