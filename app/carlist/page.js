@@ -1,5 +1,3 @@
-export const revalidate = 60;
-
 import { getCarList } from '@/lib/carList';
 import Carlist from '../_componets/Carlist/Carlist';
 import Container from '../_componets/Container/Container';
