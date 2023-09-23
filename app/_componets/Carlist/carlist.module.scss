@@ -1,4 +1,12 @@
+@import '../../styles/mixins';
 .list {
+  @include tablet {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+    gap: 10px;
+    justify-content: center;
+  }
+
   & li:not(:last-child) {
     margin-bottom: 20px;
   }

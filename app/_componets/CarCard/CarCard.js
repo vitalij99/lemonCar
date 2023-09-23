@@ -6,8 +6,8 @@ import LinkCircle from '../LinkCircle/LinkCircle';
 const CarCard = ({ car }) => {
   const { name, prise, seats, power, engine, image, id } = car;
   return (
-    <Link href={`/carlist/${id}`}>
-      <div className={style.wrapp}>
+    <div className={style.wrapp}>
+      <Link className={style.img_wrapp} href={`/carlist/${id}`}>
         <Image
           className={style.img}
           src={image}
@@ -15,6 +15,8 @@ const CarCard = ({ car }) => {
           width={345}
           height={230}
         />
+      </Link>
+      <div className={style.info}>
         <div className={style.text}>
           <h2 className={style.title}>{name}</h2>
           <div className={style.text_wrapp}>
@@ -37,10 +39,12 @@ const CarCard = ({ car }) => {
             </h2>
             <p className={style.text_style}>USDT accepted</p>
           </div>
-          <h3 className={style.link}>Rent</h3>
+          <LinkCircle href={`/carlist/${id}`} className={style.link}>
+            Rent
+          </LinkCircle>
         </div>
       </div>
-    </Link>
+    </div>
   );
 };
 

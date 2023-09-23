@@ -1,12 +1,22 @@
+@import '../../styles/mixins';
 .wrapp {
   position: relative;
   max-width: 750px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.5);
 }
+
 .img {
   width: 100%;
-  max-width: 750px;
   height: 100%;
+  &_wrapp {
+    display: flex;
+  }
+}
+.info {
+  padding: 10px;
+  @include tablet {
+    border: 1px solid rgba(255, 255, 255, 0.5);
+  }
 }
 .text {
   margin-top: 20px;
@@ -68,4 +78,8 @@
   border-radius: 50%;
   display: flex;
   align-items: center;
+
+  @include tablet {
+    display: none;
+  }
 }
