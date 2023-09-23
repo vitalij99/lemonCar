@@ -74,9 +74,7 @@ export default function AdminTable({ params }) {
     // push
     const result = await axios.patch(`/api/carlist`, newCar);
   };
-  const handleProcessRowUpdateError = err => {
-    console.log(err);
-  };
+  const handleProcessRowUpdateError = err => {};
   if (!rows) {
     return <h1>Loading</h1>;
   }
