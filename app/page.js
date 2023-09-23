@@ -8,15 +8,17 @@ import Reviews from './_componets/Reviews/Reviews';
 import Contact from './_componets/Contact/Contact';
 import Faq from './_componets/Faq/Faq';
 import Carlist from './_componets/Carlist/Carlist';
+import { getCarList } from '@/lib/carList';
 
-export default function Home() {
+export default async function Home() {
+  const listCar = (await getCarList()) ?? [];
   return (
     <main>
       <Hero />
       <Available />
       <Advantage />
       <Box />
-      <Carlist />
+      <Carlist list={listCar} />
       <Steps />
       <Reviews />
       <Contact />
