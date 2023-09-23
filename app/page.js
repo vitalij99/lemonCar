@@ -20,7 +20,7 @@ export default async function Home() {
       <Box />
       <Carlist list={listCar} />
       <Steps />
-      <Reviews />
+      {/* <Reviews /> */}
       <Contact />
       <Faq />
     </main>

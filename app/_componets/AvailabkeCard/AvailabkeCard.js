@@ -8,19 +8,21 @@ const AvailabkeCard = ({ brand }) => {
   const { id, name, number, logo } = brand;
   return (
     <li className={style.wrapp}>
-      <Image
-        className={style.logo}
-        src={logo}
-        width={138}
-        height={49}
-        alt="car brand"
-      />
       <Link href={`/carlist/?search=${id}`}>
+        <Image
+          className={style.logo}
+          src={logo}
+          width={138}
+          height={49}
+          alt="car brand"
+        />
+
         <Image className={style.arrow} src={arrow} alt="link" />
+
+        <h3 className={style.name}>
+          {name} <span>{number} cars</span>
+        </h3>
       </Link>
-      <h3 className={style.name}>
-        {name} <span>{number} cars</span>
-      </h3>
     </li>
   );
 };

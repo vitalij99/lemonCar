@@ -4,9 +4,7 @@
   width: 265px;
   border: 1px solid var(--border);
 }
-.logo {
-  margin-bottom: 43px;
-}
+
 .arrow {
   position: absolute;
   right: 15px;
@@ -14,6 +12,7 @@
   transform: rotate(-45deg);
 }
 .name {
+  margin-top: 43px;
   color: var(--white, #fff);
   font-family: var(--font-mull);
   font-size: 18px;
