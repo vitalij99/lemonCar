@@ -15,7 +15,7 @@ const AvailabkeCard = ({ brand }) => {
         height={49}
         alt="car brand"
       />
-      <Link href={`/carlist/${id}`}>
+      <Link href={`/carlist/?search=${id}`}>
         <Image className={style.arrow} src={arrow} alt="link" />
       </Link>
       <h3 className={style.name}>
