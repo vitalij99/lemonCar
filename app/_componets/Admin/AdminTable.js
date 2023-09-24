@@ -72,7 +72,7 @@ export default function AdminTable({ params }) {
     const newCar = { ...updatedRow, carBrand: idBrand.id };
 
     // push
-    const result = await axios.patch(`/api/carlist`, newCar);
+    await axios.patch(`/api/carlist`, newCar);
   };
   const handleProcessRowUpdateError = err => {};
   if (!rows) {
