@@ -1,0 +1,17 @@
+@import '../styles/mixins';
+.wrapp {
+  @include tablet {
+    display: flex;
+    gap: 25px;
+  }
+}
+.image {
+  @include tablet {
+    width: 600px;
+    height: 466px;
+  }
+  @include pc {
+    width: 1000px;
+    height: 666px;
+  }
+}

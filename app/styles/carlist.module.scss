@@ -1,3 +1,4 @@
+@import '../styles/mixins';
 .section {
   padding: 163px 0;
 }
@@ -5,8 +6,12 @@
   color: var(--text, #fff);
 
   font-family: var(--font-miller);
-  font-size: 120px;
+  font-size: 60px;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
+
+  @include tablet {
+    font-size: 120px;
+  }
 }

@@ -1,0 +1,12 @@
+.data {
+  padding: 15px;
+  background-color: color-mix(in lch, var(--background), #3d3d3d);
+  color: aliceblue;
+  & label,
+  & input {
+    color: var(--text);
+  }
+  & svg {
+    color: var(--text);
+  }
+}
