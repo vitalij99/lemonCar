@@ -4,8 +4,8 @@ import Container from '../_componets/Container/Container';
 import style from '../styles/carlist.module.scss';
 
 const page = async ({ searchParams }) => {
-  const { search } = searchParams;
-  const listCar = (await getCarList(search)) ?? [];
+  const { category } = searchParams;
+  const listCar = (await getCarList({ category })) ?? [];
 
   return (
     <section className={style.section}>
