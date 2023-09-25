@@ -28,7 +28,7 @@ const RentalCar = ({ carData }) => {
     >
       <h1>RENTAL CAR</h1>
 
-      <Box className={styled.data}>
+      <div className={styled.data}>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DatePicker
             label="Start dates"
@@ -43,9 +43,50 @@ const RentalCar = ({ carData }) => {
             onChange={newValue => setCalendar({ ...calendar, end: newValue })}
           />
         </LocalizationProvider>
-      </Box>
+        <div className={styled.text}>
+          <p>Price</p> <p>USDT accepted</p>
+        </div>
+      </div>
+      <div>{mackePrise(carData.prise)}</div>
     </Box>
   );
 };
 
 export default RentalCar;
+
+function mackePrise(prise) {
+  return (
+    <ul className={styled.prise}>
+      <li>
+        <h3 className={styled.prise_days}>1 day</h3>
+        <span>
+          <h3> -0% </h3> <h3> {prise}</h3>
+        </span>
+      </li>
+      <li>
+        <h3 className={styled.prise_days}>1-7 days</h3>
+        <span>
+          <h3>-20%</h3> <h3>{prise * 0.8}</h3>
+        </span>
+      </li>
+      <li>
+        <h3 className={styled.prise_days}>8-14 days</h3>
+        <span>
+          <h3>-30%</h3> <h3>{prise * 0.7}</h3>
+        </span>
+      </li>
+      <li>
+        <h3 className={styled.prise_days}>15-29 days</h3>
+        <span>
+          <h3>-40%</h3> <h3>{prise * 0.6}</h3>
+        </span>
+      </li>
+      <li>
+        <h3 className={styled.prise_days}>30+ days</h3>
+        <span>
+          <h3>-60%</h3> <h3>{prise * 0.4}</h3>
+        </span>
+      </li>
+    </ul>
+  );
+}

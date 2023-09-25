@@ -10,3 +10,36 @@
     color: var(--text);
   }
 }
+.text {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+
+  color: var(--text, #fff);
+  font-family: var(--muller);
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+.prise {
+  color: var(--text, #fff);
+
+  font-family: var(--muller);
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 120%;
+
+  & li {
+    display: flex;
+    gap: 30px;
+  }
+  &_days {
+    width: 157px;
+  }
+  & span {
+    display: flex;
+    gap: 30px;
+  }
+}
