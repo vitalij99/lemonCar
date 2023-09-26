@@ -26,7 +26,7 @@ export default function AdminTable({ params }) {
       },
       { field: 'engine', editable: true, headerName: 'Engine', minWidth: 100 },
       { field: 'power', editable: true, headerName: 'Power', minWidth: 100 },
-      { field: 'prise', editable: true, headerName: 'Prise', minWidth: 100 },
+      { field: 'price', editable: true, headerName: 'Price', minWidth: 100 },
       { field: 'seats', editable: true, headerName: 'Seats', minWidth: 100 },
       {
         field: 'image',

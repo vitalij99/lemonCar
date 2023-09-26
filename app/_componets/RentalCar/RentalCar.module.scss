@@ -22,11 +22,11 @@
   font-weight: 400;
   line-height: normal;
 }
-.prise {
+.price {
   color: var(--text, #fff);
 
   font-family: var(--muller);
-  font-size: 30px;
+  font-size: 18px;
   font-style: normal;
   font-weight: 500;
   line-height: 120%;
@@ -34,12 +34,25 @@
   & li {
     display: flex;
     gap: 30px;
+    padding: 15px;
+    border-bottom: 1px solid color-mix(in lch, var(--background), #a5a5a5);
+
+    &.days {
+      color: color-mix(in lch, var(--text), #3a3a3a);
+    }
   }
-  &_days {
-    width: 157px;
+
+  & span {
+    width: 300px;
+    display: flex;
+    justify-content: space-between;
   }
+}
+.price_all {
+  padding: 30px;
+  background-color: color-mix(in lch, var(--background), #3d3d3d);
   & span {
     display: flex;
-    gap: 30px;
+    justify-content: space-between;
   }
 }

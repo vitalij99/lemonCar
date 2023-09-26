@@ -7,15 +7,30 @@ import { useEffect, useState } from 'react';
 import styled from './RentalCar.module.scss';
 import dayjs from 'dayjs';
 
+const procentraPrice = (price, day) => {
+  const discounts = {
+    0: 1.0,
+    7: 0.8,
+    14: 0.7,
+    29: 0.6,
+    30: 0.4,
+  };
+
+  const discount =
+    discounts[Math.min(day, Math.max(...Object.keys(discounts)))];
+
+  return price * discount;
+};
+
 const RentalCar = ({ carData }) => {
-  const [calendar, setCalendar] = useState({
-    start: dayjs(),
-    end: dayjs(),
-  });
+  const [calendar, setCalendar] = useState({ start: dayjs(), end: dayjs() });
+  const [diffInDays, setDiffInDays] = useState(0);
+  const { price } = carData;
 
   useEffect(() => {
-    const diffInDays = calendar.end.diff(calendar.start, 'day');
-    console.log(diffInDays);
+    const diffEnd = calendar.end.diff(calendar.start, 'day');
+    console.log(diffEnd);
+    setDiffInDays(Number(diffEnd));
   }, [calendar]);
 
   return (
@@ -39,7 +54,7 @@ const RentalCar = ({ carData }) => {
           <DatePicker
             label="End"
             value={calendar.end}
-            minDate={dayjs()}
+            minDate={calendar.start}
             onChange={newValue => setCalendar({ ...calendar, end: newValue })}
           />
         </LocalizationProvider>
@@ -47,45 +62,62 @@ const RentalCar = ({ carData }) => {
           <p>Price</p> <p>USDT accepted</p>
         </div>
       </div>
-      <div>{mackePrise(carData.prise)}</div>
+      <div>{makePrice(price, diffInDays)}</div>
+      <div className={styled.price_all}>
+        <span>
+          <h3>Deposit</h3>
+          <h3>{diffInDays} day </h3>
+          <h3>Total</h3>
+        </span>
+        <span>
+          <h3>{}</h3>
+          <h3>{procentraPrice(price, diffInDays)}</h3>
+          <h3>{procentraPrice(price, diffInDays)}</h3>
+        </span>
+      </div>
     </Box>
   );
 };
 
 export default RentalCar;
 
-function mackePrise(prise) {
+function makePrice(price, diffInDays) {
   return (
-    <ul className={styled.prise}>
-      <li>
-        <h3 className={styled.prise_days}>1 day</h3>
+    <ul className={styled.price}>
+      <li className={diffInDays < 1 ? styled.days : ''}>
         <span>
-          <h3> -0% </h3> <h3> {prise}</h3>
+          <h3>1 day</h3>
+          <h3> -0% </h3>
         </span>
+        <h3>${procentraPrice(price, 0)}</h3>
       </li>
-      <li>
-        <h3 className={styled.prise_days}>1-7 days</h3>
+      <li className={diffInDays > 0 && diffInDays < 8 ? styled.days : ''}>
         <span>
-          <h3>-20%</h3> <h3>{prise * 0.8}</h3>
+          <h3>1-7 days</h3>
+          <h3>-20%</h3>
         </span>
+        <h3>${procentraPrice(price, 7)}</h3>
       </li>
-      <li>
-        <h3 className={styled.prise_days}>8-14 days</h3>
+      <li className={diffInDays > 7 && diffInDays < 15 ? styled.days : ''}>
         <span>
-          <h3>-30%</h3> <h3>{prise * 0.7}</h3>
+          <h3>8-14 days</h3>
+          <h3>-30%</h3>
         </span>
+        <h3>${procentraPrice(price, 14)}</h3>
       </li>
-      <li>
-        <h3 className={styled.prise_days}>15-29 days</h3>
+      <li className={diffInDays > 14 && diffInDays < 30 ? styled.days : ''}>
         <span>
-          <h3>-40%</h3> <h3>{prise * 0.6}</h3>
+          <h3>15-29 days</h3>
+          <h3>-40%</h3>
         </span>
+        <h3>${procentraPrice(price, 29)}</h3>
       </li>
-      <li>
-        <h3 className={styled.prise_days}>30+ days</h3>
+      <li className={diffInDays > 29 ? styled.days : ''}>
         <span>
-          <h3>-60%</h3> <h3>{prise * 0.4}</h3>
+          <h3>30+ days</h3>
+          <h3>-60%</h3>
         </span>
+        <h3>${procentraPrice(price, 30)}</h3>
       </li>
     </ul>
   );

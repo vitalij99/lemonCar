@@ -16,7 +16,7 @@ const BreadcrumbsCustl = ({ carName }) => {
         underline="hover"
         color="inherit"
         sx={{ textTransform: 'capitalize' }}
-        href="/material-ui/getting-started/installation/"
+        href={`/${prefPath}`}
       >
         {prefPath}
       </Link>

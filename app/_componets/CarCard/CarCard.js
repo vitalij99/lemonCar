@@ -4,7 +4,7 @@ import style from './carCard.module.scss';
 import LinkCircle from '../LinkCircle/LinkCircle';
 
 const CarCard = ({ car }) => {
-  const { name, prise, seats, power, engine, image, id } = car;
+  const { name, price, seats, power, engine, image, id } = car;
   return (
     <div className={style.wrapp}>
       <Link className={style.img_wrapp} href={`/carlist/${id}`}>
@@ -32,10 +32,10 @@ const CarCard = ({ car }) => {
           </div>
         </div>
 
-        <div className={style.prise_wrapp}>
+        <div className={style.price_wrapp}>
           <div>
-            <h2 className={style.prise}>
-              from <span className={style.prise_style}>${prise}</span> / per day
+            <h2 className={style.price}>
+              from <span className={style.price_style}>${price}</span> / per day
             </h2>
             <p className={style.text_style}>USDT accepted</p>
           </div>

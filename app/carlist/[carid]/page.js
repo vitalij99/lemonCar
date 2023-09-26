@@ -5,7 +5,7 @@ import style from '../../styles/carpage.module.scss';
 import BreadcrumbsCustl from '@/app/_componets/Breadcrumbs/Breadcrumbs';
 import { getCarByID } from '@/lib/carList';
 import RentalCar from '@/app/_componets/RentalCar/RentalCar';
-import { Box } from '@mui/material';
+
 import Image from 'next/image';
 
 const Car = async ({ params }) => {
