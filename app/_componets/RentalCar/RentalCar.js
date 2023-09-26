@@ -8,30 +8,45 @@ import styled from './RentalCar.module.scss';
 import dayjs from 'dayjs';
 
 const procentraPrice = (price, day) => {
-  const discounts = {
-    0: 1.0,
-    7: 0.8,
-    14: 0.7,
-    29: 0.6,
-    30: 0.4,
-  };
-
-  const discount =
-    discounts[Math.min(day, Math.max(...Object.keys(discounts)))];
-
-  return price * discount;
+  switch (true) {
+    case day < 1:
+      return price;
+    case day < 8:
+      return price * 0.8;
+    case day < 15:
+      return price * 0.7;
+    case day < 30:
+      return price * 0.6;
+    default:
+      return price * 0.4;
+  }
 };
 
 const RentalCar = ({ carData }) => {
-  const [calendar, setCalendar] = useState({ start: dayjs(), end: dayjs() });
-  const [diffInDays, setDiffInDays] = useState(0);
-  const { price } = carData;
+  const [calendar, setCalendar] = useState({
+    start: dayjs(),
+    end: dayjs(),
+  });
+
+  const price = Number(carData.price);
+  const [formCar, setFormCar] = useState({
+    totalPrise: price,
+    diffInDays: 1,
+    deposit: price * 0.64,
+  });
 
   useEffect(() => {
-    const diffEnd = calendar.end.diff(calendar.start, 'day');
-    console.log(diffEnd);
-    setDiffInDays(Number(diffEnd));
-  }, [calendar]);
+    const diffInDays = calendar.end.diff(calendar.start, 'day');
+    let totalPrise;
+    if (diffInDays === 0) {
+      totalPrise = price;
+    } else {
+      totalPrise = procentraPrice(price, diffInDays) * diffInDays;
+    }
+
+    const deposit = Math.floor(totalPrise * 0.64);
+    setFormCar({ deposit, totalPrise, diffInDays });
+  }, [calendar, price]);
 
   return (
     <Box
@@ -62,17 +77,19 @@ const RentalCar = ({ carData }) => {
           <p>Price</p> <p>USDT accepted</p>
         </div>
       </div>
-      <div>{makePrice(price, diffInDays)}</div>
+      <div>{makePrice(price, formCar.diffInDays)}</div>
       <div className={styled.price_all}>
         <span>
-          <h3>Deposit</h3>
-          <h3>{diffInDays} day </h3>
-          <h3>Total</h3>
+          <h3 className={styled.price_all_title}>Deposit</h3>
+          <h3>${formCar.deposit}</h3>
         </span>
         <span>
-          <h3>{}</h3>
-          <h3>{procentraPrice(price, diffInDays)}</h3>
-          <h3>{procentraPrice(price, diffInDays)}</h3>
+          <h3 className={styled.price_all_title}>{formCar.diffInDays} day </h3>
+          <h3>${procentraPrice(price, formCar.diffInDays)}</h3>
+        </span>
+        <span>
+          <h3 className={styled.price_all_title}>Total</h3>
+          <h3>${formCar.totalPrise}</h3>
         </span>
       </div>
     </Box>

@@ -49,10 +49,12 @@
   }
 }
 .price_all {
+  display: flex;
+  justify-content: space-between;
   padding: 30px;
   background-color: color-mix(in lch, var(--background), #3d3d3d);
-  & span {
-    display: flex;
-    justify-content: space-between;
+  text-align: center;
+  &_title {
+    margin-bottom: 10px;
   }
 }
