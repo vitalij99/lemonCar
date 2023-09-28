@@ -11,13 +11,13 @@ datasource db {
 }
 
 model CarList {
-  id     String @id @default(auto()) @map("_id") @db.ObjectId
+  id     String   @id @default(auto()) @map("_id") @db.ObjectId
   name   String
   price  String
   seats  String
   power  String
   engine String
-  image  String
+  image  String[]
 
   carBrand String @db.ObjectId
   brand    Brand  @relation(fields: [carBrand], references: [id])

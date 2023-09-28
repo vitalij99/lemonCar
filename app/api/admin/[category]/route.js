@@ -1,15 +1,7 @@
 import { db } from '@/lib/db';
 import { NextResponse } from 'next/server';
-import cloudinary from 'cloudinary';
 
-const url = 'https://api.cloudinary.com/v1_1/dizrnyvqx/image/upload';
-
-cloudinary.config({
-  cloud_name: 'dizrnyvqx',
-  api_key: '864124585882834',
-  api_secret: 'aTZfRMUGZ_JeaUtDn1cokgBJ--o',
-  secure: true,
-});
+const url = `https://api.cloudinary.com/v1_1/${process.env.CLOUDINARY}/image/upload`;
 
 export async function GET(req) {
   try {
@@ -27,9 +19,8 @@ export async function POST(req) {
     const formData = await req.formData();
 
     const images = formData.getAll('image');
-    const name = formData.get('name');
 
-    const results = [];
+    const urlImages = [];
     const cloudFormData = new FormData();
 
     for (const image of images) {
@@ -46,10 +37,18 @@ export async function POST(req) {
       }
 
       const data = await response.json();
-      results.push(data.url);
+      urlImages.push(data.url);
     }
 
-    return NextResponse.json(results, { status: results.status });
+    const formDataObject = {};
+    for (const [key, value] of formData.entries()) {
+      formDataObject[key] = value;
+    }
+    formDataObject.image = urlImages;
+
+    const result = await db.carList.create({ data: formDataObject });
+
+    return NextResponse.json(result, { status: result.status });
   } catch (error) {
     console.log('[SERVERS_POST]', error);
     return new NextResponse('Internal Error', { status: 500 });
