@@ -4,7 +4,7 @@ import Container from '../_componets/Container/Container';
 import style from '../styles/carlist.module.scss';
 
 const page = async ({ searchParams }) => {
-  const { category } = searchParams;
+  const { search: category } = searchParams;
   const listCar = (await getCarList({ category })) ?? [];
 
   return (
