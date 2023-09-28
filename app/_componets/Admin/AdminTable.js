@@ -35,7 +35,19 @@ export default function AdminTable({ params }) {
         minWidth: 40,
         renderCell: params => {
           return (
-            <Image src={params.row.image} alt="avatar" width={40} height={40} />
+            <div>
+              {params.row.image.map(elem => {
+                return (
+                  <Image
+                    key={elem}
+                    src={elem}
+                    alt="avatar"
+                    width={40}
+                    height={40}
+                  />
+                );
+              })}
+            </div>
           );
         },
       },

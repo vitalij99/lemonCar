@@ -7,8 +7,6 @@ const CarCard = ({ car }) => {
   const { name, price, seats, power, engine, image, id } = car;
   const imageSrc = image[0];
 
-  console.log(imageSrc);
-
   return (
     <div className={style.wrapp}>
       <Link className={style.img_wrapp} href={`/carlist/${id}`}>
