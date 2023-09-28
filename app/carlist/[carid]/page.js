@@ -21,13 +21,13 @@ const Car = async ({ params }) => {
         <BreadcrumbsCustl carName={carData.name} />
         <h1 className={styleTitle.title}>{carData.name}</h1>
         <div className={style.wrapp}>
-          <Image
+          {/* <Image
             className={style.image}
             src={carData.image}
             alt="car"
             width={345}
             height={125}
-          />
+          /> */}
           <RentalCar carData={carData} />
         </div>
       </Container>

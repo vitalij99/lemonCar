@@ -6,6 +6,7 @@ import arrow from '@/public/images/mdi_arrow-r.svg';
 
 const AvailabkeCard = ({ brand }) => {
   const { id, name, number, logo } = brand;
+
   return (
     <li className={style.wrapp}>
       <Link href={`/carlist/?search=${id}`}>

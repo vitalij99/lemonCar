@@ -37,7 +37,8 @@ export async function POST(req) {
       }
 
       const data = await response.json();
-      urlImages.push(data.url);
+
+      urlImages.push(data.secure_url);
     }
 
     const formDataObject = {};
