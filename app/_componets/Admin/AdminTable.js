@@ -36,10 +36,10 @@ export default function AdminTable({ params }) {
         renderCell: params => {
           return (
             <div>
-              {params.row.image.map(elem => {
+              {params.row.image.map((elem, i) => {
                 return (
                   <Image
-                    key={elem}
+                    key={elem + i}
                     src={elem}
                     alt="avatar"
                     width={40}
