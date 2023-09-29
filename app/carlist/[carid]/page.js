@@ -6,7 +6,7 @@ import BreadcrumbsCustl from '@/app/_componets/Breadcrumbs/Breadcrumbs';
 import { getCarByID } from '@/lib/carList';
 import RentalCar from '@/app/_componets/RentalCar/RentalCar';
 
-import Image from 'next/image';
+import IconSwiper from '@/app/_componets/IconSwiper/IconSwiper';
 
 const Car = async ({ params }) => {
   const carData = await getCarByID(params.carid);
@@ -21,13 +21,7 @@ const Car = async ({ params }) => {
         <BreadcrumbsCustl carName={carData.name} />
         <h1 className={styleTitle.title}>{carData.name}</h1>
         <div className={style.wrapp}>
-          {/* <Image
-            className={style.image}
-            src={carData.image}
-            alt="car"
-            width={345}
-            height={125}
-          /> */}
+          <IconSwiper images={carData.image} />
           <RentalCar carData={carData} />
         </div>
       </Container>

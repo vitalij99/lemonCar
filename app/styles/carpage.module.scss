@@ -1,11 +1,15 @@
 @import '../styles/mixins';
+
 .wrapp {
   @include tablet {
     display: flex;
     gap: 25px;
   }
 }
+
 .image {
+  width: 80%;
+  height: 100%;
   @include tablet {
     width: 600px;
     height: 466px;

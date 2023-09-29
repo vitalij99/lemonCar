@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import Container from '../Container/Container';
+
 import style from './contactForm.module.scss';
 
 const ContactForm = () => {

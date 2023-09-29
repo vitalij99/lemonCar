@@ -1,0 +1,29 @@
+@import '../../styles/mixins';
+.wrapp {
+  position: relative;
+  @include tablet {
+    min-width: 600px;
+    width: 70%;
+  }
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+}
+
+.images_wrapp {
+  display: none;
+  @include tablet {
+    display: flex;
+    gap: 10px;
+  }
+}
+.button_wrapp {
+  display: flex;
+  justify-content: space-between;
+
+  @include tablet {
+    display: none;
+  }
+}
