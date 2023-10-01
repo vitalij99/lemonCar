@@ -19,3 +19,11 @@
     height: 666px;
   }
 }
+.title {
+  color: var(--text, #fff);
+
+  font-family: var(--font-muller);
+  font-size: 60px;
+  font-style: normal;
+  font-weight: 700;
+}
