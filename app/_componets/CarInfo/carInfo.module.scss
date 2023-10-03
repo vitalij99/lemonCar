@@ -1,0 +1,19 @@
+.list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin: 20px 0;
+}
+.wrapp {
+  padding: 15px;
+  width: 265px;
+  border: 1px solid var(--border);
+}
+
+.title {
+  margin-bottom: 45px;
+  color: var(--text, #fff);
+  font-family: var(--font-mull);
+  font-size: 18px;
+  font-weight: 300;
+}

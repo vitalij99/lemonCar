@@ -6,6 +6,7 @@ import Container from '@/app/_componets/Container/Container';
 
 import styleTitle from '../../styles/carlist.module.scss';
 import style from '../../styles/carpage.module.scss';
+import CarInfo from '@/app/_componets/CarInfo/CarInfo';
 
 const Car = async ({ params }) => {
   const carData = await getCarByID(params.carid);
@@ -21,7 +22,10 @@ const Car = async ({ params }) => {
         <h1 className={styleTitle.title}>{carData.name}</h1>
         <div className={style.wrapp}>
           <IconSwiper images={carData.image} />
-          <RentalCar carData={carData} />
+          <div>
+            <RentalCar carData={carData} />
+            <CarInfo carData={carData} />
+          </div>
         </div>
         <h3 className={styleTitle.title}>WHY CHOOSE US</h3>
         <h3 className={style.title}>Why you should rent {carData.name}</h3>

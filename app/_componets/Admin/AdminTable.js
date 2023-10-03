@@ -1,5 +1,5 @@
 'use client';
-import './adminTable.scss';
+import style from './adminTable.module.scss';
 
 import axios from 'axios';
 import { DataGrid } from '@mui/x-data-grid';
@@ -93,7 +93,7 @@ export default function AdminTable({ params }) {
   return (
     <div style={{ height: 400, width: '100%' }}>
       <DataGrid
-        className="tablet"
+        className={style.tablet}
         rows={rows}
         columns={columns}
         initialState={{
