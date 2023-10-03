@@ -27,8 +27,10 @@ const Car = async ({ params }) => {
             <CarInfo carData={carData} />
           </div>
         </div>
-        <h3 className={styleTitle.title}>WHY CHOOSE US</h3>
-        <h3 className={style.title}>Why you should rent {carData.name}</h3>
+        <div className={style.text_wrapp}>
+          <h3 className={style.title_sec}>WHY CHOOSE US</h3>
+          <h3 className={style.title}>Why you should rent {carData.name}</h3>
+        </div>
       </Container>
     </section>
   );

@@ -21,25 +21,20 @@ const IconSwiper = ({ images }) => {
   if (!images) return <div>load</div>;
   return (
     <div className={style.wrapp}>
-      <Image
-        className={style.image}
-        src={images[showImage]}
-        alt="car foto"
-        width={345}
-        height={125}
-      />
-      <div className={style.button_wrapp}>
-        {showImage !== 0 && <Button onClick={handleClickBack}>back</Button>}
-        {showImage + 1 !== images.length && (
-          <Button onClick={handleClickNext}>next</Button>
-        )}
+      <div>
+        <Image
+          className={style.image}
+          src={images[showImage]}
+          alt="car foto"
+          width={345}
+          height={125}
+        />
       </div>
-
       <div className={style.images_wrapp}>
         {images.map((icon, index) => {
           {
             return (
-              <Button key={index} onClick={ele => setShowImage(index)}>
+              <Button key={index} onClick={() => setShowImage(index)}>
                 <Image
                   className={style.images}
                   src={icon}
@@ -51,6 +46,13 @@ const IconSwiper = ({ images }) => {
             );
           }
         })}
+      </div>
+
+      <div className={style.button_wrapp}>
+        {showImage !== 0 && <Button onClick={handleClickBack}>back</Button>}
+        {showImage + 1 !== images.length && (
+          <Button onClick={handleClickNext}>next</Button>
+        )}
       </div>
     </div>
   );
