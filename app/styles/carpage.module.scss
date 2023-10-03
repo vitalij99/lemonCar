@@ -40,13 +40,12 @@
 
     font-family: var(--font-monument);
     font-size: 14px;
-
     font-weight: 350;
+    margin-bottom: 28px;
 
     @include tablet {
-      font-family: var(--font-muller);
       font-size: 30px;
-      font-weight: 700;
+      margin-bottom: 58px;
     }
   }
 }

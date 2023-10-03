@@ -8,16 +8,6 @@ import { Button } from '@mui/material';
 const IconSwiper = ({ images }) => {
   const [showImage, setShowImage] = useState(0);
 
-  const handleClickNext = () => {
-    if (images.length !== showImage + 1) {
-      setShowImage(prev => (prev += 1));
-    }
-  };
-  const handleClickBack = () => {
-    if (0 !== showImage) {
-      setShowImage(prev => (prev -= 1));
-    }
-  };
   if (!images) return <div>load</div>;
   return (
     <div className={style.wrapp}>
@@ -46,13 +36,6 @@ const IconSwiper = ({ images }) => {
             );
           }
         })}
-      </div>
-
-      <div className={style.button_wrapp}>
-        {showImage !== 0 && <Button onClick={handleClickBack}>back</Button>}
-        {showImage + 1 !== images.length && (
-          <Button onClick={handleClickNext}>next</Button>
-        )}
       </div>
     </div>
   );

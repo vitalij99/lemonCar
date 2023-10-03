@@ -13,18 +13,8 @@
 }
 
 .images_wrapp {
-  display: none;
-  @include tablet {
-    display: flex;
-    gap: 10px;
-  }
-}
-
-.button_wrapp {
   display: flex;
-  justify-content: space-between;
+  padding: 10px;
 
-  @include tablet {
-    display: none;
-  }
+  gap: 10px;
 }
