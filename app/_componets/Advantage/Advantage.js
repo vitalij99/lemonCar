@@ -1,15 +1,18 @@
 import style from './advantage.module.scss';
 import Container from '../Container/Container';
 
-const Advantage = () => {
+const Advantage = ({ title, titleSec }) => {
   return (
     <section className={style.section}>
       <Container>
         <div className={style.wrapp}>
           <div>
-            <h3 className={style.title}>WHY CHOOSE US</h3>
+            <h3 className={style.title}>{title ? title : 'WHY CHOOSE US'}</h3>
             <h2 className={`${style.title_sec} ${style.title_adv}`}>
-              We offer the best experience with our rental deals offer the best
+              {titleSec
+                ? titleSec
+                : `We offer the best experience
+              with our rental deals offer the best`}
             </h2>
           </div>
           <ul>

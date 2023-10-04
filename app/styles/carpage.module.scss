@@ -1,5 +1,8 @@
 @import '../styles/mixins';
 
+.section {
+  padding-top: 100px;
+}
 .wrapp {
   @include pc {
     display: flex;

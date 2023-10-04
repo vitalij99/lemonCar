@@ -4,9 +4,10 @@ import BreadcrumbsCustl from '@/app/_componets/Breadcrumbs/Breadcrumbs';
 import IconSwiper from '@/app/_componets/IconSwiper/IconSwiper';
 import Container from '@/app/_componets/Container/Container';
 
-import styleTitle from '../../styles/carlist.module.scss';
-import style from '../../styles/carpage.module.scss';
+import styleTitle from '@/app/styles/carlist.module.scss';
+import style from '@/app/styles/carpage.module.scss';
 import CarInfo from '@/app/_componets/CarInfo/CarInfo';
+import Advantage from '@/app/_componets/Advantage/Advantage';
 
 const Car = async ({ params }) => {
   const carData = await getCarByID(params.carid);
@@ -16,23 +17,25 @@ const Car = async ({ params }) => {
   }
 
   return (
-    <section className={styleTitle.section}>
-      <Container>
-        <BreadcrumbsCustl carName={carData.name} />
-        <h1 className={styleTitle.title}>{carData.name}</h1>
-        <div className={style.wrapp}>
-          <IconSwiper images={carData.image} />
-          <div>
-            <RentalCar carData={carData} />
-            <CarInfo carData={carData} />
+    <>
+      <section className={style.section}>
+        <Container>
+          <BreadcrumbsCustl carName={carData.name} />
+          <h1 className={styleTitle.title}>{carData.name}</h1>
+          <div className={style.wrapp}>
+            <IconSwiper images={carData.image} />
+            <div>
+              <RentalCar carData={carData} />
+              <CarInfo carData={carData} />
+            </div>
           </div>
-        </div>
-        <div className={style.text_wrapp}>
-          <h3 className={style.title_sec}>WHY CHOOSE US</h3>
-          <h3 className={style.title}>Why you should rent {carData.name}</h3>
-        </div>
-      </Container>
-    </section>
+        </Container>
+      </section>
+      <Advantage
+        title={'WHY CHOOSE US'}
+        titleSec={`Why you should rent ${carData.name}`}
+      />
+    </>
   );
 };
 
