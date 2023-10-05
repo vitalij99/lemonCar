@@ -8,6 +8,7 @@ import styleTitle from '@/app/styles/carlist.module.scss';
 import style from '@/app/styles/carpage.module.scss';
 import CarInfo from '@/app/_componets/CarInfo/CarInfo';
 import Advantage from '@/app/_componets/Advantage/Advantage';
+import Reviews from '../../_componets/Reviews/Reviews';
 
 const Car = async ({ params }) => {
   const carData = await getCarByID(params.carid);
@@ -35,6 +36,7 @@ const Car = async ({ params }) => {
         title={'WHY CHOOSE US'}
         titleSec={`Why you should rent ${carData.name}`}
       />
+      <Reviews />
     </>
   );
 };
