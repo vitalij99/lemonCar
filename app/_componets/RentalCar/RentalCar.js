@@ -23,12 +23,13 @@ const procentraPrice = (price, day) => {
 };
 
 const RentalCar = ({ carData }) => {
+  const price = Number(carData.price);
+
   const [calendar, setCalendar] = useState({
     start: dayjs(),
     end: dayjs(),
   });
 
-  const price = Number(carData.price);
   const [formCar, setFormCar] = useState({
     totalPrise: price,
     diffInDays: 1,
@@ -36,9 +37,12 @@ const RentalCar = ({ carData }) => {
   });
 
   useEffect(() => {
-    const diffInDays = calendar.end.diff(calendar.start, 'day');
+    const diffInDays = Math.floor(
+      calendar.end.diff(calendar.start, 'day', true) + 0.1
+    );
+
     let totalPrise;
-    if (diffInDays === 0) {
+    if (diffInDays <= 0) {
       totalPrise = price;
     } else {
       totalPrise = procentraPrice(price, diffInDays) * diffInDays;
@@ -58,26 +62,30 @@ const RentalCar = ({ carData }) => {
     >
       <h1>RENTAL CAR</h1>
 
-      <div className={styled.data}>
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <DatePicker
-            label="Start dates"
-            value={calendar.start}
-            minDate={dayjs()}
-            onChange={newValue => setCalendar({ ...calendar, start: newValue })}
-          />
-          <DatePicker
-            label="End"
-            value={calendar.end}
-            minDate={calendar.start}
-            onChange={newValue => setCalendar({ ...calendar, end: newValue })}
-          />
-        </LocalizationProvider>
+      <div>
+        <div className={styled.data}>
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DatePicker
+              label="Start dates"
+              value={calendar.start}
+              minDate={dayjs()}
+              onChange={newValue =>
+                setCalendar({ ...calendar, start: newValue })
+              }
+            />
+            <DatePicker
+              label="End"
+              value={calendar.end}
+              minDate={calendar.start}
+              onChange={newValue => setCalendar({ ...calendar, end: newValue })}
+            />
+          </LocalizationProvider>
+        </div>
         <div className={styled.text}>
           <p>Price</p> <p>USDT accepted</p>
         </div>
       </div>
-      <div>{makePrice(price, formCar.diffInDays)}</div>
+      <div>{makePrice(price, formCar.diffInDays + 0.1)}</div>
       <div className={styled.price_all}>
         <span>
           <h3 className={styled.price_all_title}>Deposit</h3>
@@ -108,7 +116,7 @@ function makePrice(price, diffInDays) {
         </span>
         <h3>${procentraPrice(price, 0)}</h3>
       </li>
-      <li className={diffInDays > 0 && diffInDays < 8 ? styled.days : ''}>
+      <li className={diffInDays >= 1 && diffInDays < 8 ? styled.days : ''}>
         <span>
           <h3>1-7 days</h3>
           <h3>-20%</h3>
