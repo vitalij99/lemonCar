@@ -17,7 +17,6 @@ export async function GET(req) {
 export async function POST(req) {
   try {
     const formData = await req.formData();
-    console.log(formData);
 
     const images = formData.getAll('image');
 
