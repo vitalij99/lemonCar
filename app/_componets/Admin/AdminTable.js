@@ -1,5 +1,5 @@
 'use client';
-import './adminTable.scss';
+import '@/app/styles/adminTable.scss';
 
 import axios from 'axios';
 import { DataGrid } from '@mui/x-data-grid';
