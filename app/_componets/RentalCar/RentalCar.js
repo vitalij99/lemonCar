@@ -110,38 +110,33 @@ function makePrice(price, diffInDays) {
   return (
     <ul className={styled.price}>
       <li className={diffInDays < 1 ? styled.days : ''}>
-        <span>
-          <h3>1 day</h3>
-          <h3> -0% </h3>
-        </span>
+        <h3 className={styled.price_days}>1 day</h3>
+        <h3 className={styled.price_percent}>-0%</h3>
+
         <h3>${procentraPrice(price, 0)}</h3>
       </li>
       <li className={diffInDays >= 1 && diffInDays < 8 ? styled.days : ''}>
-        <span>
-          <h3>1-7 days</h3>
-          <h3>-20%</h3>
-        </span>
+        <h3 className={styled.price_days}>1-7 days</h3>
+        <h3 className={styled.price_percent}>-20%</h3>
+
         <h3>${procentraPrice(price, 7)}</h3>
       </li>
       <li className={diffInDays > 7 && diffInDays < 15 ? styled.days : ''}>
-        <span>
-          <h3>8-14 days</h3>
-          <h3>-30%</h3>
-        </span>
+        <h3 className={styled.price_days}>8-14 days</h3>
+        <h3 className={styled.price_percent}>-30%</h3>
+
         <h3>${procentraPrice(price, 14)}</h3>
       </li>
       <li className={diffInDays > 14 && diffInDays < 30 ? styled.days : ''}>
-        <span>
-          <h3>15-29 days</h3>
-          <h3>-40%</h3>
-        </span>
+        <h3 className={styled.price_days}>15-29 days</h3>
+        <h3 className={styled.price_percent}>-40%</h3>
+
         <h3>${procentraPrice(price, 29)}</h3>
       </li>
       <li className={diffInDays > 29 ? styled.days : ''}>
-        <span>
-          <h3>30+ days</h3>
-          <h3>-60%</h3>
-        </span>
+        <h3 className={styled.price_days}>30+ days</h3>
+        <h3 className={styled.price_percent}>-60%</h3>
+
         <h3>${procentraPrice(price, 30)}</h3>
       </li>
     </ul>
