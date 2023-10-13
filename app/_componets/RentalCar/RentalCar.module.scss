@@ -6,19 +6,6 @@
   display: flex;
   justify-content: center;
   gap: 15px;
-
-  & label {
-    top: -10px;
-    color: var(--text);
-  }
-
-  & input {
-    color: var(--text);
-    border: #fff solid 1px;
-  }
-  & svg {
-    color: var(--text);
-  }
 }
 .text {
   display: flex;

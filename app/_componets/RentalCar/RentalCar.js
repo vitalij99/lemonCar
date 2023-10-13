@@ -1,5 +1,5 @@
 'use client';
-import { Box } from '@mui/material';
+import { Box, ThemeProvider, createTheme } from '@mui/material';
 
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -21,7 +21,11 @@ const procentraPrice = (price, day) => {
       return price * 0.4;
   }
 };
-
+const theme = createTheme({
+  palette: {
+    mode: 'dark',
+  },
+});
 const RentalCar = ({ carData }) => {
   const price = Number(carData.price);
 
@@ -64,22 +68,26 @@ const RentalCar = ({ carData }) => {
 
       <div>
         <div className={styled.data}>
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DatePicker
-              label="Start dates"
-              value={calendar.start}
-              minDate={dayjs()}
-              onChange={newValue =>
-                setCalendar({ ...calendar, start: newValue })
-              }
-            />
-            <DatePicker
-              label="End"
-              value={calendar.end}
-              minDate={calendar.start}
-              onChange={newValue => setCalendar({ ...calendar, end: newValue })}
-            />
-          </LocalizationProvider>
+          <ThemeProvider theme={theme}>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DatePicker
+                label="Start dates"
+                value={calendar.start}
+                minDate={dayjs()}
+                onChange={newValue =>
+                  setCalendar({ ...calendar, start: newValue })
+                }
+              />
+              <DatePicker
+                label="End"
+                value={calendar.end}
+                minDate={calendar.start}
+                onChange={newValue =>
+                  setCalendar({ ...calendar, end: newValue })
+                }
+              />
+            </LocalizationProvider>
+          </ThemeProvider>
         </div>
         <div className={styled.text}>
           <p>Price</p> <p>USDT accepted</p>
