@@ -32,6 +32,14 @@ const transformBrandID = (updatedRow, brands) => {
   return { ...updatedRow, carBrand: idBrand.id };
 };
 
+const transformBrandName = (car, brands) => {
+  const matchingBrand = brands.find(brand => brand.id === car.carBrand);
+  return {
+    ...car,
+    carBrand: matchingBrand.name,
+  };
+};
+
 export default function AdminTable({ params }) {
   const [rows, setRows] = useState(null);
   const [brands, setBrands] = useState([]);
@@ -55,14 +63,10 @@ export default function AdminTable({ params }) {
         });
       } else {
         // зміна машин
-        console.log('зміна машин');
-
-        const addImagesCar = rows.find(car => car.id === idCar);
-        const newCar = transformBrandID(addImagesCar, brands);
 
         const formData = new FormData();
 
-        formData.append('id', newCar.id);
+        formData.append('id', idCar);
 
         for (let index = 0; index < files.length; index++) {
           formData.append('image', files[index]);
@@ -73,31 +77,29 @@ export default function AdminTable({ params }) {
             'Content-Type': 'multipart/form-data',
           },
         });
+        const result = await axios(`/api/admin/carlist`);
+        const newData = result.data.map(car => transformBrandName(car, brands));
+
+        setRows(newData);
       }
     };
 
     setColumns(() => newColumns({ brands, handleAddImage }));
-  }, [brands, rows]);
+  }, [brands]);
 
   useEffect(() => {
     (async () => {
-      const result = await axios(`/api/admin/${params}`);
+      const result = await axios(`/api/admin/carlist`);
       const resultBrand = await axios(`/api/brand`);
       setBrands(resultBrand.data);
 
-      const newData = result.data.map(item => {
-        const matchingBrand = resultBrand.data.find(
-          brand => brand.id === item.carBrand
-        );
-        return {
-          ...item,
-          carBrand: matchingBrand ? matchingBrand.name : item.carBrand,
-        };
-      });
+      const newData = result.data.map(car =>
+        transformBrandName(car, resultBrand.data)
+      );
 
       setRows(newData);
     })();
-  }, [params]);
+  }, []);
 
   const handleProcessRowUpdate = async updatedRow => {
     const newCar = transformBrandID(updatedRow, brands);
