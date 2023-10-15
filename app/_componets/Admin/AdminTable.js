@@ -3,9 +3,10 @@ import '@/app/styles/adminTable.scss';
 
 import axios from 'axios';
 import { DataGrid } from '@mui/x-data-grid';
-import Image from 'next/image';
+
 import { useEffect, useState } from 'react';
 import { Button } from '@mui/material';
+import { newColumns } from '@/lib/columns';
 
 const NEW_CARINFO = [
   {
@@ -30,21 +31,7 @@ const transformBrandID = (updatedRow, brands) => {
 
   return { ...updatedRow, carBrand: idBrand.id };
 };
-const handleAddImage = event => {
-  console.log('ssss');
-  const idCar = event.target.dataset.id;
-  const files = event.target.files;
-  console.dir(idCar);
-  console.log(files);
 
-  if (idCar === 'new') {
-    setNewCar(prev => {
-      return { ...prev, image: files };
-    });
-    console.log(newCar);
-  } else {
-  }
-};
 export default function AdminTable({ params }) {
   const [rows, setRows] = useState(null);
   const [brands, setBrands] = useState([]);
@@ -53,91 +40,25 @@ export default function AdminTable({ params }) {
 
   useEffect(() => {
     const handleAddImage = event => {
+      const newImage = [];
       const idCar = event.target.dataset.id;
       const files = event.target.files;
 
+      for (let i = 0; i < files.length; i++) {
+        const image = URL.createObjectURL(files[i]);
+        newImage.push(image);
+      }
+
       if (idCar === 'new') {
         setNewCar(prev => {
-          return [{ ...prev[0], image: files }];
+          return [{ ...prev[0], image: newImage }];
         });
       } else {
         // зміна машин
       }
     };
-    const newColumns = [
-      { field: 'name', editable: true, headerName: 'Name', minWidth: 170 },
-      {
-        field: 'carBrand',
-        editable: true,
-        headerName: 'Brand',
-        type: 'singleSelect',
-        valueOptions: () => {
-          return brands.map(brand => brand.name);
-        },
-        minWidth: 100,
-      },
-      { field: 'engine', editable: true, headerName: 'Engine', minWidth: 100 },
-      { field: 'power', editable: true, headerName: 'Power', minWidth: 100 },
-      { field: 'price', editable: true, headerName: 'Price', minWidth: 100 },
-      { field: 'seats', editable: true, headerName: 'Seats', minWidth: 60 },
-      { field: 'drive', editable: true, headerName: 'Drive', minWidth: 100 },
-      {
-        field: 'acceleration',
-        editable: true,
-        headerName: 'Acceleration',
-        minWidth: 100,
-      },
-      { field: 'type', editable: true, headerName: 'Type', minWidth: 100 },
-      {
-        field: 'addImage',
-        headerName: 'addImage',
-        editable: true,
-        minWidth: 150,
-        renderCell: params => {
-          return (
-            <div>
-              <Button component="label" variant="contained">
-                Upload file
-                <input
-                  data-id={params.row.id}
-                  className="fileUpload"
-                  type="file"
-                  multiple
-                  onChange={handleAddImage}
-                />
-              </Button>
-            </div>
-          );
-        },
-      },
 
-      {
-        field: 'image',
-        editable: true,
-        headerName: 'Image',
-        minWidth: 40,
-        renderCell: params => {
-          return (
-            <div>
-              {Array.isArray(params.row.image) &&
-                params.row.image.map((elem, i) => {
-                  return (
-                    <Image
-                      key={elem + i}
-                      src={elem}
-                      alt="avatar"
-                      width={40}
-                      height={40}
-                    />
-                  );
-                })}
-            </div>
-          );
-        },
-      },
-      { field: 'id', minWidth: 50 },
-    ];
-    setColumns(newColumns);
+    setColumns(() => newColumns({ brands, handleAddImage }));
   }, [brands]);
 
   useEffect(() => {
@@ -174,7 +95,7 @@ export default function AdminTable({ params }) {
   const handleAddNewCar = async updatedRow => {
     const newCar = transformBrandID(updatedRow[0], brands);
     const { id, image, ...car } = newCar;
-    console.log(image);
+
     const formData = new FormData();
 
     for (let index = 0; index < image.length; index++) {
