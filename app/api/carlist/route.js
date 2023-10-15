@@ -1,5 +1,12 @@
 import { db } from '@/lib/db';
 import { NextResponse } from 'next/server';
+import cloudinary from 'cloudinary';
+
+cloudinary.v2.config({
+  cloud_name: process.env.CLOUDINARY,
+  api_key: process.env.APIKey,
+  api_secret: process.env.APISecret,
+});
 
 export async function POST(req) {
   try {
@@ -48,14 +55,14 @@ export async function PATCH(req) {
       const newImage = car.image.filter(img => img !== deletImage);
 
       // cloudenari delete
+      const publicId = deletImage.match(/\/v\d+\/(.+?)(?:\.\w+)?$/)[1];
+
+      await cloudinary.uploader.destroy(publicId);
 
       const result = await db.carList.update({
         where: { id },
         data: {
           image: newImage,
-        },
-        include: {
-          brand: {},
         },
       });
 
