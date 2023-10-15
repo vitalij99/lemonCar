@@ -5,9 +5,14 @@ import axios from 'axios';
 import { DataGrid } from '@mui/x-data-grid';
 
 import { useEffect, useState } from 'react';
-import { Button } from '@mui/material';
+import { Button, ThemeProvider, createTheme } from '@mui/material';
 import { newColumns } from '@/lib/columns';
 
+const theme = createTheme({
+  palette: {
+    mode: 'dark',
+  },
+});
 const NEW_CARINFO = [
   {
     id: 'new',
@@ -45,6 +50,7 @@ export default function AdminTable({ params }) {
   const [brands, setBrands] = useState([]);
   const [columns, setColumns] = useState([]);
   const [newCar, setNewCar] = useState(NEW_CARINFO);
+  const [images, setImages] = useState([]);
 
   useEffect(() => {
     const handleAddImage = async event => {
@@ -83,8 +89,22 @@ export default function AdminTable({ params }) {
         setRows(newData);
       }
     };
+    const handleDeleteImage = async event => {
+      console.log('start');
 
-    setColumns(() => newColumns({ brands, handleAddImage }));
+      const id = event.target.dataset.id;
+      const deletImage = event.target.dataset.image;
+
+      console.log(id, deletImage);
+
+      await axios.patch(`/api/carlist`, { id, deletImage });
+      const result = await axios(`/api/admin/carlist`);
+      const newData = result.data.map(car => transformBrandName(car, brands));
+
+      setRows(newData);
+    };
+
+    setColumns(() => newColumns({ brands, handleAddImage, handleDeleteImage }));
   }, [brands]);
 
   useEffect(() => {
@@ -133,37 +153,41 @@ export default function AdminTable({ params }) {
       },
     });
   };
+
   return (
     <div>
-      <div style={{ height: 400, width: '100%' }}>
+      <ThemeProvider theme={theme}>
+        <div style={{ height: 400, width: '100%' }}>
+          <DataGrid
+            className="tablet"
+            rows={rows}
+            columns={columns}
+            getRowHeight={() => 'auto'}
+            initialState={{
+              pagination: {
+                paginationModel: { page: 0, pageSize: 5 },
+              },
+            }}
+            pageSizeOptions={[5, 10]}
+            processRowUpdate={(updatedRow, originalRow) => {
+              handleProcessRowUpdate(updatedRow);
+            }}
+            onProcessRowUpdateError={handleProcessRowUpdateError}
+          />
+        </div>
+        <h1>ADD new</h1>
         <DataGrid
           className="tablet"
-          rows={rows}
+          rows={newCar}
           columns={columns}
-          initialState={{
-            pagination: {
-              paginationModel: { page: 0, pageSize: 5 },
-            },
-          }}
-          pageSizeOptions={[5, 10]}
           processRowUpdate={(updatedRow, originalRow) => {
-            handleProcessRowUpdate(updatedRow);
+            setNewCar([{ ...updatedRow }]);
           }}
+          hideFooter={true}
           onProcessRowUpdateError={handleProcessRowUpdateError}
         />
-      </div>
-      <h1>ADD new</h1>
-      <DataGrid
-        className="tablet"
-        rows={newCar}
-        columns={columns}
-        processRowUpdate={(updatedRow, originalRow) => {
-          setNewCar([{ ...updatedRow }]);
-        }}
-        hideFooter={true}
-        onProcessRowUpdateError={handleProcessRowUpdateError}
-      />
-      <Button onClick={() => handleAddNewCar(newCar)}>Add new car</Button>
+        <Button onClick={() => handleAddNewCar(newCar)}>Add new car</Button>
+      </ThemeProvider>
     </div>
   );
 }

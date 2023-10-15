@@ -25,21 +25,42 @@ export async function POST(req) {
 export async function PATCH(req) {
   try {
     const data = await req.json();
+
     if (!data) return NextResponse('wrong');
+    if (!data.deletImage) {
+      const { id, ...newCar } = data;
 
-    const { id, ...newCar } = data;
+      const result = await db.carList.update({
+        where: { id },
+        data: {
+          ...newCar,
+        },
+        include: {
+          brand: {},
+        },
+      });
 
-    const car = await db.carList.update({
-      where: { id },
-      data: {
-        ...newCar,
-      },
-      include: {
-        brand: {},
-      },
-    });
+      return NextResponse.json(result);
+    } else {
+      const { id, deletImage } = data;
 
-    return NextResponse.json(car);
+      const car = await db.carList.findUnique({ where: { id: id } });
+      const newImage = car.image.filter(img => img !== deletImage);
+
+      // cloudenari delete
+
+      const result = await db.carList.update({
+        where: { id },
+        data: {
+          image: newImage,
+        },
+        include: {
+          brand: {},
+        },
+      });
+
+      return NextResponse.json(result);
+    }
   } catch (error) {
     console.log('[SERVERS_POST]', error);
     return new NextResponse(error.message, { status: 500 });

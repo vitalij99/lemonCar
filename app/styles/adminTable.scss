@@ -1,11 +1,5 @@
 .tablet {
-  color: var(--text);
   background-color: color-mix(in lch, var(--background), #3d3d3d);
-
-  & .MuiTablePagination-root,
-  & .MuiSvgIcon-root {
-    color: color-mix(in lch, var(--text), #3d3d3d);
-  }
 }
 .fileUpload {
   clip: rect(0 0 0 0);
