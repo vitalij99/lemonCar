@@ -39,7 +39,7 @@ export default function AdminTable({ params }) {
   const [newCar, setNewCar] = useState(NEW_CARINFO);
 
   useEffect(() => {
-    const handleAddImage = event => {
+    const handleAddImage = async event => {
       const newImage = [];
       const idCar = event.target.dataset.id;
       const files = event.target.files;
@@ -55,11 +55,29 @@ export default function AdminTable({ params }) {
         });
       } else {
         // зміна машин
+        console.log('зміна машин');
+
+        const addImagesCar = rows.find(car => car.id === idCar);
+        const newCar = transformBrandID(addImagesCar, brands);
+
+        const formData = new FormData();
+
+        formData.append('id', newCar.id);
+
+        for (let index = 0; index < files.length; index++) {
+          formData.append('image', files[index]);
+        }
+        // push
+        await axios.patch(`/api/admin/carlist`, formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
       }
     };
 
     setColumns(() => newColumns({ brands, handleAddImage }));
-  }, [brands]);
+  }, [brands, rows]);
 
   useEffect(() => {
     (async () => {
