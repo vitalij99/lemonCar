@@ -22,6 +22,7 @@ const NEW_CARINFO = [
     power: '671',
     engine: '3',
     image: [],
+    imagesFile: [],
     drive: 'RWD',
     acceleration: '3 sec',
     type: 'Sport',
@@ -50,7 +51,6 @@ export default function AdminTable({ params }) {
   const [brands, setBrands] = useState([]);
   const [columns, setColumns] = useState([]);
   const [newCar, setNewCar] = useState(NEW_CARINFO);
-  const [images, setImages] = useState([]);
 
   useEffect(() => {
     const handleAddImage = async event => {
@@ -59,13 +59,13 @@ export default function AdminTable({ params }) {
       const files = event.target.files;
 
       for (let i = 0; i < files.length; i++) {
-        const image = URL.createObjectURL(files[i]);
-        newImage.push(image);
+        const imagesFile = URL.createObjectURL(files[i]);
+        newImage.push(imagesFile);
       }
 
       if (idCar === 'new') {
         setNewCar(prev => {
-          return [{ ...prev[0], image: newImage }];
+          return [{ ...prev[0], image: newImage, imagesFile: files }];
         });
       } else {
         // зміна машин
@@ -90,18 +90,16 @@ export default function AdminTable({ params }) {
       }
     };
     const handleDeleteImage = async event => {
-      console.log('start');
-
       const id = event.target.dataset.id;
       const deletImage = event.target.dataset.image;
 
-      console.log(id, deletImage);
+      if (id !== 'new') {
+        await axios.patch(`/api/carlist`, { id, deletImage });
+        const result = await axios(`/api/admin/carlist`);
+        const newData = result.data.map(car => transformBrandName(car, brands));
 
-      await axios.patch(`/api/carlist`, { id, deletImage });
-      const result = await axios(`/api/admin/carlist`);
-      const newData = result.data.map(car => transformBrandName(car, brands));
-
-      setRows(newData);
+        setRows(newData);
+      }
     };
 
     setColumns(() => newColumns({ brands, handleAddImage, handleDeleteImage }));
@@ -132,14 +130,14 @@ export default function AdminTable({ params }) {
     return <h1>Loading</h1>;
   }
 
-  const handleAddNewCar = async updatedRow => {
-    const newCar = transformBrandID(updatedRow[0], brands);
-    const { id, image, ...car } = newCar;
+  const handleAddNewCar = async () => {
+    const carBrand = transformBrandID(newCar[0], brands);
+    const { id, imagesFile, image, ...car } = carBrand;
 
     const formData = new FormData();
 
-    for (let index = 0; index < image.length; index++) {
-      formData.append('image', image[index]);
+    for (let index = 0; index < imagesFile.length; index++) {
+      formData.append('image', imagesFile[index]);
     }
 
     for (const property in car) {
@@ -147,11 +145,15 @@ export default function AdminTable({ params }) {
     }
 
     // push
-    await axios.post(`/api/admin/carlist`, formData, {
+    const result = await axios.post(`/api/admin/carlist`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
     });
+
+    const carBrandId = transformBrandName(result, brands);
+
+    setRows(prev => [...prev, carBrandId]);
   };
 
   return (
@@ -186,7 +188,7 @@ export default function AdminTable({ params }) {
           hideFooter={true}
           onProcessRowUpdateError={handleProcessRowUpdateError}
         />
-        <Button onClick={() => handleAddNewCar(newCar)}>Add new car</Button>
+        <Button onClick={handleAddNewCar}>Add new car</Button>
       </ThemeProvider>
     </div>
   );
