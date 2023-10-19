@@ -1,0 +1,27 @@
+.button {
+  padding: 0;
+
+  .delete_wrapp {
+    display: none;
+    backdrop-filter: blur(6px);
+    position: absolute;
+    padding: 10px 14px;
+  }
+  &:hover {
+    .delete_wrapp {
+      display: block;
+      color: red;
+    }
+  }
+}
+.fileUpload {
+  clip: rect(0 0 0 0);
+
+  height: 1;
+  overflow: hidden;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+
+  width: 1;
+}
