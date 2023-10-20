@@ -33,7 +33,7 @@ const Footer = () => {
         <Dropdown title="Contacts">
           <Contacts title="Car List" />
         </Dropdown>
-        {/* <div className={style.wrapp}>
+        <div className={style.wrapp}>
           <Contacts
             className={style.list}
             title="For Customers"
@@ -50,7 +50,7 @@ const Footer = () => {
           <LinkCircle width="178px">
             <span className={style.link}>Rent a car</span>
           </LinkCircle>
-        </div> */}
+        </div>
         <LinkCircle className={style.circle} width="178px">
           <span className={style.link}>Rent a car</span>
         </LinkCircle>
