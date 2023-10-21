@@ -10,7 +10,7 @@ import Carlist from './_componets/Carlist/Carlist';
 import { getCarList } from '@/lib/carList';
 
 export default async function Home() {
-  const listCar = (await getCarList()) ?? [];
+  const listCar = (await getCarList({ pagenation: 6 })) ?? [];
   return (
     <main>
       <Hero />
