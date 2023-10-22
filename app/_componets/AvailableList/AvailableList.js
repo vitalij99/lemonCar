@@ -1,9 +1,9 @@
 import AvailabkeCard from '../AvailabkeCard/AvailabkeCard';
 import style from './availableList.module.scss';
-import { getBrand } from '@/lib/getBrand';
+import { getBrandList } from '@/lib/getBrand';
 
 const AvailableList = async () => {
-  const list = (await getBrand()) ?? [];
+  const list = (await getBrandList()) ?? [];
 
   return (
     <ul className={style.list}>
