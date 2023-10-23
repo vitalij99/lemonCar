@@ -1,3 +1,4 @@
+import { socket } from '@/pages/api/socket/io';
 import { NextResponse } from 'next/server';
 
 export async function POST(req) {
@@ -5,6 +6,8 @@ export async function POST(req) {
 
   try {
     const { comment, phone } = await req.json();
+    console.log(socket);
+    // socket.emit('message', { comment, phone });
 
     return NextResponse.json({ comment, phone });
   } catch (error) {
