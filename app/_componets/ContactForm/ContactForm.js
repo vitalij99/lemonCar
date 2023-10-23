@@ -3,6 +3,7 @@
 import { useState } from 'react';
 
 import style from './contactForm.module.scss';
+import axios from 'axios';
 
 const ContactForm = () => {
   const [comment, setComment] = useState('');
@@ -11,10 +12,11 @@ const ContactForm = () => {
     event.preventDefault();
 
     const formData = new FormData(event.target);
-
-    await fetch('/api/submit', {
-      method: 'POST',
-      body: formData,
+    const phone = formData.get('phone');
+    const comment = formData.get('comment');
+    await axios.post('/api/formsubmit', {
+      phone,
+      comment,
     });
   };
   const handleComment = event => {
