@@ -29,6 +29,7 @@ const Admin = () => {
       setIsConnected(false);
     });
     socketInstance.on('message', message => {
+      console.log('seed message');
       console.log(message);
       setMessages(prevMessages => [...prevMessages, message]);
     });
