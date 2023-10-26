@@ -7,7 +7,7 @@ export async function POST(req) {
   try {
     const { comment, phone } = await req.json();
     console.log(socket);
-    // socket.emit('message', { comment, phone });
+    socket.emit('message', { comment, phone });
 
     return NextResponse.json({ comment, phone });
   } catch (error) {
