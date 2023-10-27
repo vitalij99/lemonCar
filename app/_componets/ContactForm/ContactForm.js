@@ -1,13 +1,12 @@
 'use client';
 import { io as ClientIO } from 'socket.io-client';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import style from './contactForm.module.scss';
 import axios from 'axios';
 
 const ContactForm = () => {
   const [comment, setComment] = useState('');
-  const [socket, setSocket] = useState(null);
 
   const onSubmit = async event => {
     event.preventDefault();
@@ -16,35 +15,28 @@ const ContactForm = () => {
     const phone = formData.get('phone');
     const comment = formData.get('comment');
 
-    socket.emit('message', {
-      phone,
-      comment,
+    const socketInstance = new ClientIO(process.env.NEXT_PUBLIC_SITE_URL, {
+      path: '/api/socket/io',
+      addTrailingSlash: false,
     });
+    socketInstance.on('connect', () => {
+      console.log('connected');
+    });
+    socketInstance.on('disconnect', () => {
+      console.log('disconnect');
+    });
+    socketInstance.emit('message', 'Повідомлення з клієнта');
+    console.log(socketInstance);
+
+    setTimeout(() => {
+      socketInstance.disconnect();
+    }, 3000);
 
     await axios.post('/api/formsubmit', {
       phone,
       comment,
     });
   };
-
-  useEffect(() => {
-    console.log('start client');
-    const socketInstance = new ClientIO(process.env.NEXT_PUBLIC_SITE_URL, {
-      path: '/api/socket/io',
-      addTrailingSlash: false,
-    });
-    socketInstance.on('connect', () => {
-      console.log('connect');
-    });
-    socketInstance.on('disconnect', () => {
-      console.log('disconnect');
-    });
-    setSocket(socketInstance);
-    console.log(socketInstance);
-    return () => {
-      socketInstance.disconnect();
-    };
-  }, []);
 
   const handleComment = event => {
     setComment(event.target.value.replace(/^\s+/, ''));

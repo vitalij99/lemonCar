@@ -9,7 +9,7 @@ const Admin = () => {
   const [token, setToken] = useState(null);
 
   const [socket, setSocket] = useState(null);
-  const [message, setMessages] = useState(null);
+  const [message, setMessages] = useState('');
   const [isConnected, setIsConnected] = useState(false);
 
   useEffect(() => {
@@ -23,15 +23,17 @@ const Admin = () => {
       addTrailingSlash: false,
     });
     socketInstance.on('connect', () => {
+      console.log('connected');
       setIsConnected(true);
     });
     socketInstance.on('disconnect', () => {
+      console.log('disconnect');
       setIsConnected(false);
     });
     socketInstance.on('message', message => {
       console.log('seed message');
       console.log(message);
-      setMessages(prevMessages => [...prevMessages, message]);
+      setMessages(prevMessages => (prevMessages += message));
     });
     setSocket(socketInstance);
     console.log(socketInstance);

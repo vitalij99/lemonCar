@@ -7,6 +7,7 @@ const ioHandler = (req, res) => {
     console.log('*First use, starting Socket.IO');
     const path = '/api/socket/io';
     const httpServer = res.socket.server;
+
     const io = new ServerIO(httpServer, {
       path: path,
 
@@ -18,6 +19,7 @@ const ioHandler = (req, res) => {
 
       // Listen for incoming messages and broadcast to all clients
       socket.on('message', message => {
+        console.log('to client message');
         io.emit('message', message);
       });
 
