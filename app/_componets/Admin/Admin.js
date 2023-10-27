@@ -44,7 +44,7 @@ const Admin = () => {
       ) : (
         <>
           <h1>isConnected {message}</h1>
-          <ResponsiveAppBar />
+          <ResponsiveAppBar badgeMessage={message} />
         </>
       )}
     </Box>
