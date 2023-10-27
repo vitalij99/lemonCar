@@ -17,13 +17,10 @@ const ioHandler = (req, res) => {
     io.on('connection', socket => {
       console.log(`Socket ${socket.id} connected.`);
 
-      // Listen for incoming messages and broadcast to all clients
       socket.on('message', message => {
-        console.log('to client message');
-        io.emit('message', message);
+        io.emit('form', message);
       });
 
-      // Clean up the socket on disconnect
       socket.on('disconnect', () => {
         console.log(`Socket ${socket.id} disconnected.`);
       });

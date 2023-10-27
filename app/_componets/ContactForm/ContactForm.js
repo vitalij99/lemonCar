@@ -19,14 +19,11 @@ const ContactForm = () => {
       path: '/api/socket/io',
       addTrailingSlash: false,
     });
-    socketInstance.on('connect', () => {
-      console.log('connected');
+
+    socketInstance.emit('message', {
+      phone,
+      comment,
     });
-    socketInstance.on('disconnect', () => {
-      console.log('disconnect');
-    });
-    socketInstance.emit('message', 'Повідомлення з клієнта');
-    console.log(socketInstance);
 
     setTimeout(() => {
       socketInstance.disconnect();

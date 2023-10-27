@@ -9,8 +9,7 @@ const Admin = () => {
   const [token, setToken] = useState(null);
 
   const [socket, setSocket] = useState(null);
-  const [message, setMessages] = useState('');
-  const [isConnected, setIsConnected] = useState(false);
+  const [message, setMessages] = useState(0);
 
   useEffect(() => {
     setToken(localStorage.getItem('token'));
@@ -24,19 +23,15 @@ const Admin = () => {
     });
     socketInstance.on('connect', () => {
       console.log('connected');
-      setIsConnected(true);
     });
     socketInstance.on('disconnect', () => {
       console.log('disconnect');
-      setIsConnected(false);
     });
-    socketInstance.on('message', message => {
-      console.log('seed message');
+    socketInstance.on('form', message => {
       console.log(message);
-      setMessages(prevMessages => (prevMessages += message));
+      setMessages(prevMessages => (prevMessages += 1));
     });
     setSocket(socketInstance);
-    console.log(socketInstance);
     return () => {
       socketInstance.disconnect();
     };
