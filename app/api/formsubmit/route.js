@@ -6,6 +6,8 @@ export async function POST(req) {
 
     console.log({ comment, phone });
 
+    // add to bd
+
     return NextResponse.json({ comment, phone });
   } catch (error) {
     console.log('[SERVERS_POST]', error);

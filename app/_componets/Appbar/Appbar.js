@@ -8,7 +8,6 @@ import IconButton from '@mui/material/IconButton';
 import Badge from '@mui/material/Badge';
 
 import MailIcon from '@mui/icons-material/Mail';
-import NotificationsIcon from '@mui/icons-material/Notifications';
 import { MenuItem } from '@mui/material';
 import Link from 'next/link';
 
@@ -30,11 +29,6 @@ export default function PrimarySearchAppBar({ badgeMessage }) {
             <IconButton size="large" color="inherit">
               <Badge badgeContent={badgeMessage} color="error">
                 <MailIcon />
-              </Badge>
-            </IconButton>
-            <IconButton size="large" color="inherit">
-              <Badge badgeContent={17} color="error">
-                <NotificationsIcon />
               </Badge>
             </IconButton>
           </Box>
