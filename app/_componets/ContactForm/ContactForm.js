@@ -20,10 +20,7 @@ const ContactForm = () => {
       addTrailingSlash: false,
     });
 
-    socketInstance.emit('message', {
-      phone,
-      comment,
-    });
+    socketInstance.emit('message', 'new form');
 
     setTimeout(() => {
       socketInstance.disconnect();
