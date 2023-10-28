@@ -1,41 +1,41 @@
 'use client';
-import { io as ClientIO } from 'socket.io-client';
+// import { io as ClientIO } from 'socket.io-client';
 import Form from '@/app/admin/form/Form';
 import { useEffect, useState } from 'react';
 import ResponsiveAppBar from '../Appbar/Appbar';
 import { Box } from '@mui/material';
+import { useFetcher } from '@/lib/fetcher';
 
 const Admin = () => {
   const [token, setToken] = useState(null);
-
-  const [socket, setSocket] = useState(null);
-  const [message, setMessages] = useState(0);
-
+  const { data, error, isLoading } = useFetcher('/api/swr');
+  console.log({ data, error, isLoading });
   useEffect(() => {
     setToken(localStorage.getItem('token'));
   }, []);
 
-  useEffect(() => {
-    console.log('start client soket');
-    const socketInstance = new ClientIO(process.env.NEXT_PUBLIC_SITE_URL, {
-      path: '/api/socket/io',
-      addTrailingSlash: false,
-    });
-    socketInstance.on('connect', () => {
-      console.log('connected');
-    });
-    socketInstance.on('disconnect', () => {
-      console.log('disconnect');
-    });
-    socketInstance.on('form', message => {
-      console.log(message);
-      setMessages(prevMessages => (prevMessages += 1));
-    });
-    setSocket(socketInstance);
-    return () => {
-      socketInstance.disconnect();
-    };
-  }, []);
+  //webSocket
+  // useEffect(() => {
+  //   console.log('start client soket');
+  //   const socketInstance = new ClientIO(process.env.NEXT_PUBLIC_SITE_URL, {
+  //     path: '/api/socket/io',
+  //     addTrailingSlash: false,
+  //   });
+  //   socketInstance.on('connect', () => {
+  //     console.log('connected');
+  //   });
+  //   socketInstance.on('disconnect', () => {
+  //     console.log('disconnect');
+  //   });
+  //   socketInstance.on('form', message => {
+  //     console.log(message);
+  //     setMessages(prevMessages => (prevMessages += 1));
+  //   });
+  //   setSocket(socketInstance);
+  //   return () => {
+  //     socketInstance.disconnect();
+  //   };
+  // }, []);
 
   return (
     <Box sx={{ mt: 20 }}>
@@ -43,8 +43,8 @@ const Admin = () => {
         <Form />
       ) : (
         <>
-          <h1>isConnected {message}</h1>
-          <ResponsiveAppBar badgeMessage={message} />
+          <h1>isConnected </h1>
+          <ResponsiveAppBar data={data} />
         </>
       )}
     </Box>

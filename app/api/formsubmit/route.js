@@ -1,14 +1,24 @@
+import { db } from '@/lib/db';
 import { NextResponse } from 'next/server';
 
 export async function POST(req) {
   try {
-    const { comment, phone } = await req.json();
+    const { comment, phone, carId = '' } = await req.json();
 
-    console.log({ comment, phone });
+    console.log({ comment, phone, carId });
 
     // add to bd
+    const newComment = await db.forma.create({
+      data: {
+        comment,
+        phone,
+      },
+      include: {
+        carList: carId,
+      },
+    });
 
-    return NextResponse.json({ comment, phone });
+    return NextResponse.json(newComment);
   } catch (error) {
     console.log('[SERVERS_POST]', error);
     return new NextResponse(error.message, { status: 500 });

@@ -28,7 +28,8 @@
         "react-dom": "18.2.0",
         "sass": "^1.66.1",
         "socket.io": "^4.7.2",
-        "socket.io-client": "^4.7.2"
+        "socket.io-client": "^4.7.2",
+        "swr": "^2.2.4"
     },
     "devDependencies": {
         "prisma": "^5.3.1"

@@ -13,7 +13,8 @@ import Link from 'next/link';
 
 const pages = ['Carlist', 'Brand'];
 
-export default function PrimarySearchAppBar({ badgeMessage }) {
+export default function PrimarySearchAppBar({ data }) {
+  console.log(data);
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -27,7 +28,7 @@ export default function PrimarySearchAppBar({ badgeMessage }) {
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <IconButton size="large" color="inherit">
-              <Badge badgeContent={badgeMessage} color="error">
+              <Badge badgeContent={0} color="error">
                 <MailIcon />
               </Badge>
             </IconButton>

@@ -24,6 +24,8 @@ model CarList {
 
   carBrand String @db.ObjectId
   brand    Brand  @relation(fields: [carBrand], references: [id])
+
+  commit Forma[]
 }
 
 model Brand {
@@ -39,4 +41,17 @@ model Admin {
 
   login    String
   password String
+}
+
+model Forma {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  phone     String
+  comment   String
+  dataFirst DateTime?
+  dataLast  DateTime?
+  checkRead Boolean   @default(false)
+
+  carId String?  @db.ObjectId
+  car   CarList? @relation(fields: [carId], references: [id])
 }

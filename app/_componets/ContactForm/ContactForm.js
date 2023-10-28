@@ -1,5 +1,5 @@
 'use client';
-import { io as ClientIO } from 'socket.io-client';
+// import { io as ClientIO } from 'socket.io-client';
 import { useState } from 'react';
 
 import style from './contactForm.module.scss';
@@ -15,16 +15,17 @@ const ContactForm = () => {
     const phone = formData.get('phone');
     const comment = formData.get('comment');
 
-    const socketInstance = new ClientIO(process.env.NEXT_PUBLIC_SITE_URL, {
-      path: '/api/socket/io',
-      addTrailingSlash: false,
-    });
+    // webSocket
+    // const socketInstance = new ClientIO(process.env.NEXT_PUBLIC_SITE_URL, {
+    //   path: '/api/socket/io',
+    //   addTrailingSlash: false,
+    // });
 
-    socketInstance.emit('message', 'new form');
+    // socketInstance.emit('message', 'new form');
 
-    setTimeout(() => {
-      socketInstance.disconnect();
-    }, 3000);
+    // setTimeout(() => {
+    //   socketInstance.disconnect();
+    // }, 3000);
 
     await axios.post('/api/formsubmit', {
       phone,
