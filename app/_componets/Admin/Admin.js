@@ -43,8 +43,8 @@ const Admin = () => {
         <Form />
       ) : (
         <>
-          <h1>isConnected </h1>
-          <ResponsiveAppBar data={data} />
+          <h1>{isLoading ? 'Load' : 'isConnected'}</h1>
+          {data && <ResponsiveAppBar data={data} />}
         </>
       )}
     </Box>

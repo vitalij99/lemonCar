@@ -1,10 +1,10 @@
 import AdminTable from '@/app/_componets/Admin/AdminTable';
 import React from 'react';
 
-const page = ({ params }) => {
+const page = () => {
   return (
     <div>
-      <AdminTable params={params.item} />
+      <AdminTable />
     </div>
   );
 };

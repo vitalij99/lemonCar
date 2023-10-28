@@ -5,7 +5,7 @@ import { MenuItem } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
+
 import Badge from '@mui/material/Badge';
 import MailIcon from '@mui/icons-material/Mail';
 
@@ -35,11 +35,11 @@ export default function PrimarySearchAppBar({ data }) {
 
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <IconButton size="large" color="inherit">
+            <Link href={`/admin/message`}>
               <Badge badgeContent={unRead} color="error">
                 <MailIcon />
               </Badge>
-            </IconButton>
+            </Link>
           </Box>
         </Toolbar>
       </AppBar>
