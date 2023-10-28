@@ -1,20 +1,28 @@
-import * as React from 'react';
+import { useMemo, useState } from 'react';
+import Link from 'next/link';
 
+import { MenuItem } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
-
 import Badge from '@mui/material/Badge';
-
 import MailIcon from '@mui/icons-material/Mail';
-import { MenuItem } from '@mui/material';
-import Link from 'next/link';
 
 const pages = ['Carlist', 'Brand'];
 
 export default function PrimarySearchAppBar({ data }) {
-  console.log(data);
+  const [unRead, setUnRead] = useState(0);
+  useMemo(() => {
+    let searchUnRead = 0;
+    for (let index = 0; index < data.length; index++) {
+      if (data[index].checkRead === false) {
+        searchUnRead += 1;
+      }
+    }
+    setUnRead(searchUnRead);
+  }, [data]);
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -28,7 +36,7 @@ export default function PrimarySearchAppBar({ data }) {
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <IconButton size="large" color="inherit">
-              <Badge badgeContent={0} color="error">
+              <Badge badgeContent={unRead} color="error">
                 <MailIcon />
               </Badge>
             </IconButton>

@@ -5,8 +5,6 @@ export async function POST(req) {
   try {
     const { comment, phone, carId = '' } = await req.json();
 
-    console.log({ comment, phone, carId });
-
     // add to bd
     const newComment = await db.forma.create({
       data: {

@@ -9,7 +9,7 @@ import { useFetcher } from '@/lib/fetcher';
 const Admin = () => {
   const [token, setToken] = useState(null);
   const { data, error, isLoading } = useFetcher('/api/swr');
-  console.log({ data, error, isLoading });
+
   useEffect(() => {
     setToken(localStorage.getItem('token'));
   }, []);
