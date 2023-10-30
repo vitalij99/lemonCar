@@ -1,3 +1,6 @@
+const dynamic = 'force-dynamic';
+const revalidate = 0;
+
 import { db } from '@/lib/db';
 import { NextResponse } from 'next/server';
 
