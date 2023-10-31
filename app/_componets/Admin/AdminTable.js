@@ -68,7 +68,7 @@ export default function AdminTable({ params }) {
           return [{ ...prev[0], image: newImage, imagesFile: files }];
         });
       } else {
-        // зміна машин
+        // change of car
 
         const formData = new FormData();
 

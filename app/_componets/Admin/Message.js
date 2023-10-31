@@ -13,7 +13,11 @@ const theme = createTheme({
 
 const Message = () => {
   const { data, error, isLoading } = useFetcher('/api/swr');
-  console.log(data, ' message');
+
+  const handleDeleteMessage = event => {
+    const idMessage = event.target.dataset.id;
+    console.log(idMessage);
+  };
 
   const handleProcessRowUpdate = async updatedRow => {
     // push
@@ -27,7 +31,7 @@ const Message = () => {
             <DataGrid
               className="tablet"
               rows={data}
-              columns={newColumnsMessage()}
+              columns={newColumnsMessage({ handleDeleteMessage })}
               getRowHeight={() => 'auto'}
               initialState={{
                 pagination: {

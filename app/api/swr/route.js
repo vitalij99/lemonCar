@@ -13,3 +13,13 @@ export async function GET(req, res) {
     return new NextResponse('Internal Error', { status: 500 });
   }
 }
+
+export async function DELETE(req, res) {
+  try {
+    const result = await db.forma.findMany();
+    return NextResponse.json(result);
+  } catch (error) {
+    console.log(error.message);
+    return new NextResponse('Internal Error', { status: 500 });
+  }
+}
