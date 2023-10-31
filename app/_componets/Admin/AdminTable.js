@@ -91,10 +91,10 @@ export default function AdminTable({ params }) {
     };
     const handleDeleteImage = async event => {
       const id = event.target.dataset.id;
-      const deletImage = event.target.dataset.image;
+      const deleteImage = event.target.dataset.image;
 
       if (id !== 'new') {
-        await axios.patch(`/api/carlist`, { id, deletImage });
+        await axios.patch(`/api/carlist`, { id, deleteImage });
         const result = await axios(`/api/admin/carlist`);
         const newData = result.data.map(car => transformBrandName(car, brands));
 

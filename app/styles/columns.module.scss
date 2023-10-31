@@ -6,6 +6,7 @@
     backdrop-filter: blur(6px);
     position: absolute;
     padding: 10px 14px;
+    pointer-events: none;
   }
   &:hover {
     .delete_wrapp {

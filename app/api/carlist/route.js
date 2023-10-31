@@ -34,7 +34,8 @@ export async function PATCH(req) {
     const data = await req.json();
 
     if (!data) return NextResponse('wrong');
-    if (!data.deletImage) {
+    else if (data.id === undefined) return NextResponse('wrong id car');
+    else if (!data.deleteImage) {
       const { id, ...newCar } = data;
 
       const result = await db.carList.update({
@@ -49,13 +50,13 @@ export async function PATCH(req) {
 
       return NextResponse.json(result);
     } else {
-      const { id, deletImage } = data;
+      const { id, deleteImage } = data;
 
       const car = await db.carList.findUnique({ where: { id: id } });
-      const newImage = car.image.filter(img => img !== deletImage);
+      const newImage = car.image.filter(img => img !== deleteImage);
 
       // cloudenari delete
-      const publicId = deletImage.match(/\/v\d+\/(.+?)(?:\.\w+)?$/)[1];
+      const publicId = deleteImage.match(/\/v\d+\/(.+?)(?:\.\w+)?$/)[1];
 
       await cloudinary.uploader.destroy(publicId);
 
