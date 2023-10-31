@@ -5,6 +5,7 @@ import { ThemeProvider } from '@emotion/react';
 import { createTheme } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 import axios from 'axios';
+import { mutate } from 'swr';
 
 const theme = createTheme({
   palette: {
@@ -18,8 +19,8 @@ const Message = () => {
   const handleDeleteMessage = async event => {
     const idMessage = event.target.dataset.id;
 
-    const res = await axios.patch(`/api/swr/`, { id: idMessage });
-    console.log(res);
+    await axios.patch(`/api/swr/`, { id: idMessage });
+    mutate('/api/swr');
   };
 
   const handleProcessRowUpdate = async updatedRow => {
