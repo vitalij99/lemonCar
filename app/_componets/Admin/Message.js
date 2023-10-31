@@ -4,6 +4,7 @@ import { useFetcher } from '@/lib/fetcher';
 import { ThemeProvider } from '@emotion/react';
 import { createTheme } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
+import axios from 'axios';
 
 const theme = createTheme({
   palette: {
@@ -14,9 +15,11 @@ const theme = createTheme({
 const Message = () => {
   const { data, error, isLoading } = useFetcher('/api/swr');
 
-  const handleDeleteMessage = event => {
+  const handleDeleteMessage = async event => {
     const idMessage = event.target.dataset.id;
-    console.log(idMessage);
+
+    const res = await axios.patch(`/api/swr/`, { id: idMessage });
+    console.log(res);
   };
 
   const handleProcessRowUpdate = async updatedRow => {

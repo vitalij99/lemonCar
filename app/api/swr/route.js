@@ -1,5 +1,5 @@
 export const dynamic = 'force-dynamic';
-export const revalidate = 120;
+export const revalidate = 30;
 
 import { db } from '@/lib/db';
 import { NextResponse } from 'next/server';
@@ -14,9 +14,11 @@ export async function GET(req, res) {
   }
 }
 
-export async function DELETE(req, res) {
+export async function PATCH(req, res) {
+  const { id } = await req.json();
+  console.log(id);
   try {
-    const result = await db.forma.findMany();
+    const result = await db.forma.delete({ where: { id } });
     return NextResponse.json(result);
   } catch (error) {
     console.log(error.message);
