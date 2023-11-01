@@ -15,8 +15,19 @@ export async function GET(req, res) {
 }
 
 export async function PATCH(req, res) {
-  const { id } = await req.json();
-  console.log(id);
+  const message = await req.json();
+  console.log(message);
+
+  const result = 'hell';
+  return NextResponse.json(result);
+}
+export async function DELETE(req, res) {
+  const id = req.nextUrl.searchParams.get('id');
+
+  if (!id) {
+    return new NextResponse('Error id', { status: 404 });
+  }
+
   try {
     const result = await db.forma.delete({ where: { id } });
     return NextResponse.json(result);

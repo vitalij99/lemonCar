@@ -19,12 +19,15 @@ const Message = () => {
   const handleDeleteMessage = async event => {
     const idMessage = event.target.dataset.id;
 
-    await axios.patch(`/api/swr/`, { id: idMessage });
+    await axios.delete(`/api/swr?id=${idMessage}`);
+
     mutate('/api/swr');
   };
 
   const handleProcessRowUpdate = async updatedRow => {
     // push
+
+    await axios.patch(`/api/swr/`, updatedRow);
   };
   const handleProcessRowUpdateError = err => {};
   return (
