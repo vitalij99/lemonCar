@@ -15,10 +15,15 @@ export async function GET(req, res) {
 }
 
 export async function PATCH(req, res) {
-  const message = await req.json();
-  console.log(message);
+  const { id, ...data } = await req.json();
 
-  const result = 'hell';
+  const result = await db.forma.update({
+    where: { id },
+    data: {
+      ...data,
+    },
+  });
+
   return NextResponse.json(result);
 }
 export async function DELETE(req, res) {
