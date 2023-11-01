@@ -169,6 +169,12 @@ export default function AdminTable({ params }) {
               pagination: {
                 paginationModel: { page: 0, pageSize: 10 },
               },
+              columns: {
+                ...rows.initialState?.columns,
+                columnVisibilityModel: {
+                  id: false,
+                },
+              },
             }}
             pageSizeOptions={[5, 10]}
             processRowUpdate={(updatedRow, originalRow) => {

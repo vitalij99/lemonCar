@@ -46,6 +46,12 @@ const Message = () => {
                 pagination: {
                   paginationModel: { page: 0, pageSize: 10 },
                 },
+                columns: {
+                  ...data.initialState?.columns,
+                  columnVisibilityModel: {
+                    id: false,
+                  },
+                },
               }}
               pageSizeOptions={[5, 10]}
               processRowUpdate={(updatedRow, originalRow) => {
