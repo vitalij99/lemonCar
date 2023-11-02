@@ -6,6 +6,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { useEffect, useState } from 'react';
 import styled from './RentalCar.module.scss';
 import dayjs from 'dayjs';
+import FormCar from '../FormCar/FormCar';
 
 const procentraPrice = (price, day) => {
   switch (true) {
@@ -38,6 +39,8 @@ const RentalCar = ({ carData }) => {
     totalPrise: price,
     diffInDays: 1,
     deposit: price * 0.64,
+    price,
+    carId: carData.id,
   });
 
   useEffect(() => {
@@ -53,7 +56,7 @@ const RentalCar = ({ carData }) => {
     }
 
     const deposit = Math.floor(totalPrise * 0.64);
-    setFormCar({ deposit, totalPrise, diffInDays });
+    setFormCar(prev => ({ ...prev, deposit, totalPrise, diffInDays }));
   }, [calendar, price]);
 
   return (
@@ -108,6 +111,7 @@ const RentalCar = ({ carData }) => {
           <h3>${formCar.totalPrise}</h3>
         </span>
       </div>
+      <FormCar form={formCar} calendar={calendar} />
     </Box>
   );
 };
