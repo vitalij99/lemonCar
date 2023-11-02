@@ -89,10 +89,7 @@ export default function AdminTable({ params }) {
         setRows(newData);
       }
     };
-    const handleDeleteImage = async event => {
-      const id = event.target.dataset.id;
-      const deleteImage = event.target.dataset.image;
-
+    const handleDeleteImage = async (id, deleteImage) => {
       if (id !== 'new') {
         await axios.patch(`/api/carlist`, { id, deleteImage });
         const result = await axios(`/api/admin/carlist`);

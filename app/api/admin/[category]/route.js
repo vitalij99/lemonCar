@@ -65,7 +65,7 @@ export async function PATCH(req) {
     const car = await db.carList.findUnique({ where: { id: carId } });
 
     if (!car) {
-      throw new Error(`HTTP error! Status: 500`);
+      throw new Error(`Car id not found`);
     }
 
     const images = formData.getAll('image');
