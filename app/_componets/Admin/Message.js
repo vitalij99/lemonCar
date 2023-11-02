@@ -16,9 +16,7 @@ const theme = createTheme({
 const Message = () => {
   const { data, error, isLoading } = useFetcher('/api/swr');
 
-  const handleDeleteMessage = async event => {
-    const idMessage = event.target.dataset.id;
-
+  const handleDeleteMessage = async idMessage => {
     await axios.delete(`/api/swr?id=${idMessage}`);
 
     mutate('/api/swr');
