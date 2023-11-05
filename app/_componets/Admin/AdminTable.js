@@ -16,15 +16,15 @@ const theme = createTheme({
 const NEW_CARINFO = [
   {
     id: 'new',
-    name: 'McLaren Artura ass',
-    price: '320',
-    seats: '2',
-    power: '671',
-    engine: '3',
+    name: 'name',
+    price: '0',
+    seats: '0',
+    power: '0',
+    engine: '0',
     image: [],
     imagesFile: [],
     drive: 'RWD',
-    acceleration: '3 sec',
+    acceleration: '1 sec',
     type: 'Sport',
     carBrand: 'Rolls-Royce',
   },
@@ -46,7 +46,7 @@ const transformBrandName = (car, brands) => {
   };
 };
 
-export default function AdminTable({ params }) {
+export default function AdminTable() {
   const [rows, setRows] = useState(null);
   const [brands, setBrands] = useState([]);
   const [columns, setColumns] = useState([]);
