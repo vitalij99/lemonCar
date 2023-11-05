@@ -46,11 +46,16 @@ model Admin {
 model Forma {
   id String @id @default(auto()) @map("_id") @db.ObjectId
 
-  phone     String
-  comment   String
-  dataFirst DateTime?
-  dataLast  DateTime?
-  checkRead Boolean   @default(false)
+  phone      String
+  comment    String
+  dataFirst  DateTime?
+  dataLast   DateTime?
+  totalPrise String?
+  diffInDays String?
+  deposit    String?
+  price      String?
+
+  checkRead Boolean @default(false)
 
   carId String?  @db.ObjectId
   car   CarList? @relation(fields: [carId], references: [id])

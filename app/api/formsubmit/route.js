@@ -3,19 +3,20 @@ import { NextResponse } from 'next/server';
 
 export async function POST(req) {
   try {
-    const { comment, phone, carId = '' } = await req.json();
+    const { comment, phone, carId = '', ...pass } = await req.json();
 
     // add to bd
+
     const newComment = await db.forma.create({
       data: {
         comment,
         phone,
+        ...pass,
       },
       include: {
         carList: carId,
       },
     });
-
     return NextResponse.json(newComment);
   } catch (error) {
     console.log('[SERVERS_POST]', error);

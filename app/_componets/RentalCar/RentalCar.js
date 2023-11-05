@@ -31,8 +31,8 @@ const RentalCar = ({ carData }) => {
   const price = Number(carData.price);
 
   const [calendar, setCalendar] = useState({
-    start: dayjs(),
-    end: dayjs(),
+    dataFirst: dayjs(),
+    dataLast: dayjs(),
   });
 
   const [formCar, setFormCar] = useState({
@@ -45,7 +45,7 @@ const RentalCar = ({ carData }) => {
 
   useEffect(() => {
     const diffInDays = Math.floor(
-      calendar.end.diff(calendar.start, 'day', true) + 0.1
+      calendar.dataLast.diff(calendar.dataFirst, 'day', true) + 0.1
     );
 
     let totalPrise;
@@ -75,18 +75,18 @@ const RentalCar = ({ carData }) => {
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DatePicker
                 label="Start dates"
-                value={calendar.start}
+                value={calendar.dataFirst}
                 minDate={dayjs()}
                 onChange={newValue =>
-                  setCalendar({ ...calendar, start: newValue })
+                  setCalendar({ ...calendar, dataFirst: newValue })
                 }
               />
               <DatePicker
                 label="End"
-                value={calendar.end}
-                minDate={calendar.start}
+                value={calendar.dataLast}
+                minDate={calendar.dataFirst}
                 onChange={newValue =>
-                  setCalendar({ ...calendar, end: newValue })
+                  setCalendar({ ...calendar, dataLast: newValue })
                 }
               />
             </LocalizationProvider>

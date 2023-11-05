@@ -1,11 +1,11 @@
 'use client';
-// import { io as ClientIO } from 'socket.io-client';
+
 import { useState } from 'react';
 
 import style from './contactForm.module.scss';
 import axios from 'axios';
 
-const ContactForm = () => {
+const ContactForm = ({ carForm }) => {
   const [comment, setComment] = useState('');
 
   const onSubmit = async event => {
@@ -15,21 +15,10 @@ const ContactForm = () => {
     const phone = formData.get('phone');
     const comment = formData.get('comment');
 
-    // webSocket
-    // const socketInstance = new ClientIO(process.env.NEXT_PUBLIC_SITE_URL, {
-    //   path: '/api/socket/io',
-    //   addTrailingSlash: false,
-    // });
-
-    // socketInstance.emit('message', 'new form');
-
-    // setTimeout(() => {
-    //   socketInstance.disconnect();
-    // }, 3000);
-
     await axios.post('/api/formsubmit', {
       phone,
       comment,
+      ...carForm,
     });
   };
 
@@ -55,7 +44,7 @@ const ContactForm = () => {
         onChange={handleComment}
       />
 
-      <button type="submit">Contact Us</button>
+      <button type="submit">{carForm ? 'RENTAL CAR' : 'Contact Us'}</button>
     </form>
   );
 };
