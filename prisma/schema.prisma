@@ -48,12 +48,12 @@ model Forma {
 
   phone      String
   comment    String
+  totalPrise Int?
+  diffInDays Int?
+  deposit    Int?
+  price      Int?
   dataFirst  DateTime?
   dataLast   DateTime?
-  totalPrise String?
-  diffInDays String?
-  deposit    String?
-  price      String?
 
   checkRead Boolean @default(false)
 
