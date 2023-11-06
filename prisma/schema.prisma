@@ -57,6 +57,6 @@ model Forma {
 
   checkRead Boolean @default(false)
 
-  carId String?  @db.ObjectId
-  car   CarList? @relation(fields: [carId], references: [id])
+  carId   String?  @db.ObjectId
+  carList CarList? @relation(fields: [carId], references: [id])
 }

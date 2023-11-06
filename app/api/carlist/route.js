@@ -8,26 +8,26 @@ cloudinary.v2.config({
   api_secret: process.env.APISecret,
 });
 
-export async function POST(req) {
-  try {
-    const car = await req.json();
-    if (!car) return NextResponse('wrong');
+// export async function POST(req) {
+//   try {
+//     const car = await req.json();
+//     if (!car) return NextResponse('wrong');
 
-    const newCar = await db.carList.create({
-      data: {
-        ...car,
-      },
-      include: {
-        brand: car.carBrand,
-      },
-    });
+//     const newCar = await db.carList.create({
+//       data: {
+//         ...car,
+//       },
+//       include: {
+//         brand: car.carBrand,
+//       },
+//     });
 
-    return NextResponse.json(newCar);
-  } catch (error) {
-    console.log('[SERVERS_POST]', error);
-    return new NextResponse(error.message, { status: 500 });
-  }
-}
+//     return NextResponse.json(newCar);
+//   } catch (error) {
+//     console.log('[SERVERS_POST]', error);
+//     return new NextResponse(error.message, { status: 500 });
+//   }
+// }
 
 export async function PATCH(req) {
   try {

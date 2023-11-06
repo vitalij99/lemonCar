@@ -7,6 +7,8 @@ import { DataGrid } from '@mui/x-data-grid';
 
 import { newColumnsMessage } from '@/lib/columns';
 import { useFetcher } from '@/lib/fetcher';
+import { useEffect } from 'react';
+import { useState } from 'react';
 
 const theme = createTheme({
   palette: {
@@ -16,6 +18,14 @@ const theme = createTheme({
 
 const Message = () => {
   const { data, error, isLoading } = useFetcher('/api/swr');
+  const [carList, setCarList] = useState(null);
+  useEffect(() => {
+    (async () => {
+      const result = await axios(`/api/admin/carlist`);
+
+      setCarList(result.data);
+    })();
+  }, []);
 
   const handleDeleteMessage = async idMessage => {
     await axios.delete(`/api/swr?id=${idMessage}`);
@@ -34,12 +44,12 @@ const Message = () => {
   return (
     <div>
       <ThemeProvider theme={theme}>
-        {data && (
+        {data && carList && (
           <div style={{ height: 400, width: '100%' }}>
             <DataGrid
               className="tablet"
               rows={data}
-              columns={newColumnsMessage({ handleDeleteMessage })}
+              columns={newColumnsMessage({ handleDeleteMessage, carList })}
               getRowHeight={() => 'auto'}
               initialState={{
                 pagination: {
