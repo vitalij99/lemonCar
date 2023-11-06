@@ -1,11 +1,12 @@
 'use client';
-import { newColumnsMessage } from '@/lib/columns';
-import { useFetcher } from '@/lib/fetcher';
+import axios from 'axios';
+import { mutate } from 'swr';
 import { ThemeProvider } from '@emotion/react';
 import { createTheme } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
-import axios from 'axios';
-import { mutate } from 'swr';
+
+import { newColumnsMessage } from '@/lib/columns';
+import { useFetcher } from '@/lib/fetcher';
 
 const theme = createTheme({
   palette: {
@@ -49,6 +50,9 @@ const Message = () => {
                   columnVisibilityModel: {
                     id: false,
                   },
+                },
+                sorting: {
+                  sortModel: [{ field: 'checkRead', sort: 'asc' }],
                 },
               }}
               pageSizeOptions={[5, 10]}
