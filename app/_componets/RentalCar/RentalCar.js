@@ -7,21 +7,8 @@ import { useEffect, useState } from 'react';
 import styled from './RentalCar.module.scss';
 import dayjs from 'dayjs';
 import FormCar from '../FormCar/FormCar';
+import { CAR_DEPOSIT, getDiffInDays, procentraPrice } from '@/lib/values';
 
-const procentraPrice = (price, day) => {
-  switch (true) {
-    case day < 1:
-      return price;
-    case day < 8:
-      return price * 0.8;
-    case day < 15:
-      return price * 0.7;
-    case day < 30:
-      return price * 0.6;
-    default:
-      return price * 0.4;
-  }
-};
 const theme = createTheme({
   palette: {
     mode: 'dark',
@@ -38,24 +25,18 @@ const RentalCar = ({ carData }) => {
   const [formCar, setFormCar] = useState({
     totalPrise: price,
     diffInDays: 1,
-    deposit: price * 0.64,
+    deposit: price * CAR_DEPOSIT,
     price,
     carId: carData.id,
   });
 
   useEffect(() => {
-    const diffInDays = Math.floor(
-      calendar.dataLast.diff(calendar.dataFirst, 'day', true) + 0.1
-    );
+    const diffInDays = getDiffInDays(calendar.dataFirst, calendar.dataLast);
 
-    let totalPrise;
-    if (diffInDays <= 0) {
-      totalPrise = price;
-    } else {
-      totalPrise = procentraPrice(price, diffInDays) * diffInDays;
-    }
+    const totalPrise =
+      diffInDays <= 0 ? price : procentraPrice(price, diffInDays) * diffInDays;
 
-    const deposit = Math.floor(totalPrise * 0.64);
+    const deposit = Math.floor(totalPrise * CAR_DEPOSIT);
     setFormCar(prev => ({ ...prev, deposit, totalPrise, diffInDays }));
   }, [calendar, price]);
 

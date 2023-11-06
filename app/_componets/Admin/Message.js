@@ -39,6 +39,7 @@ const Message = () => {
     await axios.patch(`/api/swr/`, updatedRow);
 
     mutate('/api/swr');
+    return updatedRow;
   };
   const handleProcessRowUpdateError = err => {};
   return (
