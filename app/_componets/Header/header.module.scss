@@ -1,16 +1,15 @@
 @import '../../styles/mixins';
 .header_section {
-  display: none;
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   z-index: 2;
-  border-bottom: 0.5px solid var(--text, #fff);
-  background: rgba(23, 23, 23, 0.1);
 
   @include tablet {
     display: block;
+    border-bottom: 0.5px solid var(--text, #fff);
+    background: rgba(23, 23, 23, 0.1);
   }
 }
 .header_wrapp {
@@ -18,8 +17,12 @@
   padding: 18px;
 }
 .wrapper {
-  display: flex;
+  display: none;
+
   align-items: center;
+  @include tablet {
+    display: flex;
+  }
 }
 .navigation {
   margin-left: auto;

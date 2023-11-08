@@ -6,6 +6,16 @@ import LogoSec from '@/public/images/logo-sec.svg';
 import Container from '../Container/Container';
 import style from './header.module.scss';
 import Image from 'next/image';
+import BurgerMenu from '../BurgerMenu/BurgerMenu';
+
+const HEADER_LINK = [
+  { name: 'Car List', link: '/carlist' },
+  { name: 'VIP Transfer', link: '/viptransfer' },
+  { name: 'Yachts', link: '/yachts' },
+  { name: 'Photshoots with car', link: '/photshoots' },
+  { name: 'About Us', link: '/about' },
+  { name: 'Contact Us', link: '/contact' },
+];
 
 export const Header = () => {
   return (
@@ -19,26 +29,16 @@ export const Header = () => {
             </div>
           </Link>
           <ul className={style.navigation}>
-            <li>
-              <Link href="/carlist">Car List</Link>
-            </li>
-            <li>
-              <Link href="/viptransfer">VIP Transfer</Link>
-            </li>
-            <li>
-              <Link href="/yachts">Yachts</Link>
-            </li>
-            <li>
-              <Link href="/photshoots">Photshoots with car</Link>
-            </li>
-            <li>
-              <Link href="/about">About Us</Link>
-            </li>
-            <li>
-              <Link href="/contact">Contact Us</Link>
-            </li>
+            {HEADER_LINK.map((nav, index) => {
+              return (
+                <li key={index}>
+                  <Link href={nav.link}>{nav.name}</Link>
+                </li>
+              );
+            })}
           </ul>
         </nav>
+        <BurgerMenu list={HEADER_LINK} />
       </Container>
     </header>
   );
