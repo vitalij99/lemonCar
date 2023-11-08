@@ -10,7 +10,7 @@ import {
 import MenuIcon from '@mui/icons-material/Menu';
 import { useState } from 'react';
 
-const BurgerMenu = ({ list }) => {
+const BurgerMenu = ({ list, className }) => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => {
     setOpen(true);
@@ -19,7 +19,7 @@ const BurgerMenu = ({ list }) => {
     setOpen(false);
   };
   return (
-    <div>
+    <div className={className}>
       <IconButton onClick={handleOpen} aria-label="menu">
         <MenuIcon fontSize="large" sx={{ color: '#fff' }} />
       </IconButton>

@@ -48,3 +48,8 @@
     text-align: center;
   }
 }
+.burger {
+  @include tablet {
+    display: none;
+  }
+}

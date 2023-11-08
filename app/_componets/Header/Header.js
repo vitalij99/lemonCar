@@ -38,7 +38,7 @@ export const Header = () => {
             })}
           </ul>
         </nav>
-        <BurgerMenu list={HEADER_LINK} />
+        <BurgerMenu className={style.burger} list={HEADER_LINK} />
       </Container>
     </header>
   );
