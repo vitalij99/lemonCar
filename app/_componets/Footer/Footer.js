@@ -18,6 +18,7 @@ const CARLIST = [
 ];
 
 const Footer = () => {
+  // add image + pc ver.
   return (
     <footer>
       <Container>
