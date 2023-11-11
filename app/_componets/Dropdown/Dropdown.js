@@ -1,27 +1,29 @@
 'use client';
-import { useState } from 'react';
+
 import style from './Dropdown.module.scss';
+import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  ThemeProvider,
+  createTheme,
+} from '@mui/material';
+
+const theme = createTheme({
+  palette: {
+    mode: 'dark',
+  },
+});
 
 const Dropdown = ({ title, children }) => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const handleTagle = () => {
-    setIsOpen(!isOpen);
-  };
-  // add Dropdown from mui
   return (
-    <div>
-      <button
-        className={isOpen ? `${style.button} ${style.visible}` : style.button}
-        onClick={handleTagle}
-      >
-        <h3 className={style.title}>{title}</h3>
-      </button>
+    <ThemeProvider theme={theme}>
+      <Accordion>
+        <AccordionSummary className={style.title}>{title}</AccordionSummary>
 
-      <div className={isOpen ? `${style.wrapp} ${style.visible}` : style.wrapp}>
-        {children}
-      </div>
-    </div>
+        <AccordionDetails>{children}</AccordionDetails>
+      </Accordion>
+    </ThemeProvider>
   );
 };
 
