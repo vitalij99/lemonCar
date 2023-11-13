@@ -1,21 +1,17 @@
-.text {
-  margin-left: -200px;
-  color: var(--text, #fff);
-
-  font-family: var(--font-muller, #fff);
-  font-size: 120px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-  white-space: nowrap;
-  overflow: hidden;
+.footer::before {
+  content: '';
+  width: 100%;
+  height: 90px;
+  display: block;
+  background-image: url(../../../public/images/lemann.svg);
+  background-position: -190px;
 }
+
 .wrapp {
   display: flex;
   justify-content: space-between;
 }
-.list {
-}
+
 .circle {
   margin: 27px auto;
 }

@@ -20,11 +20,8 @@ const CARLIST = [
 const Footer = () => {
   // add image + pc ver.
   return (
-    <footer>
+    <footer className={style.footer}>
       <Container>
-        {/* <p className={style.text}>
-          lemann • lemann • lemann • lemann • lemann • lemann
-        </p> */}
         <Dropdown title="For Customers">
           <Contacts title="For Customers" list={CUSTOMERS} blank={false} />
         </Dropdown>
