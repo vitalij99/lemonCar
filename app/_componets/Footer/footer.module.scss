@@ -1,3 +1,5 @@
+@import '../../styles/mixins';
+
 .footer::before {
   content: '';
   width: 100%;
@@ -6,10 +8,21 @@
   background-image: url(../../../public/images/lemann.svg);
   background-position: -190px;
 }
-
+.wrapp,
+.wrapp_des {
+  padding: 10px;
+}
 .wrapp {
-  display: flex;
-  justify-content: space-between;
+  &_des {
+    display: none;
+    justify-content: space-between;
+  }
+  @include tablet {
+    display: none;
+    &_des {
+      display: flex;
+    }
+  }
 }
 
 .circle {

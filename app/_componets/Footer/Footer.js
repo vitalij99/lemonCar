@@ -22,16 +22,18 @@ const Footer = () => {
   return (
     <footer className={style.footer}>
       <Container>
-        <Dropdown title="For Customers">
-          <Contacts title="For Customers" list={CUSTOMERS} blank={false} />
-        </Dropdown>
-        <Dropdown title="Car List">
-          <Contacts title="Car List" list={CARLIST} blank={false} />
-        </Dropdown>
-        <Dropdown title="Contacts">
-          <Contacts title="Car List" />
-        </Dropdown>
         <div className={style.wrapp}>
+          <Dropdown title="For Customers">
+            <Contacts title="For Customers" list={CUSTOMERS} blank={false} />
+          </Dropdown>
+          <Dropdown title="Car List">
+            <Contacts title="Car List" list={CARLIST} blank={false} />
+          </Dropdown>
+          <Dropdown title="Contacts">
+            <Contacts title="Car List" />
+          </Dropdown>
+        </div>
+        <div className={style.wrapp_des}>
           <Contacts
             className={style.list}
             title="For Customers"
