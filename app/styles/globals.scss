@@ -2,9 +2,12 @@
   --small-screen: 375px;
   --medium-screen: 755px;
   --large-screen: 1700px;
-  --text: #000;
-  --background: #fff;
-  --border: #d3d3d3;
+  // --text: #000;
+  // --background: #fff;
+  // --border: #d3d3d3;
+  --text: #fff;
+  --background: #000;
+  --border: #2f2f2f;
 }
 
 @media (prefers-color-scheme: dark) {
