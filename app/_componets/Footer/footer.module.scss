@@ -16,6 +16,7 @@
   &_des {
     display: none;
     justify-content: space-between;
+    align-items: center;
   }
   @include tablet {
     display: none;
@@ -27,4 +28,7 @@
 
 .circle {
   margin: 27px auto;
+  @include tablet {
+    display: none;
+  }
 }
