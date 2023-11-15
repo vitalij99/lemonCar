@@ -9,12 +9,13 @@
   padding: 15px;
   width: 265px;
   border: 1px solid var(--border);
+  font-family: var(--font-mull);
+  color: var(--text, #fff);
 }
 
 .title {
   margin-bottom: 45px;
-  color: var(--text, #fff);
-  font-family: var(--font-mull);
+
   font-size: 18px;
   font-weight: 300;
 }

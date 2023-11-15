@@ -1,3 +1,6 @@
+.title {
+  color: var(--text, #fff);
+}
 .data {
   padding: 25px;
   background-color: color-mix(in lch, var(--background), #3d3d3d);
@@ -58,6 +61,7 @@
   padding: 30px;
   background-color: color-mix(in lch, var(--background), #3d3d3d);
   text-align: center;
+  color: var(--text, #fff);
   &_title {
     margin-bottom: 10px;
   }

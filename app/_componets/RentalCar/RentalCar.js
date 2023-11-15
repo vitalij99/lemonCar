@@ -48,7 +48,7 @@ const RentalCar = ({ carData }) => {
         border: '1px solid #2F2F2F',
       }}
     >
-      <h1>RENTAL CAR</h1>
+      <h1 className={styled.title}>RENTAL CAR</h1>
 
       <div>
         <div className={styled.data}>
