@@ -19,7 +19,6 @@ export default async function Home() {
       <Box />
       <Carlist list={listCar} />
       <Steps />
-      {/* <Reviews /> */}
       <Contact />
       <Faq />
     </main>
