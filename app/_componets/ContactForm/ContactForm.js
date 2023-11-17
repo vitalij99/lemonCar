@@ -28,7 +28,7 @@ const ContactForm = ({ carForm }) => {
   return (
     <form className={style.form} onSubmit={onSubmit}>
       <input
-        placeholder="Phone"
+        placeholder="Phone +555..."
         type="tel"
         name="phone"
         pattern="^\+\d+$"
