@@ -6,7 +6,7 @@ import React from 'react';
 const ALL_BRANDS = { id: '', name: 'All' };
 
 const BrandList = async () => {
-  const brands = await getBrand();
+  const brands = (await getBrand()) ?? [];
   brands.unshift(ALL_BRANDS);
   return (
     <Box>
