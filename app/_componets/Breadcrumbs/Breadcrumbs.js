@@ -3,7 +3,7 @@ import { Breadcrumbs, Link, Typography } from '@mui/material';
 
 import { usePathname } from 'next/navigation';
 
-const BreadcrumbsCustl = ({ carName }) => {
+const BreadcrumbsCustl = ({ lastLink }) => {
   const pathname = usePathname();
   const [_, prefPath, thisPath] = pathname.split('/');
 
@@ -20,9 +20,11 @@ const BreadcrumbsCustl = ({ carName }) => {
       >
         {prefPath}
       </Link>
-      <Typography sx={{ color: 'var(--text)' }} color="text.primary">
-        {carName ? carName : thisPath}
-      </Typography>
+      {lastLink && (
+        <Typography sx={{ color: 'var(--text)' }} color="text.primary">
+          {lastLink ? lastLink : thisPath}
+        </Typography>
+      )}
     </Breadcrumbs>
   );
 };
