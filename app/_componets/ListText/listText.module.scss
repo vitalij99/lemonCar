@@ -1,0 +1,27 @@
+@import '../../styles/mixins';
+
+.title {
+  font-family: var(--font-monument);
+  margin: 25px 0;
+  font-size: 20px;
+  font-weight: 350;
+  line-height: 100%;
+  color: var(--text);
+}
+.para {
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  font-family: var(--font-muller);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 140%;
+  color: var(--text);
+  border-bottom: solid 1px rgba(255, 255, 255, 0.1);
+
+  @include tablet {
+    margin-bottom: 30px;
+  }
+}
+.para:last-child {
+  margin-bottom: 0;
+}

@@ -1,6 +1,21 @@
+import Container from '@/app/_componets/Container/Container';
+import ListText from '@/app/_componets/ListText/ListText';
 import style from './advantage.module.scss';
-import Container from '../Container/Container';
-
+const CHOOSE_LIST = [
+  {
+    title: 'FREECAR DELIVERY',
+    text: ' We will deliver the car directly to your location in Dubai',
+  },
+  {
+    title: 'EXPERIENCEDDRIVERS',
+    text: `Don’t have a driver? Don’t worry, we have many experienced drivers for
+          you.`,
+  },
+  {
+    title: 'TECHNICAL SUPPORT',
+    text: 'Have a question? Contact support when you have a problem.',
+  },
+];
 const Advantage = ({ title, titleSec }) => {
   return (
     <section className={style.section}>
@@ -15,27 +30,7 @@ const Advantage = ({ title, titleSec }) => {
               with our rental deals offer the best`}
             </h2>
           </div>
-          <ul>
-            <li>
-              <h3 className={style.advantage_title}>FREECAR DELIVERY</h3>
-              <p className={style.advantage_para}>
-                We will deliver the car directly to your location in Dubai
-              </p>
-            </li>
-            <li>
-              <h3 className={style.advantage_title}>EXPERIENCEDDRIVERS</h3>
-              <p className={style.advantage_para}>
-                Don’t have a driver? Don’t worry, we have many experienced
-                drivers for you.
-              </p>
-            </li>
-            <li>
-              <h3 className={style.advantage_title}>TECHNICAL SUPPORT</h3>
-              <p className={style.advantage_para}>
-                Have a question? Contact support when you have a problem.
-              </p>
-            </li>
-          </ul>
+          <ListText list={CHOOSE_LIST} />
         </div>
       </Container>
     </section>
