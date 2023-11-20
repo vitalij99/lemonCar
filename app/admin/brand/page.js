@@ -1,7 +1,11 @@
-import React from 'react';
+import BrendTable from '@/app/_componets/Admin/BrendTable';
 
 const page = () => {
-  return <div>page</div>;
+  return (
+    <div>
+      <BrendTable />
+    </div>
+  );
 };
 
 export default page;
