@@ -1,9 +1,9 @@
-import BrendTable from '@/app/_componets/Admin/BrendTable';
+import BrandTable from '@/app/_componets/Admin/BrandTable';
 
 const page = () => {
   return (
     <div>
-      <BrendTable />
+      <BrandTable />
     </div>
   );
 };

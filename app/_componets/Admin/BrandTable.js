@@ -12,7 +12,7 @@ const theme = createTheme({
   },
 });
 
-const BrendTable = () => {
+const BrandTable = () => {
   const [brands, setBrands] = useState(null);
   const [columns, setColumns] = useState([]);
 
@@ -79,4 +79,4 @@ const BrendTable = () => {
   );
 };
 
-export default BrendTable;
+export default BrandTable;
