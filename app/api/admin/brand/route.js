@@ -3,6 +3,7 @@ import { upLoadImage } from '@/lib/upLoadImage';
 import { NextResponse } from 'next/server';
 
 const IMAGE_VALUE = 'logo';
+const FOLDER_NAME = 'brand';
 
 export async function POST(req) {
   try {
@@ -25,51 +26,36 @@ export async function POST(req) {
   }
 }
 
-// PATCH images
 export async function PATCH(req) {
   try {
     const formData = await req.formData();
 
-    const carId = formData.get('id');
-    const car = await db.carList.findUnique({ where: { id: carId } });
+    const brandId = formData.get('id');
+    const brand = await db.brand.findUnique({ where: { id: brandId } });
 
-    if (!car) {
-      throw new Error(`Car id not found`);
+    if (!brand) {
+      throw new Error(`Brand id not found`);
     }
 
-    const images = formData.getAll('image');
+    const data = {};
 
-    const urlImages = [];
-    const cloudFormData = new FormData();
+    const logo = formData.get(IMAGE_VALUE);
 
-    for (const image of images) {
-      cloudFormData.append('file', image);
-      cloudFormData.append('upload_preset', 'ojlqsb85');
-
-      const response = await fetch(url, {
-        method: 'POST',
-        body: cloudFormData,
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-
-      const data = await response.json();
-
-      urlImages.push(data.secure_url);
+    for (const [key, value] of formData.entries()) {
+      data[key] = value;
     }
 
-    const newCar = { ...car, image: [...car.image, ...urlImages] };
-    const { id, ...data } = newCar;
+    if (logo) {
+      const urlImages = await upLoadImage(formData, IMAGE_VALUE, FOLDER_NAME);
 
-    const result = await db.carList.update({
+      data[IMAGE_VALUE] = urlImages[0];
+    }
+    const { id, ...newBrands } = data;
+
+    const result = await db.brand.update({
       where: { id },
       data: {
-        ...data,
-      },
-      include: {
-        brand: {},
+        ...newBrands,
       },
     });
 

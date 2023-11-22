@@ -29,7 +29,20 @@ const BrandTable = () => {
 
   const handleProcessRowUpdate = async updatedRow => {
     // push
-    // await axios.patch(`/api/carlist`, newCar);
+    console.log(updatedRow);
+
+    const formData = new FormData();
+
+    formData.append('id', updatedRow.id);
+    formData.append('name', updatedRow.name);
+
+    await axios.patch(`/api/admin/brand`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+
+    // await axios.patch(`/api/admin/brand`, newCar);
   };
   const handleProcessRowUpdateError = err => {};
   if (!brands) {
