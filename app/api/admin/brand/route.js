@@ -9,7 +9,7 @@ export async function POST(req) {
   try {
     const formData = await req.formData();
 
-    const urlImages = upLoadImage(formData, IMAGE_VALUE);
+    const urlImages = upLoadImage(formData, IMAGE_VALUE, FOLDER_NAME);
 
     const formDataObject = {};
     for (const [key, value] of formData.entries()) {
