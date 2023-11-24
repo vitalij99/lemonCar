@@ -1,5 +1,5 @@
 import { db } from '@/lib/db';
-import { upLoadImage } from '@/lib/upLoadImage';
+import { deleteImageCloudinary, upLoadImage } from '@/lib/upLoadImage';
 import { NextResponse } from 'next/server';
 
 const IMAGE_VALUE = 'logo';
@@ -47,6 +47,7 @@ export async function PATCH(req) {
 
     if (logo) {
       const urlImages = await upLoadImage(formData, IMAGE_VALUE, FOLDER_NAME);
+      await deleteImageCloudinary(brand.logo);
 
       data[IMAGE_VALUE] = urlImages[0];
     }

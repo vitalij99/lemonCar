@@ -1,33 +1,6 @@
 import { db } from '@/lib/db';
+import { deleteImageCloudinary } from '@/lib/upLoadImage';
 import { NextResponse } from 'next/server';
-import cloudinary from 'cloudinary';
-
-cloudinary.v2.config({
-  cloud_name: process.env.CLOUDINARY,
-  api_key: process.env.APIKey,
-  api_secret: process.env.APISecret,
-});
-
-// export async function POST(req) {
-//   try {
-//     const car = await req.json();
-//     if (!car) return NextResponse('wrong');
-
-//     const newCar = await db.carList.create({
-//       data: {
-//         ...car,
-//       },
-//       include: {
-//         brand: car.carBrand,
-//       },
-//     });
-
-//     return NextResponse.json(newCar);
-//   } catch (error) {
-//     console.log('[SERVERS_POST]', error);
-//     return new NextResponse(error.message, { status: 500 });
-//   }
-// }
 
 export async function PATCH(req) {
   try {
@@ -56,9 +29,8 @@ export async function PATCH(req) {
       const newImage = car.image.filter(img => img !== deleteImage);
 
       // cloudenari delete
-      const publicId = deleteImage.match(/\/v\d+\/(.+?)(?:\.\w+)?$/)[1];
 
-      await cloudinary.uploader.destroy(publicId);
+      deleteImageCloudinary(deleteImage);
 
       const result = await db.carList.update({
         where: { id },

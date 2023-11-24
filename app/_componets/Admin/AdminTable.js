@@ -40,6 +40,7 @@ const transformBrandID = (updatedRow, brands) => {
 
 const transformBrandName = (car, brands) => {
   const matchingBrand = brands.find(brand => brand.id === car.carBrand);
+
   return {
     ...car,
     carBrand: matchingBrand.name,
@@ -142,13 +143,13 @@ export default function AdminTable() {
     }
 
     // push
-    const result = await axios.post(`/api/admin/carlist`, formData, {
+    const { data } = await axios.post(`/api/admin/carlist`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
     });
 
-    const carBrandId = transformBrandName(result, brands);
+    const carBrandId = transformBrandName(data, brands);
 
     setRows(prev => [...prev, carBrandId]);
   };
