@@ -99,8 +99,16 @@ export default function AdminTable() {
         setRows(newData);
       }
     };
+    const handleDeleteCar = async id => {
+      await axios.delete(`/api/admin/carlist?id=${id}`);
+      const result = await axios(`/api/admin/carlist`);
+      const newData = result.data.map(car => transformBrandName(car, brands));
 
-    setColumns(() => newColumns({ brands, handleAddImage, handleDeleteImage }));
+      setRows(newData);
+    };
+    setColumns(() =>
+      newColumns({ brands, handleAddImage, handleDeleteImage, handleDeleteCar })
+    );
   }, [brands]);
 
   useEffect(() => {

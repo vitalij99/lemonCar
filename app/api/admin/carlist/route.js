@@ -1,4 +1,5 @@
 import { db } from '@/lib/db';
+import { deleteImageCloudinary } from '@/lib/upLoadImage';
 import { NextResponse } from 'next/server';
 
 const url = `https://api.cloudinary.com/v1_1/${process.env.CLOUDINARY}/image/upload`;
@@ -107,6 +108,28 @@ export async function PATCH(req) {
     return NextResponse.json(result, { status: result.status });
   } catch (error) {
     console.log('[SERVERS_POST]', error);
+    return new NextResponse('Internal Error', { status: 500 });
+  }
+}
+export async function DELETE(req) {
+  const id = req.nextUrl.searchParams.get('id');
+  if (!id) {
+    return new NextResponse('Error id', { status: 404 });
+  }
+  const car = await db.carList.findUnique({ where: { id: id } });
+  if (!car) {
+    return new NextResponse('Car not found', { status: 404 });
+  }
+
+  try {
+    const result = await db.carList.delete({
+      where: { id },
+      include: { commit: true },
+    });
+    car.image.map(img => deleteImageCloudinary(img));
+    return NextResponse.json(result);
+  } catch (error) {
+    console.log(error.message);
     return new NextResponse('Internal Error', { status: 500 });
   }
 }
