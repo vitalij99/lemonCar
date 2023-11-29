@@ -30,7 +30,7 @@ const BrandTable = () => {
   }, []);
 
   useEffect(() => {
-    setColumns(() => newColumnsBrand({ handleUpdateImage }));
+    setColumns(() => newColumnsBrand({ handleUpdateImage, handleDeleteBrand }));
   }, []);
 
   const handleUpdateImage = (event, id) => {
@@ -62,6 +62,11 @@ const BrandTable = () => {
       },
     });
     setBrands(prev => [...prev, data]);
+  };
+  const handleDeleteBrand = async id => {
+    await axios.delete(`/api/admin/brand?id=${id}`);
+    const { data } = await axios(`/api/brand`);
+    setBrands(data);
   };
   const handleProcessRowUpdate = async updatedRow => {
     const formData = new FormData();

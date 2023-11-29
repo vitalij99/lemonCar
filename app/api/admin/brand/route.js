@@ -66,3 +66,23 @@ export async function PATCH(req) {
     return new NextResponse('Internal Error', { status: 500 });
   }
 }
+export async function DELETE(req) {
+  const id = req.nextUrl.searchParams.get('id');
+
+  if (!id) {
+    return new NextResponse('Error id', { status: 404 });
+  }
+
+  try {
+    const result = await db.brand.delete({
+      where: { id },
+      include: { cars: true },
+    });
+
+    deleteImageCloudinary(result.logo);
+    return NextResponse.json(result);
+  } catch (error) {
+    console.log(error.message);
+    return new NextResponse('Internal Error', { status: 500 });
+  }
+}
