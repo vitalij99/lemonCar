@@ -8,10 +8,10 @@ import style from './header.module.scss';
 import Image from 'next/image';
 import BurgerMenu from '../BurgerMenu/BurgerMenu';
 
+// { name: 'Yachts', link: '/yachts' },
 const HEADER_LINK = [
   { name: 'Car List', link: '/carlist' },
   { name: 'VIP Transfer', link: '/viptransfer' },
-  { name: 'Yachts', link: '/yachts' },
   { name: 'Photshoots with car', link: '/photshoots' },
   { name: 'About Us', link: '/about' },
   { name: 'Contact Us', link: '/contact' },

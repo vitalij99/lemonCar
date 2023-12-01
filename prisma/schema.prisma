@@ -57,6 +57,19 @@ model Forma {
 
   checkRead Boolean @default(false)
 
+  transferId String?   @db.ObjectId
+  transfer   Transfer? @relation(fields: [transferId], references: [id])
+
   carId   String?  @db.ObjectId
   carList CarList? @relation(fields: [carId], references: [id])
+}
+
+model Transfer {
+  id          String  @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  foto        String
+  age         String?
+  description String?
+
+  forma Forma[]
 }
