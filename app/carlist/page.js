@@ -1,8 +1,8 @@
 import { getCarList } from '@/lib/carList';
-import Carlist from '../_componets/Carlist/Carlist';
-import Container from '../_componets/Container/Container';
-import style from '../styles/carlist.module.scss';
-import BrandList from '../_componets/BrandList/BrandList';
+import Carlist from '@/app/_componets/Carlist/Carlist';
+import Container from '@/app/_componets/Container/Container';
+import BrandList from '@/app/_componets/BrandList/BrandList';
+import style from '@/app/styles/carlist.module.scss';
 
 const page = async ({ searchParams }) => {
   const { search: category } = searchParams;

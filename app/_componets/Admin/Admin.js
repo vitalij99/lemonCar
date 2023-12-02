@@ -14,29 +14,6 @@ const Admin = () => {
     setToken(localStorage.getItem('token'));
   }, []);
 
-  //webSocket
-  // useEffect(() => {
-  //   console.log('start client soket');
-  //   const socketInstance = new ClientIO(process.env.NEXT_PUBLIC_SITE_URL, {
-  //     path: '/api/socket/io',
-  //     addTrailingSlash: false,
-  //   });
-  //   socketInstance.on('connect', () => {
-  //     console.log('connected');
-  //   });
-  //   socketInstance.on('disconnect', () => {
-  //     console.log('disconnect');
-  //   });
-  //   socketInstance.on('form', message => {
-  //     console.log(message);
-  //     setMessages(prevMessages => (prevMessages += 1));
-  //   });
-  //   setSocket(socketInstance);
-  //   return () => {
-  //     socketInstance.disconnect();
-  //   };
-  // }, []);
-
   return (
     <Box sx={{ mt: 20 }}>
       {!token ? (

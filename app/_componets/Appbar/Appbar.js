@@ -9,7 +9,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Badge from '@mui/material/Badge';
 import MailIcon from '@mui/icons-material/Mail';
 
-const pages = ['Carlist', 'Brand'];
+const pages = ['Carlist', 'Brand', 'Viptransfer'];
 
 export default function PrimarySearchAppBar({ data }) {
   const [unRead, setUnRead] = useState(0);
