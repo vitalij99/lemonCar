@@ -33,7 +33,7 @@ const BrandTable = () => {
     setColumns(() => newColumnsBrand({ handleUpdateImage, handleDeleteBrand }));
   }, []);
 
-  const handleUpdateImage = (event, id) => {
+  const handleUpdateImage = async (event, id) => {
     if (!event.target.files) {
       return;
     }
@@ -46,10 +46,20 @@ const BrandTable = () => {
         { ...prev[0], logo: newImageUrl, imageFile: file },
       ]);
     } else {
+      const formData = new FormData();
+      formData.append('logo', file);
+      formData.append('id', id);
+
+      await axios.patch(`/api/admin/brand`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      const { data } = await axios(`/api/brand`);
+      setBrands(data);
     }
   };
   const handleAddNewBrand = async () => {
-    console.log(newBrands[0]);
     const { imageFile, name } = newBrands[0];
     const formData = new FormData();
 
