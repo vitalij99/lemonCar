@@ -19,6 +19,7 @@ export async function GET() {
 export async function POST(req) {
   try {
     const formData = await req.formData();
+    formData.delete('id');
 
     const urlImages = await upLoadImage(formData, IMAGE_VALUE, FOLDER_NAME);
 
@@ -89,7 +90,7 @@ export async function DELETE(req) {
   try {
     const result = await db.transfer.delete({
       where: { id },
-      include: { cars: true },
+      include: { forma: true },
     });
 
     deleteImageCloudinary(result.foto);

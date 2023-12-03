@@ -11,11 +11,18 @@ const theme = createTheme({
     mode: 'dark',
   },
 });
-
+const NEW_TRANSFER = [
+  {
+    id: 'new',
+    name: 'name',
+    description: '',
+    age: 18,
+  },
+];
 const AdminTransfer = () => {
   const [rows, setRows] = useState(null);
   const [columns, setColumns] = useState([]);
-  const [newTransver, setNewTransver] = useState([]);
+  const [newTransver, setNewTransver] = useState(NEW_TRANSFER);
 
   useEffect(() => {
     (async () => {
@@ -50,31 +57,47 @@ const AdminTransfer = () => {
           'Content-Type': 'multipart/form-data',
         },
       });
-      const { data } = await axios(`/api/viptransfer`);
+      const { data } = await axios(`/api/admin/viptransfer`);
       setRows(data);
     }
   };
   const handleDelete = async id => {
     await axios.delete(`/api/admin/viptransfer?id=${id}`);
-    const { data } = await axios(`/api/viptransfer`);
+    const { data } = await axios(`/api/admin/viptransfer`);
     setRows(data);
   };
 
   const handleAddNewTransfer = async () => {
-    const { imageFile, name } = newTransver[0];
+    const { imageFile, foto, ...prev } = newTransver[0];
     const formData = new FormData();
 
     formData.append('foto', imageFile);
-    formData.append('name', name);
+
+    for (const key in prev) {
+      formData.append(key, prev[key]);
+    }
 
     const { data } = await axios.post(`/api/admin/viptransfer`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
     });
-    rows(prev => [...prev, data]);
+    setRows(prev => [...prev, data]);
   };
+  const handleProcessRowUpdate = async updatedRow => {
+    const formData = new FormData();
+    const { foto, ...prev } = updatedRow;
+    for (const key in prev) {
+      formData.append(key, prev[key]);
+    }
 
+    // push
+    await axios.patch(`/api/admin/viptransfer`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+  };
   const handleProcessRowUpdateError = err => {};
   if (!rows) {
     return <h1>Loading</h1>;
@@ -113,6 +136,14 @@ const AdminTransfer = () => {
           columns={columns}
           processRowUpdate={updatedRow => {
             setNewTransver([{ ...updatedRow }]);
+          }}
+          initialState={{
+            columns: {
+              ...rows.initialState?.columns,
+              columnVisibilityModel: {
+                id: false,
+              },
+            },
           }}
           hideFooter={true}
           onProcessRowUpdateError={handleProcessRowUpdateError}
