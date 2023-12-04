@@ -1,5 +1,5 @@
 import { getVipTransfer } from '@/lib/getVipTransfer';
-import { Box, Grid, Paper, Typography } from '@mui/material';
+import { Box, Grid, Typography } from '@mui/material';
 import Container from '../Container/Container';
 import Image from 'next/image';
 

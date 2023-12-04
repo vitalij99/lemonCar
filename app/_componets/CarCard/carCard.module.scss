@@ -4,13 +4,16 @@
   position: relative;
   max-width: 750px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  @include tablet {
+    border: none;
+  }
 }
 
 .img {
   width: 100%;
-  
+
   height: 355px;
-  
+
   &_wrapp {
     display: flex;
   }
@@ -19,6 +22,8 @@
   padding: 10px;
   @include tablet {
     border: 1px solid rgba(255, 255, 255, 0.5);
+    border-top: none;
+    border-radius: 0 0 20px 20px;
   }
 }
 .text {
