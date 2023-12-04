@@ -14,8 +14,9 @@ const VipTransfer = async () => {
               <Image src={transfer.foto} width={400} height={500} alt="foto" />
               <Box
                 sx={{
-                  p: '5px',
-                  border: 'solid 2px #fff',
+                  p: '15px',
+                  border: '2px solid #fff',
+                  borderTop: 'none',
                   borderRadius: '0 0 20px 20px',
                 }}
               >
