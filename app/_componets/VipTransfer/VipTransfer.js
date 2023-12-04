@@ -16,7 +16,7 @@ const VipTransfer = async () => {
                 sx={{
                   p: '5px',
                   border: 'solid 2px #fff',
-                  borderRadius: '20px',
+                  borderRadius: '0 0 20px 20px',
                 }}
               >
                 <Typography sx={{ fontSize: 30, color: '#fff' }}>
