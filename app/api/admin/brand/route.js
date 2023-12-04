@@ -29,6 +29,7 @@ export async function POST(req) {
 export async function PATCH(req) {
   try {
     const formData = await req.formData();
+    formData.delete('id');
 
     const brandId = formData.get('id');
     const brand = await db.brand.findUnique({ where: { id: brandId } });

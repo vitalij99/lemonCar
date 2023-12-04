@@ -18,6 +18,7 @@ export async function GET(req) {
 export async function POST(req) {
   try {
     const formData = await req.formData();
+    formData.delete('id');
 
     const images = formData.getAll('image');
 
