@@ -19,10 +19,13 @@ const theme = createTheme({
 const Message = () => {
   const { data, error, isLoading } = useFetcher('/api/swr');
   const [carList, setCarList] = useState(null);
+  const [vipTransfer, setVipTransfer] = useState(null);
+
   useEffect(() => {
     (async () => {
       const result = await axios(`/api/admin/carlist`);
-
+      const { data } = await axios(`/api/admin/viptransfer`);
+      setVipTransfer(data);
       setCarList(result.data);
     })();
   }, []);
@@ -50,7 +53,11 @@ const Message = () => {
             <DataGrid
               className="tablet"
               rows={data}
-              columns={newColumnsMessage({ handleDeleteMessage, carList })}
+              columns={newColumnsMessage({
+                handleDeleteMessage,
+                carList,
+                vipTransfer,
+              })}
               getRowHeight={() => 'auto'}
               initialState={{
                 pagination: {
