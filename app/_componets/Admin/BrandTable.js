@@ -19,7 +19,7 @@ const NEW_BRANDINFO = [
 ];
 const BrandTable = () => {
   const [brands, setBrands] = useState(null);
-  const [columns, setColumns] = useState([]);
+
   const [newBrands, setNewBrands] = useState(NEW_BRANDINFO);
 
   useEffect(() => {
@@ -27,10 +27,6 @@ const BrandTable = () => {
       const resultBrands = await axios(`/api/brand`);
       setBrands(resultBrands.data);
     })();
-  }, []);
-
-  useEffect(() => {
-    setColumns(() => newColumnsBrand({ handleUpdateImage, handleDeleteBrand }));
   }, []);
 
   const handleUpdateImage = async (event, id) => {
@@ -102,7 +98,7 @@ const BrandTable = () => {
           <DataGrid
             className="tablet"
             rows={brands}
-            columns={columns}
+            columns={newColumnsBrand({ handleUpdateImage, handleDeleteBrand })}
             getRowHeight={() => 'auto'}
             initialState={{
               pagination: {
@@ -126,7 +122,7 @@ const BrandTable = () => {
         <DataGrid
           className="tablet"
           rows={newBrands}
-          columns={columns}
+          columns={newColumnsBrand({ handleUpdateImage, handleDeleteBrand })}
           hideFooter={true}
           processRowUpdate={updatedRow => {
             setNewBrands([updatedRow]);
