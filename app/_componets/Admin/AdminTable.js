@@ -30,21 +30,10 @@ const NEW_CARINFO = [
   },
 ];
 
-const transformBrandID = (updatedRow, brands) => {
-  const idBrand = brands.find(brand => {
-    return brand.name === updatedRow.carBrand;
-  });
+const transformBrandName = (updatedRow, brands) => {
+  const idBrand = brands.find(brand => brand.name === updatedRow.carBrand);
 
   return { ...updatedRow, carBrand: idBrand.id };
-};
-
-const transformBrandName = (car, brands) => {
-  const matchingBrand = brands.find(brand => brand.id === car.carBrand);
-
-  return {
-    ...car,
-    carBrand: matchingBrand.name,
-  };
 };
 
 export default function AdminTable() {
@@ -84,27 +73,21 @@ export default function AdminTable() {
             'Content-Type': 'multipart/form-data',
           },
         });
-        const result = await axios(`/api/admin/carlist`);
-        const newData = result.data.map(car => transformBrandName(car, brands));
-
-        setRows(newData);
+        const { data } = await axios(`/api/admin/carlist`);
+        setRows(data);
       }
     };
     const handleDeleteImage = async (id, deleteImage) => {
       if (id !== 'new') {
         await axios.patch(`/api/carlist`, { id, deleteImage });
-        const result = await axios(`/api/admin/carlist`);
-        const newData = result.data.map(car => transformBrandName(car, brands));
-
-        setRows(newData);
+        const { data } = await axios(`/api/admin/carlist`);
+        setRows(data);
       }
     };
     const handleDeleteCar = async id => {
       await axios.delete(`/api/admin/carlist?id=${id}`);
-      const result = await axios(`/api/admin/carlist`);
-      const newData = result.data.map(car => transformBrandName(car, brands));
-
-      setRows(newData);
+      const { data } = await axios(`/api/admin/carlist`);
+      setRows(data);
     };
     setColumns(() =>
       newColumns({ brands, handleAddImage, handleDeleteImage, handleDeleteCar })
@@ -117,19 +100,18 @@ export default function AdminTable() {
       const resultBrand = await axios(`/api/brand`);
       setBrands(resultBrand.data);
 
-      const newData = result.data.map(car =>
-        transformBrandName(car, resultBrand.data)
-      );
-
-      setRows(newData);
+      setRows(result.data);
     })();
   }, []);
 
-  const handleProcessRowUpdate = async updatedRow => {
-    const newCar = transformBrandID(updatedRow, brands);
-
+  const handleProcessRowUpdate = async (updatedRow, originalRow) => {
     // push
-    await axios.patch(`/api/carlist`, newCar);
+
+    if (originalRow.carBrand !== updatedRow.carBrand) {
+      updatedRow = transformBrandName(updatedRow, brands);
+    }
+
+    await axios.patch(`/api/carlist`, updatedRow);
   };
   const handleProcessRowUpdateError = err => {};
   if (!rows) {
@@ -137,7 +119,8 @@ export default function AdminTable() {
   }
 
   const handleAddNewCar = async () => {
-    const carBrand = transformBrandID(newCar[0], brands);
+    const carBrand = transformBrandName(newCar[0], brands);
+
     const { id, imagesFile, image, ...car } = carBrand;
 
     const formData = new FormData();
@@ -157,9 +140,7 @@ export default function AdminTable() {
       },
     });
 
-    const carBrandId = transformBrandName(data, brands);
-
-    setRows(prev => [...prev, carBrandId]);
+    setRows(prev => [...prev, data]);
   };
 
   return (
@@ -184,7 +165,7 @@ export default function AdminTable() {
             }}
             pageSizeOptions={[5, 10]}
             processRowUpdate={(updatedRow, originalRow) => {
-              handleProcessRowUpdate(updatedRow);
+              handleProcessRowUpdate(updatedRow, originalRow);
             }}
             onProcessRowUpdateError={handleProcessRowUpdateError}
           />
