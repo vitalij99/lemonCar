@@ -15,12 +15,12 @@ const VipTransfer = async () => {
               <Box
                 sx={{
                   p: '15px',
-                  border: '2px solid #fff',
+                  border: '2px solid var(--text)',
                   borderTop: 'none',
                   borderRadius: '0 0 20px 20px',
                 }}
               >
-                <Typography sx={{ fontSize: 30, color: '#fff' }}>
+                <Typography sx={{ fontSize: 30, color: 'var(--text)' }}>
                   Name: {transfer.name}
                 </Typography>
                 <Typography sx={{ fontSize: 30 }}>
