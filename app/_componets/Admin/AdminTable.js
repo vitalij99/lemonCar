@@ -178,6 +178,14 @@ export default function AdminTable() {
           processRowUpdate={(updatedRow, originalRow) => {
             setNewCar([{ ...updatedRow }]);
           }}
+          initialState={{
+            columns: {
+              ...rows.initialState?.columns,
+              columnVisibilityModel: {
+                id: false,
+              },
+            },
+          }}
           hideFooter={true}
           onProcessRowUpdateError={handleProcessRowUpdateError}
         />
