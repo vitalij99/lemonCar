@@ -183,6 +183,7 @@ export default function AdminTable() {
               ...rows.initialState?.columns,
               columnVisibilityModel: {
                 id: false,
+                actions: false,
               },
             },
           }}

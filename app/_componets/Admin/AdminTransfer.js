@@ -142,6 +142,7 @@ const AdminTransfer = () => {
               ...rows.initialState?.columns,
               columnVisibilityModel: {
                 id: false,
+                actions: false,
               },
             },
           }}
