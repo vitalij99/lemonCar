@@ -1,9 +1,9 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 import style from './contactForm.module.scss';
-import axios from 'axios';
 
 const ContactForm = ({ carForm }) => {
   const [comment, setComment] = useState('');
@@ -41,6 +41,7 @@ const ContactForm = ({ carForm }) => {
         name="phone"
         pattern="^\+\d+$"
         required={true}
+        className={style.phone}
       />
 
       <textarea
@@ -52,15 +53,16 @@ const ContactForm = ({ carForm }) => {
         onChange={handleComment}
       />
       <div className={style.wrapp}>
-        <h3 className={style.text}>Choose a driver</h3>
-        <input
-          className={style.checkbox}
-          type="checkbox"
-          name="openTransfer"
-          onChange={() => {
-            setOpenTransfer(!openTransfer);
-          }}
-        />
+        <h3>Choose a driver</h3>
+        <label className={style.checkbox} name="openTransfer">
+          <input
+            type="checkbox"
+            name="openTransfer"
+            onChange={() => {
+              setOpenTransfer(!openTransfer);
+            }}
+          />
+        </label>
       </div>
       {vipTransfer && openTransfer && (
         <select name="transferId">
