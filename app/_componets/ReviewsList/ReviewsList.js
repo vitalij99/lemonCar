@@ -2,7 +2,7 @@ import Image from 'next/image';
 import styleList from '../AvailableList/availableList.module.scss';
 const reviewsUser = [
   {
-    id: 'ashdasd',
+    id: 'ashdasdf',
     foto: 'https://res.cloudinary.com/dizrnyvqx/image/upload/v1693403682/cld-sample-5.jpg',
   },
   {
