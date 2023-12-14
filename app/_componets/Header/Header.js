@@ -1,15 +1,13 @@
 import Link from 'next/link';
+import Image from 'next/image';
+
+import BurgerMenu from '@/app/_componets/BurgerMenu/BurgerMenu';
+import Container from '@/app/_componets/Container/Container';
 
 import Logo from '@/public/images/logo.svg';
 import LogoSec from '@/public/images/logo-sec.svg';
-
-import Container from '../Container/Container';
 import style from './header.module.scss';
-import Image from 'next/image';
-import BurgerMenu from '../BurgerMenu/BurgerMenu';
 
-// { name: 'Yachts', link: '/yachts' },
-// { name: 'Photshoots with car', link: '/photshoots' },
 const HEADER_LINK = [
   { name: 'Car List', link: '/carlist' },
   { name: 'VIP Transfer', link: '/viptransfer' },
