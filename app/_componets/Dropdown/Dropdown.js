@@ -18,7 +18,7 @@ const theme = createTheme({
 const Dropdown = ({ title, children }) => {
   return (
     <ThemeProvider theme={theme}>
-      <Accordion>
+      <Accordion sx={{ m: '10px' }}>
         <AccordionSummary className={style.title}>{title}</AccordionSummary>
 
         <AccordionDetails>{children}</AccordionDetails>
