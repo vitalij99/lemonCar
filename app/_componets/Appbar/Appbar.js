@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
 import Link from 'next/link';
+import { useFetcher } from '@/lib/fetcher';
 
 import { MenuItem } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
@@ -11,8 +12,10 @@ import MailIcon from '@mui/icons-material/Mail';
 
 const pages = ['Carlist', 'Brand', 'Viptransfer'];
 
-export default function PrimarySearchAppBar({ data }) {
+export default function PrimarySearchAppBar() {
+  const { data, error, isLoading } = useFetcher('/api/swr');
   const [unRead, setUnRead] = useState(0);
+
   useMemo(() => {
     let searchUnRead = 0;
     for (let index = 0; index < data.length; index++) {

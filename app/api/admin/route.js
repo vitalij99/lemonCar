@@ -1,6 +1,7 @@
-import { db } from '@/lib/db';
-
 import { NextResponse } from 'next/server';
+import jwt from 'jsonwebtoken';
+
+import { db } from '@/lib/db';
 
 export async function POST(req, res) {
   try {
@@ -11,7 +12,23 @@ export async function POST(req, res) {
     const admin = await db.admin.findFirst();
 
     if (admin.password === passwordUser && admin.login === loginUser) {
-      return NextResponse.json({ token: 'login' });
+      const accessToken = jwt.sign(
+        { user: admin.login },
+        process.env.TokenSecret,
+        {
+          expiresIn: '3h',
+        }
+      );
+      console.log(accessToken);
+
+      await db.admin.update({
+        where: { id: admin.id },
+        data: {
+          accessToken: accessToken,
+        },
+      });
+
+      return NextResponse.json({ token: accessToken });
     }
 
     return new NextResponse('wrong', { status: 401 });

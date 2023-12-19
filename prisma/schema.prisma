@@ -39,8 +39,9 @@ model Brand {
 model Admin {
   id String @id @default(auto()) @map("_id") @db.ObjectId
 
-  login    String
-  password String
+  login       String
+  password    String
+  accessToken String?
 }
 
 model Forma {
