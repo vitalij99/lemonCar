@@ -7,13 +7,7 @@ import Container from '@/app/_componets/Container/Container';
 import Logo from '@/public/images/logo.svg';
 import LogoSec from '@/public/images/logo-sec.svg';
 import style from './header.module.scss';
-
-const HEADER_LINK = [
-  { name: 'Car List', link: '/carlist' },
-  { name: 'VIP Transfer', link: '/viptransfer' },
-  { name: 'About Us', link: '/about' },
-  { name: 'Contact Us', link: '/contact' },
-];
+import { HEADER_LINK } from '@/lib/link';
 
 export const Header = () => {
   return (
