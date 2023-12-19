@@ -17,13 +17,11 @@ export default function PrimarySearchAppBar() {
   const [unRead, setUnRead] = useState(0);
 
   useMemo(() => {
-    let searchUnRead = 0;
-    for (let index = 0; index < data.length; index++) {
-      if (data[index].checkRead === false) {
-        searchUnRead += 1;
-      }
+    if (!data) {
+      return;
     }
-    setUnRead(searchUnRead);
+
+    setUnRead(data.filter(item => item.checkRead === false).length);
   }, [data]);
 
   return (

@@ -1,15 +1,19 @@
 'use client';
-// import { io as ClientIO } from 'socket.io-client';
+
 import Form from '@/app/admin/form/Form';
 import { useEffect, useState } from 'react';
 import ResponsiveAppBar from '../Appbar/Appbar';
 import { Box } from '@mui/material';
+import axios from 'axios';
 
 const Admin = () => {
   const [token, setToken] = useState(null);
 
   useEffect(() => {
-    setToken(localStorage.getItem('token'));
+    const accessToken = localStorage.getItem('token');
+    setToken(accessToken);
+
+    axios.defaults.headers.common['Authorization'] = accessToken;
   }, []);
 
   return (
@@ -18,7 +22,7 @@ const Admin = () => {
         <Form />
       ) : (
         <>
-          <ResponsiveAppBar data={data} />
+          <ResponsiveAppBar />
         </>
       )}
     </Box>

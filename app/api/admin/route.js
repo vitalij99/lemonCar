@@ -19,7 +19,6 @@ export async function POST(req, res) {
           expiresIn: '3h',
         }
       );
-      console.log(accessToken);
 
       await db.admin.update({
         where: { id: admin.id },
