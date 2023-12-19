@@ -120,7 +120,7 @@ const ContactForm = ({ carForm }) => {
             )}
           </Formik>
         ) : (
-          <Skeleton />
+          <Skeleton width={375} height={250} />
         )}
       </ThemeProvider>
     </>
