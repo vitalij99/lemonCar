@@ -32,11 +32,8 @@ const ContactForm = ({ carForm }) => {
   }, []);
 
   const handleSubmit = async values => {
-    const { transferId, ...prev } = values;
-    const result = { ...prev, ...carForm };
-
-    if (openTransfer && transferId) {
-      result.transferId = transferId;
+    if (!openTransfer && values.transferId) {
+      delete values.transferId;
     }
 
     await axios.post('/api/formsubmit', result);
