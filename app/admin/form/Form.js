@@ -17,10 +17,10 @@ const Form = () => {
     try {
       const result = await axios.post('/api/admin', value);
 
-      if (result) {
-        localStorage.setItem('token', result.data.token);
-        window.location.reload();
-      }
+      // if (result) {
+      //   localStorage.setItem('token', result.data.token);
+      //   window.location.reload();
+      // }
     } catch (error) {
       setError(error.message);
     }

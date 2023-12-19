@@ -1,7 +1,8 @@
 import { db } from '@/lib/db';
+
 import { NextResponse } from 'next/server';
 
-export async function POST(req) {
+export async function POST(req, res) {
   try {
     const { password: passwordUser, login: loginUser } = await req.json();
     if (!passwordUser || !loginUser)
