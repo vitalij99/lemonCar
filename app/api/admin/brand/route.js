@@ -1,4 +1,3 @@
-import { authUser } from '@/lib/auth';
 import { db } from '@/lib/db';
 import { deleteImageCloudinary, upLoadImage } from '@/lib/upLoadImage';
 import { NextResponse } from 'next/server';
@@ -6,7 +5,16 @@ import { NextResponse } from 'next/server';
 const IMAGE_VALUE = 'logo';
 const FOLDER_NAME = 'brand';
 
-//next try
+export async function GET(req) {
+  try {
+    const result = await db.brand.findMany();
+
+    return NextResponse.json(result);
+  } catch (error) {
+    console.log(error.message);
+    return new NextResponse('Internal Error', { status: 500 });
+  }
+}
 export async function POST(req) {
   try {
     const formData = await req.formData();

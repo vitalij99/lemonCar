@@ -1,13 +1,17 @@
 import { NextResponse } from 'next/server';
-import { authUser } from './lib/auth';
 
+// private toute
 export async function middleware(request) {
-  const user = await authUser(request);
-  if (!user) return new NextResponse('WWW-Authenticate', { status: 401 });
+  if (request.nextUrl.pathname.endsWith('/admin')) {
+    return NextResponse.next();
+  }
+  const token = request.cookies.get('token');
+  if (!token) return NextResponse.redirect(new URL('/admin', request.url));
+
   return NextResponse.next();
 }
 
 // See "Matching Paths" below to learn more
 export const config = {
-  matcher: '/api/admin/:path*',
+  matcher: ['/admin/:path*'],
 };

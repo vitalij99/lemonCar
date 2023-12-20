@@ -24,7 +24,7 @@ const BrandTable = () => {
 
   useEffect(() => {
     (async () => {
-      const resultBrands = await axios(`/api/brand`);
+      const resultBrands = await axios(`/api/admin/brand`);
       setBrands(resultBrands.data);
     })();
   }, []);
@@ -51,7 +51,7 @@ const BrandTable = () => {
           'Content-Type': 'multipart/form-data',
         },
       });
-      const { data } = await axios(`/api/brand`);
+      const { data } = await axios(`/api/admin/brand`);
       setBrands(data);
     }
   };
@@ -71,7 +71,7 @@ const BrandTable = () => {
   };
   const handleDeleteBrand = async id => {
     await axios.delete(`/api/admin/brand?id=${id}`);
-    const { data } = await axios(`/api/brand`);
+    const { data } = await axios(`/api/admin/brand`);
     setBrands(data);
   };
   const handleProcessRowUpdate = async updatedRow => {

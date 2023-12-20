@@ -1,4 +1,3 @@
-import { authUser } from '@/lib/auth';
 import { db } from '@/lib/db';
 import { deleteImageCloudinary } from '@/lib/upLoadImage';
 import { NextResponse } from 'next/server';
@@ -7,8 +6,6 @@ const url = `https://api.cloudinary.com/v1_1/${process.env.CLOUDINARY}/image/upl
 
 export async function GET(req) {
   try {
-    // if (!user) return new NextResponse('WWW-Authenticate', { status: 401 });
-
     const result = await db.carList.findMany();
 
     return NextResponse.json(result);

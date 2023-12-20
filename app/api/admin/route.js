@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 
 import { db } from '@/lib/db';
 
-export async function POST(req, res) {
+export async function POST(req) {
   try {
     const { password: passwordUser, login: loginUser } = await req.json();
     if (!passwordUser || !loginUser)
@@ -26,8 +26,9 @@ export async function POST(req, res) {
           accessToken: accessToken,
         },
       });
-
-      return NextResponse.json({ token: accessToken });
+      const response = NextResponse.json({ token: accessToken });
+      response.cookies.set('token', accessToken);
+      return response;
     }
 
     return new NextResponse('wrong', { status: 401 });
