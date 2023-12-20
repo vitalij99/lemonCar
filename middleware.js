@@ -5,6 +5,13 @@ export async function middleware(request) {
   if (request.nextUrl.pathname.endsWith('/admin')) {
     return NextResponse.next();
   }
+  if (request.nextUrl.pathname.startsWith('/api')) {
+    try {
+      return NextResponse.next();
+    } catch (error) {
+      return new NextResponse('Internal Error', { status: 500 });
+    }
+  }
   const token = request.cookies.get('token');
   if (!token) return NextResponse.redirect(new URL('/admin', request.url));
 
@@ -13,5 +20,5 @@ export async function middleware(request) {
 
 // See "Matching Paths" below to learn more
 export const config = {
-  matcher: ['/admin/:path*'],
+  matcher: ['/admin/:path*', '/api/:path*'],
 };
