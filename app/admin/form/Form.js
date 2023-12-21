@@ -3,10 +3,12 @@
 import { Alert, Button, Card, TextField } from '@mui/material';
 import axios from 'axios';
 import { Formik } from 'formik';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 const Form = () => {
   const [error, setError] = useState(null);
+  const router = useRouter();
 
   const handleSubmit = async value => {
     setError(null);
@@ -19,7 +21,7 @@ const Form = () => {
 
       if (result) {
         localStorage.setItem('token', result.data.token);
-        window.location.reload();
+        router.refresh();
       }
     } catch (error) {
       setError(error.message);
