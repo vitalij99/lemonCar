@@ -10,6 +10,7 @@ const Form = () => {
   const [error, setError] = useState(null);
   const router = useRouter();
 
+  // password hex
   const handleSubmit = async value => {
     setError(null);
     if (value.login === '' || value.password === '') {
