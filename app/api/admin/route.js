@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 
 import { db } from '@/lib/db';
 
-// password hex
+// password hash
 export async function POST(req) {
   try {
     const { password: passwordUser, login: loginUser } = await req.json();
