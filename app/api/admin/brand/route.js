@@ -6,11 +6,19 @@ const IMAGE_VALUE = 'logo';
 const FOLDER_NAME = 'brand';
 
 export async function GET(req) {
+  const admin = authUser(req);
+  if (!admin) {
+    return NextResponse('wrong authorization', { status: 401 });
+  }
   const result = await db.brand.findMany();
 
   return NextResponse.json(result);
 }
 export async function POST(req) {
+  const admin = authUser(req);
+  if (!admin) {
+    return NextResponse('wrong authorization', { status: 401 });
+  }
   const formData = await req.formData();
 
   const urlImages = await upLoadImage(formData, IMAGE_VALUE, FOLDER_NAME);
@@ -27,6 +35,10 @@ export async function POST(req) {
 }
 
 export async function PATCH(req) {
+  const admin = authUser(req);
+  if (!admin) {
+    return NextResponse('wrong authorization', { status: 401 });
+  }
   const formData = await req.formData();
   formData.delete('id');
 
@@ -63,6 +75,10 @@ export async function PATCH(req) {
   return NextResponse.json(result, { status: result.status });
 }
 export async function DELETE(req) {
+  const admin = authUser(req);
+  if (!admin) {
+    return NextResponse('wrong authorization', { status: 401 });
+  }
   const id = req.nextUrl.searchParams.get('id');
 
   if (!id) {
