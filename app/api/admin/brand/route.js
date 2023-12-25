@@ -6,7 +6,7 @@ const IMAGE_VALUE = 'logo';
 const FOLDER_NAME = 'brand';
 
 export async function GET(req) {
-  const admin = authUser(req);
+  const admin = await authUser(req);
   if (!admin) {
     return NextResponse('wrong authorization', { status: 401 });
   }
@@ -15,7 +15,7 @@ export async function GET(req) {
   return NextResponse.json(result);
 }
 export async function POST(req) {
-  const admin = authUser(req);
+  const admin = await authUser(req);
   if (!admin) {
     return NextResponse('wrong authorization', { status: 401 });
   }
@@ -35,7 +35,7 @@ export async function POST(req) {
 }
 
 export async function PATCH(req) {
-  const admin = authUser(req);
+  const admin = await authUser(req);
   if (!admin) {
     return NextResponse('wrong authorization', { status: 401 });
   }
@@ -75,7 +75,7 @@ export async function PATCH(req) {
   return NextResponse.json(result, { status: result.status });
 }
 export async function DELETE(req) {
-  const admin = authUser(req);
+  const admin = await authUser(req);
   if (!admin) {
     return NextResponse('wrong authorization', { status: 401 });
   }

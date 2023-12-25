@@ -41,7 +41,7 @@ export async function POST(req) {
 }
 export async function PATCH(req) {
   try {
-    const admin = authUser(req);
+    const admin = await authUser(req);
     const { password: passwordUser, login: loginUser } = await req.json();
 
     if (!passwordUser || !loginUser)
