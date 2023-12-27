@@ -5,6 +5,7 @@ import { NextResponse } from 'next/server';
 const IMAGE_VALUE = 'logo';
 const FOLDER_NAME = 'brand';
 
+// try to error in try catch
 export async function GET(req) {
   const admin = await authUser(req);
   if (!admin) {
