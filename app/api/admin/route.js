@@ -42,6 +42,9 @@ export async function POST(req) {
 export async function PATCH(req) {
   try {
     const admin = await authUser(req);
+    if (!admin) {
+      return new NextResponse('wrong authorization', { status: 401 });
+    }
     const { password: passwordUser, login: loginUser } = await req.json();
 
     if (!passwordUser || !loginUser)
