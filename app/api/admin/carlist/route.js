@@ -6,6 +6,8 @@ const url = `https://api.cloudinary.com/v1_1/${process.env.CLOUDINARY}/image/upl
 
 export async function GET(req) {
   try {
+    const admin = await authUser(req);
+    if (!admin) return new NextResponse('wrong authorization', { status: 401 });
     const result = await db.carList.findMany();
 
     return NextResponse.json(result);
@@ -17,6 +19,8 @@ export async function GET(req) {
 
 export async function POST(req) {
   try {
+    const admin = await authUser(req);
+    if (!admin) return new NextResponse('wrong authorization', { status: 401 });
     const formData = await req.formData();
     formData.delete('id');
 
@@ -61,6 +65,8 @@ export async function POST(req) {
 // PATCH images
 export async function PATCH(req) {
   try {
+    const admin = await authUser(req);
+    if (!admin) return new NextResponse('wrong authorization', { status: 401 });
     const formData = await req.formData();
 
     const carId = formData.get('id');
@@ -113,16 +119,19 @@ export async function PATCH(req) {
   }
 }
 export async function DELETE(req) {
-  const id = req.nextUrl.searchParams.get('id');
-  if (!id) {
-    return new NextResponse('Error id', { status: 404 });
-  }
-  const car = await db.carList.findUnique({ where: { id: id } });
-  if (!car) {
-    return new NextResponse('Car not found', { status: 404 });
-  }
-
   try {
+    const id = req.nextUrl.searchParams.get('id');
+    if (!id) {
+      return new NextResponse('Error id', { status: 404 });
+    }
+
+    const admin = await authUser(req);
+    if (!admin) return new NextResponse('wrong authorization', { status: 401 });
+
+    const car = await db.carList.findUnique({ where: { id: id } });
+    if (!car) {
+      return new NextResponse('Car not found', { status: 404 });
+    }
     const result = await db.carList.delete({
       where: { id },
       include: { commit: true },
