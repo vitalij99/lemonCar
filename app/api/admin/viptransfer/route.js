@@ -7,6 +7,8 @@ const FOLDER_NAME = 'transfer';
 
 export async function GET() {
   try {
+    const admin = await authUser(req);
+    if (!admin) return new NextResponse('wrong authorization', { status: 401 });
     const result = await db.transfer.findMany();
 
     return NextResponse.json(result, { status: result.status });
@@ -18,6 +20,8 @@ export async function GET() {
 
 export async function POST(req) {
   try {
+    const admin = await authUser(req);
+    if (!admin) return new NextResponse('wrong authorization', { status: 401 });
     const formData = await req.formData();
     formData.delete('id');
 
@@ -40,6 +44,8 @@ export async function POST(req) {
 
 export async function PATCH(req) {
   try {
+    const admin = await authUser(req);
+    if (!admin) return new NextResponse('wrong authorization', { status: 401 });
     const formData = await req.formData();
 
     const transferId = formData.get('id');
@@ -86,6 +92,9 @@ export async function DELETE(req) {
   if (!id) {
     return new NextResponse('Error id', { status: 404 });
   }
+
+  const admin = await authUser(req);
+  if (!admin) return new NextResponse('wrong authorization', { status: 401 });
 
   try {
     const result = await db.transfer.delete({
