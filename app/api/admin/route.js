@@ -4,7 +4,6 @@ import jwt from 'jsonwebtoken';
 import { db } from '@/lib/db';
 import { authUser, comparePasswords, hashPassword } from '@/lib/auth';
 
-// password hash
 export async function POST(req) {
   try {
     const { password: passwordUser, login: loginUser } = await req.json();
@@ -25,15 +24,27 @@ export async function POST(req) {
           expiresIn: '3h',
         }
       );
+      const refreshToken = jwt.sign(
+        { user: admin.login },
+        process.env.TokenSecret,
+        {
+          expiresIn: '4h',
+        }
+      );
 
       await db.admin.update({
         where: { id: admin.id },
         data: {
           accessToken: accessToken,
+          refreshToken: refreshToken,
         },
       });
-      const response = NextResponse.json({ token: accessToken });
+      const response = NextResponse.json({
+        token: accessToken,
+        refreshToken: refreshToken,
+      });
       response.cookies.set('token', accessToken);
+      response.cookies.set('refreshToken', refreshToken);
       return response;
     }
 
