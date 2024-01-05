@@ -6,7 +6,7 @@ import { NextResponse } from 'next/server';
 const IMAGE_VALUE = 'foto';
 const FOLDER_NAME = 'transfer';
 
-export async function GET() {
+export async function GET(req) {
   try {
     const admin = await authUser(req);
     if (!admin) return new NextResponse('wrong authorization', { status: 401 });
