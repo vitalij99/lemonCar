@@ -1,3 +1,4 @@
+import { authUser } from '@/lib/auth';
 import { db } from '@/lib/db';
 import { deleteImageCloudinary } from '@/lib/upLoadImage';
 import { NextResponse } from 'next/server';
