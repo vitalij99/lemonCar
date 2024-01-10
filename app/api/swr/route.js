@@ -4,21 +4,23 @@ import { NextResponse } from 'next/server';
 
 export async function GET(req, res) {
   try {
-    const admin = await authUser(req);
-    if (!admin) return new NextResponse('wrong authorization', { status: 401 });
+    await authUser(req);
 
     const result = await db.forma.findMany();
     return NextResponse.json(result);
   } catch (error) {
-    console.log(error.message);
-    return new NextResponse('Internal Error', { status: 500 });
+    if (error === 'wrong authorization') {
+      return new NextResponse('wrong authorization', { status: 401 });
+    } else {
+      return new NextResponse('Internal Error', { status: 500 });
+    }
   }
 }
 
 export async function PATCH(req, res) {
   try {
-    const admin = await authUser(req);
-    if (!admin) return new NextResponse('wrong authorization', { status: 401 });
+    await authUser(req);
+
     const { id, ...data } = await req.json();
 
     const result = await db.forma.update({
@@ -30,8 +32,11 @@ export async function PATCH(req, res) {
 
     return NextResponse.json(result);
   } catch (error) {
-    console.log(error.message);
-    return new NextResponse('Internal Error', { status: 500 });
+    if (error === 'wrong authorization') {
+      return new NextResponse('wrong authorization', { status: 401 });
+    } else {
+      return new NextResponse('Internal Error', { status: 500 });
+    }
   }
 }
 export async function DELETE(req, res) {
@@ -40,13 +45,15 @@ export async function DELETE(req, res) {
 
     if (!id) return new NextResponse('Error id', { status: 404 });
 
-    const admin = await authUser(req);
-    if (!admin) return new NextResponse('wrong authorization', { status: 401 });
+    await authUser(req);
 
     const result = await db.forma.delete({ where: { id } });
     return NextResponse.json(result);
   } catch (error) {
-    console.log(error.message);
-    return new NextResponse('Internal Error', { status: 500 });
+    if (error === 'wrong authorization') {
+      return new NextResponse('wrong authorization', { status: 401 });
+    } else {
+      return new NextResponse('Internal Error', { status: 500 });
+    }
   }
 }

@@ -57,10 +57,8 @@ export async function POST(req) {
 }
 export async function PATCH(req) {
   try {
-    const admin = await authUser(req);
-    if (!admin) {
-      return new NextResponse('wrong authorization', { status: 401 });
-    }
+    await authUser(req);
+
     const { password, login } = await req.json();
 
     if (!password || !login) return NextResponse('wrong', { status: 401 });
@@ -74,7 +72,10 @@ export async function PATCH(req) {
 
     return NextResponse.json(newAdmin);
   } catch (error) {
-    console.log('[SERVERS_POST]', error);
-    return new NextResponse('Internal Error', { status: 500 });
+    if (error === 'wrong authorization') {
+      return new NextResponse('wrong authorization', { status: 401 });
+    } else {
+      return new NextResponse('Internal Error', { status: 500 });
+    }
   }
 }

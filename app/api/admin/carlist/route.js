@@ -7,21 +7,24 @@ const url = `https://api.cloudinary.com/v1_1/${process.env.CLOUDINARY}/image/upl
 
 export async function GET(req) {
   try {
-    const admin = await authUser(req);
-    if (!admin) return new NextResponse('wrong authorization', { status: 401 });
+    await authUser(req);
+
     const result = await db.carList.findMany();
 
     return NextResponse.json(result);
   } catch (error) {
-    console.log(error.message);
-    return new NextResponse('Internal Error', { status: 500 });
+    if (error === 'wrong authorization') {
+      return new NextResponse('wrong authorization', { status: 401 });
+    } else {
+      return new NextResponse('Internal Error', { status: 500 });
+    }
   }
 }
 
 export async function POST(req) {
   try {
-    const admin = await authUser(req);
-    if (!admin) return new NextResponse('wrong authorization', { status: 401 });
+    await authUser(req);
+
     const formData = await req.formData();
     formData.delete('id');
 
@@ -66,8 +69,8 @@ export async function POST(req) {
 // PATCH images
 export async function PATCH(req) {
   try {
-    const admin = await authUser(req);
-    if (!admin) return new NextResponse('wrong authorization', { status: 401 });
+    await authUser(req);
+
     const formData = await req.formData();
 
     const carId = formData.get('id');
@@ -126,8 +129,7 @@ export async function DELETE(req) {
       return new NextResponse('Error id', { status: 404 });
     }
 
-    const admin = await authUser(req);
-    if (!admin) return new NextResponse('wrong authorization', { status: 401 });
+    await authUser(req);
 
     const car = await db.carList.findUnique({ where: { id: id } });
     if (!car) {
@@ -140,7 +142,10 @@ export async function DELETE(req) {
     car.image.map(img => deleteImageCloudinary(img));
     return NextResponse.json(result);
   } catch (error) {
-    console.log(error.message);
-    return new NextResponse('Internal Error', { status: 500 });
+    if (error === 'wrong authorization') {
+      return new NextResponse('wrong authorization', { status: 401 });
+    } else {
+      return new NextResponse('Internal Error', { status: 500 });
+    }
   }
 }

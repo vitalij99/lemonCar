@@ -8,21 +8,24 @@ const FOLDER_NAME = 'transfer';
 
 export async function GET(req) {
   try {
-    const admin = await authUser(req);
-    if (!admin) return new NextResponse('wrong authorization', { status: 401 });
+    await authUser(req);
+
     const result = await db.transfer.findMany();
 
     return NextResponse.json(result, { status: result.status });
   } catch (error) {
-    console.log('[SERVERS_POST]', error);
-    return new NextResponse('Internal Error', { status: 500 });
+    if (error === 'wrong authorization') {
+      return new NextResponse('wrong authorization', { status: 401 });
+    } else {
+      return new NextResponse('Internal Error', { status: 500 });
+    }
   }
 }
 
 export async function POST(req) {
   try {
-    const admin = await authUser(req);
-    if (!admin) return new NextResponse('wrong authorization', { status: 401 });
+    await authUser(req);
+
     const formData = await req.formData();
     formData.delete('id');
 
@@ -38,15 +41,18 @@ export async function POST(req) {
 
     return NextResponse.json(result, { status: result.status });
   } catch (error) {
-    console.log('[SERVERS_POST]', error);
-    return new NextResponse('Internal Error', { status: 500 });
+    if (error === 'wrong authorization') {
+      return new NextResponse('wrong authorization', { status: 401 });
+    } else {
+      return new NextResponse('Internal Error', { status: 500 });
+    }
   }
 }
 
 export async function PATCH(req) {
   try {
-    const admin = await authUser(req);
-    if (!admin) return new NextResponse('wrong authorization', { status: 401 });
+    await authUser(req);
+
     const formData = await req.formData();
 
     const transferId = formData.get('id');
@@ -83,8 +89,11 @@ export async function PATCH(req) {
 
     return NextResponse.json(result, { status: result.status });
   } catch (error) {
-    console.log('[SERVERS_POST]', error);
-    return new NextResponse('Internal Error', { status: 500 });
+    if (error === 'wrong authorization') {
+      return new NextResponse('wrong authorization', { status: 401 });
+    } else {
+      return new NextResponse('Internal Error', { status: 500 });
+    }
   }
 }
 export async function DELETE(req) {
@@ -94,8 +103,7 @@ export async function DELETE(req) {
     return new NextResponse('Error id', { status: 404 });
   }
 
-  const admin = await authUser(req);
-  if (!admin) return new NextResponse('wrong authorization', { status: 401 });
+  await authUser(req);
 
   try {
     const result = await db.transfer.delete({

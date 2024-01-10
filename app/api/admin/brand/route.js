@@ -6,25 +6,24 @@ import { NextResponse } from 'next/server';
 const IMAGE_VALUE = 'logo';
 const FOLDER_NAME = 'brand';
 
-// try to error in try catch
 export async function GET(req) {
   try {
-    const admin = await authUser(req);
-
-    if (!admin) return new NextResponse('wrong authorization', { status: 401 });
+    await authUser(req);
 
     const result = await db.brand.findMany();
 
     return NextResponse.json(result);
   } catch (error) {
-    console.log(error.message);
-    return new NextResponse('Internal Error', { status: 500 });
+    if (error === 'wrong authorization') {
+      return new NextResponse('wrong authorization', { status: 401 });
+    } else {
+      return new NextResponse('Internal Error', { status: 500 });
+    }
   }
 }
 export async function POST(req) {
   try {
-    const admin = await authUser(req);
-    if (!admin) return new NextResponse('wrong authorization', { status: 401 });
+    await authUser(req);
 
     const formData = await req.formData();
 
@@ -40,15 +39,17 @@ export async function POST(req) {
 
     return NextResponse.json(result, { status: result.status });
   } catch (error) {
-    console.log(error.message);
-    return new NextResponse('Internal Error', { status: 500 });
+    if (error === 'wrong authorization') {
+      return new NextResponse('wrong authorization', { status: 401 });
+    } else {
+      return new NextResponse('Internal Error', { status: 500 });
+    }
   }
 }
 
 export async function PATCH(req) {
   try {
-    const admin = await authUser(req);
-    if (!admin) return new NextResponse('wrong authorization', { status: 401 });
+    await authUser(req);
 
     const formData = await req.formData();
     formData.delete('id');
@@ -85,14 +86,16 @@ export async function PATCH(req) {
 
     return NextResponse.json(result, { status: result.status });
   } catch (error) {
-    console.log(error.message);
-    return new NextResponse('Internal Error', { status: 500 });
+    if (error === 'wrong authorization') {
+      return new NextResponse('wrong authorization', { status: 401 });
+    } else {
+      return new NextResponse('Internal Error', { status: 500 });
+    }
   }
 }
 export async function DELETE(req) {
   try {
-    const admin = await authUser(req);
-    if (!admin) return new NextResponse('wrong authorization', { status: 401 });
+    await authUser(req);
 
     const id = req.nextUrl.searchParams.get('id');
 
@@ -108,7 +111,10 @@ export async function DELETE(req) {
     deleteImageCloudinary(result.logo);
     return NextResponse.json(result);
   } catch (error) {
-    console.log(error.message);
-    return new NextResponse('Internal Error', { status: 500 });
+    if (error === 'wrong authorization') {
+      return new NextResponse('wrong authorization', { status: 401 });
+    } else {
+      return new NextResponse('Internal Error', { status: 500 });
+    }
   }
 }
