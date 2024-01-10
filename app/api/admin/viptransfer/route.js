@@ -15,9 +15,12 @@ export async function GET(req) {
     return NextResponse.json(result, { status: result.status });
   } catch (error) {
     if (error === 'wrong authorization') {
-      return new NextResponse('wrong authorization', { status: 401 });
+      const response = new NextResponse('wrong authorization', { status: 401 });
+      response.cookies.delete('token');
+
+      return response;
     } else {
-      return new NextResponse('Internal Error', { status: 500 });
+      return new NextResponse(error, { status: 500 });
     }
   }
 }
@@ -42,9 +45,12 @@ export async function POST(req) {
     return NextResponse.json(result, { status: result.status });
   } catch (error) {
     if (error === 'wrong authorization') {
-      return new NextResponse('wrong authorization', { status: 401 });
+      const response = new NextResponse('wrong authorization', { status: 401 });
+      response.cookies.delete('token');
+
+      return response;
     } else {
-      return new NextResponse('Internal Error', { status: 500 });
+      return new NextResponse(error, { status: 500 });
     }
   }
 }
@@ -90,9 +96,12 @@ export async function PATCH(req) {
     return NextResponse.json(result, { status: result.status });
   } catch (error) {
     if (error === 'wrong authorization') {
-      return new NextResponse('wrong authorization', { status: 401 });
+      const response = new NextResponse('wrong authorization', { status: 401 });
+      response.cookies.delete('token');
+
+      return response;
     } else {
-      return new NextResponse('Internal Error', { status: 500 });
+      return new NextResponse(error, { status: 500 });
     }
   }
 }

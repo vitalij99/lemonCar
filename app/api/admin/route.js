@@ -19,17 +19,10 @@ export async function POST(req) {
     const corectPassword = await comparePasswords(passwordUser, admin.password);
     if (corectPassword) {
       const accessToken = jwt.sign(
-        { user: admin.login },
+        { user: admin.id },
         process.env.TokenSecret,
         {
-          expiresIn: '3h',
-        }
-      );
-      const refreshToken = jwt.sign(
-        { user: admin.login },
-        process.env.TokenSecret,
-        {
-          expiresIn: '4h',
+          expiresIn: '7h',
         }
       );
 
@@ -37,15 +30,13 @@ export async function POST(req) {
         where: { id: admin.id },
         data: {
           accessToken: accessToken,
-          refreshToken: refreshToken,
         },
       });
       const response = NextResponse.json({
         token: accessToken,
-        refreshToken: refreshToken,
       });
       response.cookies.set('token', accessToken);
-      response.cookies.set('refreshToken', refreshToken);
+
       return response;
     }
 
@@ -57,7 +48,8 @@ export async function POST(req) {
 }
 export async function PATCH(req) {
   try {
-    await authUser(req);
+    const admin = await authUser(req);
+    throw 'try';
 
     const { password, login } = await req.json();
 
@@ -73,9 +65,12 @@ export async function PATCH(req) {
     return NextResponse.json(newAdmin);
   } catch (error) {
     if (error === 'wrong authorization') {
-      return new NextResponse('wrong authorization', { status: 401 });
+      const response = new NextResponse('wrong authorization', { status: 401 });
+      response.cookies.delete('token');
+
+      return response;
     } else {
-      return new NextResponse('Internal Error', { status: 500 });
+      return new NextResponse(error, { status: 500 });
     }
   }
 }

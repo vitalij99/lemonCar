@@ -11,6 +11,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Badge from '@mui/material/Badge';
 import MailIcon from '@mui/icons-material/Mail';
 import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 
 const pages = ['Carlist', 'Brand', 'Viptransfer'];
 
@@ -26,6 +27,16 @@ export default function PrimarySearchAppBar() {
 
     setUnRead(data.filter(item => item.checkRead === false).length);
   }, [data]);
+
+  useEffect(() => {
+    if (
+      error &&
+      error.message &&
+      error.message.startsWith('Unexpected token')
+    ) {
+      router.refresh();
+    }
+  }, [error, router]);
 
   const handleExit = () => {
     document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/;';

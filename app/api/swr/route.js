@@ -10,9 +10,12 @@ export async function GET(req, res) {
     return NextResponse.json(result);
   } catch (error) {
     if (error === 'wrong authorization') {
-      return new NextResponse('wrong authorization', { status: 401 });
+      const response = new NextResponse('wrong authorization', { status: 401 });
+      response.cookies.delete('token');
+
+      return response;
     } else {
-      return new NextResponse('Internal Error', { status: 500 });
+      return new NextResponse(error, { status: 500 });
     }
   }
 }
@@ -33,9 +36,12 @@ export async function PATCH(req, res) {
     return NextResponse.json(result);
   } catch (error) {
     if (error === 'wrong authorization') {
-      return new NextResponse('wrong authorization', { status: 401 });
+      const response = new NextResponse('wrong authorization', { status: 401 });
+      response.cookies.delete('token');
+
+      return response;
     } else {
-      return new NextResponse('Internal Error', { status: 500 });
+      return new NextResponse(error, { status: 500 });
     }
   }
 }
@@ -51,9 +57,12 @@ export async function DELETE(req, res) {
     return NextResponse.json(result);
   } catch (error) {
     if (error === 'wrong authorization') {
-      return new NextResponse('wrong authorization', { status: 401 });
+      const response = new NextResponse('wrong authorization', { status: 401 });
+      response.cookies.delete('token');
+
+      return response;
     } else {
-      return new NextResponse('Internal Error', { status: 500 });
+      return new NextResponse(error, { status: 500 });
     }
   }
 }
