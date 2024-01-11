@@ -64,8 +64,14 @@ export async function POST(req) {
 
     return NextResponse.json(result, { status: result.status });
   } catch (error) {
-    console.log('[SERVERS_POST]', error);
-    return new NextResponse('Internal Error', { status: 500 });
+    if (error === 'wrong authorization') {
+      const response = new NextResponse('wrong authorization', { status: 401 });
+      response.cookies.delete('token');
+
+      return response;
+    } else {
+      return new NextResponse(error, { status: 500 });
+    }
   }
 }
 
@@ -121,10 +127,62 @@ export async function PATCH(req) {
 
     return NextResponse.json(result, { status: result.status });
   } catch (error) {
-    console.log('[SERVERS_POST]', error);
-    return new NextResponse('Internal Error', { status: 500 });
+    if (error === 'wrong authorization') {
+      const response = new NextResponse('wrong authorization', { status: 401 });
+      response.cookies.delete('token');
+
+      return response;
+    } else {
+      return new NextResponse(error, { status: 500 });
+    }
   }
 }
+
+export async function PUT(req) {
+  try {
+    const data = await req.json();
+
+    if (!data) return NextResponse('wrong');
+    else if (data.id === undefined) return NextResponse('wrong id car');
+    else if (!data.deleteImage) {
+      const { id, ...newCar } = data;
+
+      const result = await db.carList.update({
+        where: { id },
+        data: {
+          ...newCar,
+        },
+        include: {
+          brand: {},
+        },
+      });
+
+      return NextResponse.json(result);
+    } else {
+      const { id, deleteImage } = data;
+
+      const car = await db.carList.findUnique({ where: { id: id } });
+      const newImage = car.image.filter(img => img !== deleteImage);
+
+      // cloudenari delete
+
+      deleteImageCloudinary(deleteImage);
+
+      const result = await db.carList.update({
+        where: { id },
+        data: {
+          image: newImage,
+        },
+      });
+
+      return NextResponse.json(result);
+    }
+  } catch (error) {
+    console.log('[SERVERS_POST]', error);
+    return new NextResponse(error.message, { status: 500 });
+  }
+}
+
 export async function DELETE(req) {
   try {
     const id = req.nextUrl.searchParams.get('id');

@@ -79,7 +79,7 @@ export default function AdminTable() {
     };
     const handleDeleteImage = async (id, deleteImage) => {
       if (id !== 'new') {
-        await axios.patch(`/api/carlist`, { id, deleteImage });
+        await axios.put(`/api/admin/carlist`, { id, deleteImage });
         const { data } = await axios(`/api/admin/carlist`);
         setRows(data);
       }
@@ -111,7 +111,7 @@ export default function AdminTable() {
       updatedRow = transformBrandName(updatedRow, brands);
     }
 
-    await axios.patch(`/api/carlist`, updatedRow);
+    await axios.put(`/api/admin/carlist`, updatedRow);
   };
   const handleProcessRowUpdateError = err => {};
   if (!rows) {
