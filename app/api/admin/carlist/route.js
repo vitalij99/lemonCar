@@ -141,7 +141,7 @@ export async function PATCH(req) {
 export async function PUT(req) {
   try {
     const data = await req.json();
-
+    await authUser(req);
     if (!data) return NextResponse('wrong');
     else if (data.id === undefined) return NextResponse('wrong id car');
     else if (!data.deleteImage) {
@@ -178,8 +178,14 @@ export async function PUT(req) {
       return NextResponse.json(result);
     }
   } catch (error) {
-    console.log('[SERVERS_POST]', error);
-    return new NextResponse(error.message, { status: 500 });
+    if (error === 'wrong authorization') {
+      const response = new NextResponse('wrong authorization', { status: 401 });
+      response.cookies.delete('token');
+
+      return response;
+    } else {
+      return new NextResponse(error, { status: 500 });
+    }
   }
 }
 
