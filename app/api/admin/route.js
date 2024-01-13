@@ -49,7 +49,6 @@ export async function POST(req) {
 export async function PATCH(req) {
   try {
     const admin = await authUser(req);
-    throw 'try';
 
     const { password, login } = await req.json();
 
