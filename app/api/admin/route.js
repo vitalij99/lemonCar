@@ -4,7 +4,6 @@ import jwt from 'jsonwebtoken';
 import { db } from '@/lib/db';
 import { authUser, comparePasswords, hashPassword } from '@/lib/auth';
 
-// add reloadToken try add error and hech password
 export async function POST(req) {
   try {
     const { password: passwordUser, login: loginUser } = await req.json();
