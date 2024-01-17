@@ -22,7 +22,7 @@ const BrandList = async () => {
               <Link
                 sx={{ p: '20px', color: 'var(--text)', fontSize: '20px' }}
                 href={brand.id ? `/carlist/?search=${brand.id}` : `/carlist`}
-                underline="false"
+                underline="none"
               >
                 {brand.name}
               </Link>

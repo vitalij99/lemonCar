@@ -31,12 +31,13 @@ const ContactForm = ({ carForm }) => {
     axios('/api/viptransfer').then(({ data }) => setVipTransfer(data));
   }, []);
 
-  const handleSubmit = async values => {
+  const handleSubmit = async (values, actions) => {
     if (!openTransfer && values.transferId) {
       delete values.transferId;
     }
 
     await axios.post('/api/formsubmit', result);
+    actions.resetForm();
   };
 
   return (
@@ -54,7 +55,9 @@ const ContactForm = ({ carForm }) => {
               }
               return errors;
             }}
-            onSubmit={handleSubmit}
+            onSubmit={(values, actions) => {
+              handleSubmit(values, actions);
+            }}
           >
             {({ values, handleChange, handleSubmit, errors }) => (
               <form className={style.form} onSubmit={handleSubmit}>
