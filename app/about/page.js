@@ -1,6 +1,6 @@
 import Container from '@/app/_componets/Container/Container';
 import BreadcrumbsCustl from '@/app/_componets/Breadcrumbs/Breadcrumbs';
-import { Box, Typography } from '@mui/material';
+import { Box } from '@mui/material';
 
 import styleTitle from '@/app/styles/carlist.module.scss';
 import ListText from '@/app/_componets/ListText/ListText';
@@ -32,7 +32,7 @@ const page = () => {
             <Box>
               <BreadcrumbsCustl />
               <h1 className={styleTitle.title}>About Us</h1>
-              <Typography sx={{ width: '70%' }}>
+              <p>
                 Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean
                 commodo ligula eget dolor. Aenean massa. Cum sociis natoque
                 penatibus et magnis dis parturient montes, nascetur ridiculus
@@ -45,7 +45,7 @@ const page = () => {
                 Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac,
                 enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a,
                 tellus.
-              </Typography>
+              </p>
             </Box>
             <ListText list={CHOOSE_LIST} />
           </Box>

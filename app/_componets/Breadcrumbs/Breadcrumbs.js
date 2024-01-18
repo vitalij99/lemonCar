@@ -1,5 +1,5 @@
 'use client';
-import { Breadcrumbs, Link, Typography } from '@mui/material';
+import { Breadcrumbs, Link } from '@mui/material';
 
 import { usePathname } from 'next/navigation';
 
@@ -21,9 +21,14 @@ const BreadcrumbsCustl = ({ lastLink }) => {
         {prefPath}
       </Link>
       {lastLink && (
-        <Typography sx={{ color: 'var(--text)' }} color="text.primary">
+        <Link
+          underline="hover"
+          color="inherit"
+          sx={{ textTransform: 'capitalize' }}
+          href={`/${prefPath}/${thisPath}`}
+        >
           {lastLink ? lastLink : thisPath}
-        </Typography>
+        </Link>
       )}
     </Breadcrumbs>
   );

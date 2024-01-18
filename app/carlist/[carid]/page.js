@@ -20,7 +20,7 @@ const Car = async ({ params }) => {
     <>
       <section className={style.section}>
         <Container>
-          <BreadcrumbsCustl carName={carData.name} />
+          <BreadcrumbsCustl lastLink={carData.name} />
           <h1 className={styleTitle.title}>{carData.name}</h1>
           <div className={style.wrapp}>
             <IconSwiper images={carData.image} />
