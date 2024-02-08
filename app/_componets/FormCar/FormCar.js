@@ -21,7 +21,10 @@ const FormCar = ({ form, calendar }) => {
         aria-describedby="modal-modal-description"
       >
         <Box className={style.wrapp}>
-          <ContactForm carForm={{ ...form, ...calendar }} />
+          <ContactForm
+            handleClose={handleClose}
+            carForm={{ ...form, ...calendar }}
+          />
         </Box>
       </Modal>
     </div>

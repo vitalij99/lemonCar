@@ -23,7 +23,7 @@ const INITIAL_VALUES = {
   comment: '',
   transferId: [],
 };
-const ContactForm = ({ carForm }) => {
+const ContactForm = ({ carForm, handleClose }) => {
   const [vipTransfer, setVipTransfer] = useState(null);
   const [openTransfer, setOpenTransfer] = useState(false);
 
@@ -38,6 +38,7 @@ const ContactForm = ({ carForm }) => {
 
     await axios.post('/api/formsubmit', result);
     actions.resetForm();
+    if (handleClose) handleClose();
   };
 
   return (
