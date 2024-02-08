@@ -36,7 +36,7 @@ const ContactForm = ({ carForm, handleClose }) => {
       delete values.transferId;
     }
 
-    await axios.post('/api/formsubmit', result);
+    await axios.post('/api/formsubmit', values);
     actions.resetForm();
     if (handleClose) handleClose();
   };
