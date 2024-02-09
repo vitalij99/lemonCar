@@ -17,8 +17,8 @@ const FormCar = ({ form, calendar }) => {
       <Modal
         open={openModal}
         onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
+        aria-labelledby="modal-form-car"
+        aria-describedby="modal-form-car"
       >
         <Box className={style.wrapp}>
           <ContactForm

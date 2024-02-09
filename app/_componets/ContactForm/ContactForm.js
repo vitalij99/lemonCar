@@ -13,6 +13,7 @@ import {
   ThemeProvider,
   createTheme,
 } from '@mui/material';
+import { useStaticPicker } from '@mui/x-date-pickers/internals';
 const theme = createTheme({
   palette: {
     mode: 'dark',
@@ -26,12 +27,14 @@ const INITIAL_VALUES = {
 const ContactForm = ({ carForm, handleClose }) => {
   const [vipTransfer, setVipTransfer] = useState(null);
   const [openTransfer, setOpenTransfer] = useState(false);
+  const [submitPending, setSubmitPending] = useState(false);
 
   useEffect(() => {
     axios('/api/viptransfer').then(({ data }) => setVipTransfer(data));
   }, []);
 
   const handleSubmit = async (values, actions) => {
+    setSubmitPending(true);
     if (!openTransfer && values.transferId) {
       delete values.transferId;
     }
@@ -39,6 +42,7 @@ const ContactForm = ({ carForm, handleClose }) => {
     await axios.post('/api/formsubmit', values);
     actions.resetForm();
     if (handleClose) handleClose();
+    setSubmitPending(false);
   };
 
   return (
@@ -114,7 +118,7 @@ const ContactForm = ({ carForm, handleClose }) => {
                 )}
 
                 <Button
-                  disabled={errors.phone}
+                  disabled={submitPending}
                   className={style.btn}
                   type="submit"
                 >
