@@ -23,7 +23,7 @@ const RentalCar = ({ carData }) => {
   });
 
   const [formCar, setFormCar] = useState({
-    totalPrise: price,
+    totalPrice: price,
     diffInDays: 1,
     deposit: price * CAR_DEPOSIT,
     price,
@@ -33,11 +33,11 @@ const RentalCar = ({ carData }) => {
   useEffect(() => {
     const diffInDays = getDiffInDays(calendar.dataFirst, calendar.dataLast);
 
-    const totalPrise =
+    const totalPrice =
       diffInDays <= 0 ? price : procentraPrice(price, diffInDays) * diffInDays;
 
-    const deposit = Math.floor(totalPrise * CAR_DEPOSIT);
-    setFormCar(prev => ({ ...prev, deposit, totalPrise, diffInDays }));
+    const deposit = Math.floor(totalPrice * CAR_DEPOSIT);
+    setFormCar(prev => ({ ...prev, deposit, totalPrice, diffInDays }));
   }, [calendar, price]);
 
   return (
@@ -89,7 +89,7 @@ const RentalCar = ({ carData }) => {
         </span>
         <span>
           <h3 className={styled.price_all_title}>Total</h3>
-          <h3>${formCar.totalPrise}</h3>
+          <h3>${formCar.totalPrice}</h3>
         </span>
       </div>
       <FormCar form={formCar} calendar={calendar} />

@@ -38,8 +38,8 @@ const ContactForm = ({ carForm, handleClose }) => {
     if (!openTransfer && values.transferId) {
       delete values.transferId;
     }
-
-    axios.post('/api/formsubmit', values);
+    const payload = { ...values, ...carForm };
+    axios.post('/api/formsubmit', payload);
     actions.resetForm();
     if (handleClose) handleClose();
     setSubmitPending(false);

@@ -50,7 +50,7 @@ model Forma {
 
   phone      String
   comment    String
-  totalPrise Int?
+  totalPrice Int?
   diffInDays Int?
   deposit    Int?
   price      Int?

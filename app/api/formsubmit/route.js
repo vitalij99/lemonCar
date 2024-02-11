@@ -34,7 +34,7 @@ export async function POST(req) {
 
     const newComment = await db.forma.create({ data: commentData });
 
-    return new NextResponse.json({
+    return NextResponse.json({
       comment: newComment.comment,
       phone: newComment.phone,
     });

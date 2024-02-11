@@ -54,7 +54,7 @@ export default function PrimarySearchAppBar() {
           ))}
 
           <Box sx={{ flexGrow: 1 }} />
-          <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+          <Box sx={{ display: 'flex' }}>
             <Link href={`/admin/message`}>
               <Badge badgeContent={unRead} color="error">
                 <MailIcon />
