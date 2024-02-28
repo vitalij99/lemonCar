@@ -5,14 +5,9 @@ import axios from 'axios';
 import { DataGrid } from '@mui/x-data-grid';
 
 import { useEffect, useState } from 'react';
-import { Button, ThemeProvider, createTheme } from '@mui/material';
+import { Button } from '@mui/material';
 import { newColumns } from '@/lib/columns';
 
-const theme = createTheme({
-  palette: {
-    mode: 'dark',
-  },
-});
 const NEW_CARINFO = [
   {
     id: 'new',
@@ -145,53 +140,51 @@ export default function AdminTable() {
 
   return (
     <div>
-      <ThemeProvider theme={theme}>
-        <div style={{ height: 400, width: '100%' }}>
-          <DataGrid
-            className="tablet"
-            rows={rows}
-            columns={columns}
-            getRowHeight={() => 'auto'}
-            initialState={{
-              pagination: {
-                paginationModel: { page: 0, pageSize: 10 },
-              },
-              columns: {
-                ...rows.initialState?.columns,
-                columnVisibilityModel: {
-                  id: false,
-                },
-              },
-            }}
-            pageSizeOptions={[5, 10]}
-            processRowUpdate={(updatedRow, originalRow) => {
-              handleProcessRowUpdate(updatedRow, originalRow);
-            }}
-            onProcessRowUpdateError={handleProcessRowUpdateError}
-          />
-        </div>
-        <h1>ADD new</h1>
+      <div style={{ height: 400, width: '100%' }}>
         <DataGrid
           className="tablet"
-          rows={newCar}
+          rows={rows}
           columns={columns}
-          processRowUpdate={(updatedRow, originalRow) => {
-            setNewCar([{ ...updatedRow }]);
-          }}
+          getRowHeight={() => 'auto'}
           initialState={{
+            pagination: {
+              paginationModel: { page: 0, pageSize: 10 },
+            },
             columns: {
               ...rows.initialState?.columns,
               columnVisibilityModel: {
                 id: false,
-                actions: false,
               },
             },
           }}
-          hideFooter={true}
+          pageSizeOptions={[5, 10]}
+          processRowUpdate={(updatedRow, originalRow) => {
+            handleProcessRowUpdate(updatedRow, originalRow);
+          }}
           onProcessRowUpdateError={handleProcessRowUpdateError}
         />
-        <Button onClick={handleAddNewCar}>Add new car</Button>
-      </ThemeProvider>
+      </div>
+      <h1>ADD new</h1>
+      <DataGrid
+        className="tablet"
+        rows={newCar}
+        columns={columns}
+        processRowUpdate={(updatedRow, originalRow) => {
+          setNewCar([{ ...updatedRow }]);
+        }}
+        initialState={{
+          columns: {
+            ...rows.initialState?.columns,
+            columnVisibilityModel: {
+              id: false,
+              actions: false,
+            },
+          },
+        }}
+        hideFooter={true}
+        onProcessRowUpdateError={handleProcessRowUpdateError}
+      />
+      <Button onClick={handleAddNewCar}>Add new car</Button>
     </div>
   );
 }

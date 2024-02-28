@@ -5,20 +5,8 @@ import axios from 'axios';
 
 import style from './contactForm.module.scss';
 import { Formik } from 'formik';
-import {
-  Button,
-  MenuItem,
-  Skeleton,
-  TextField,
-  ThemeProvider,
-  createTheme,
-} from '@mui/material';
-import { useStaticPicker } from '@mui/x-date-pickers/internals';
-const theme = createTheme({
-  palette: {
-    mode: 'dark',
-  },
-});
+import { Button, MenuItem, Skeleton, TextField } from '@mui/material';
+
 const INITIAL_VALUES = {
   phone: '',
   comment: '',
@@ -47,90 +35,88 @@ const ContactForm = ({ carForm, handleClose }) => {
 
   return (
     <>
-      <ThemeProvider theme={theme}>
-        {vipTransfer ? (
-          <Formik
-            initialValues={{ ...INITIAL_VALUES, transferId: vipTransfer[0].id }}
-            validate={values => {
-              const errors = {};
-              if (!values.phone) {
-                errors.phone = true;
-              } else if (!/\+\d+$/.test(values.phone)) {
-                errors.phone = true;
-              }
-              return errors;
-            }}
-            onSubmit={(values, actions) => {
-              handleSubmit(values, actions);
-            }}
-          >
-            {({ values, handleChange, handleSubmit, errors }) => (
-              <form className={style.form} onSubmit={handleSubmit}>
-                <TextField
-                  sx={{ width: '100%', marginBottom: '10px' }}
-                  name="phone"
-                  type="tel"
-                  placeholder="+555..."
-                  required={true}
-                  className={style.phone}
-                  label="Phone"
-                  variant="outlined"
-                  value={values.phone}
-                  onChange={handleChange}
-                  error={errors.phone}
-                />
+      {vipTransfer ? (
+        <Formik
+          initialValues={{ ...INITIAL_VALUES, transferId: vipTransfer[0].id }}
+          validate={values => {
+            const errors = {};
+            if (!values.phone) {
+              errors.phone = true;
+            } else if (!/\+\d+$/.test(values.phone)) {
+              errors.phone = true;
+            }
+            return errors;
+          }}
+          onSubmit={(values, actions) => {
+            handleSubmit(values, actions);
+          }}
+        >
+          {({ values, handleChange, handleSubmit, errors }) => (
+            <form className={style.form} onSubmit={handleSubmit}>
+              <TextField
+                sx={{ width: '100%', marginBottom: '10px' }}
+                name="phone"
+                type="tel"
+                placeholder="+555..."
+                required={true}
+                className={style.phone}
+                label="Phone"
+                variant="outlined"
+                value={values.phone}
+                onChange={handleChange}
+                error={errors.phone}
+              />
 
+              <TextField
+                sx={{ width: '100%', marginBottom: '10px' }}
+                name="comment"
+                label="Comment"
+                placeholder="Comment"
+                value={values.comment}
+                onChange={handleChange}
+              />
+              <div className={style.wrapp}>
+                <h3>Choose a driver</h3>
+                <label className={style.checkbox} name="openTransfer">
+                  <input
+                    type="checkbox"
+                    name="openTransfer"
+                    onChange={() => {
+                      setOpenTransfer(!openTransfer);
+                    }}
+                  />
+                </label>
+              </div>
+              {vipTransfer && openTransfer && (
                 <TextField
-                  sx={{ width: '100%', marginBottom: '10px' }}
-                  name="comment"
-                  label="Comment"
-                  placeholder="Comment"
-                  value={values.comment}
+                  sx={{ width: '100%', marginTop: '10px' }}
                   onChange={handleChange}
-                />
-                <div className={style.wrapp}>
-                  <h3>Choose a driver</h3>
-                  <label className={style.checkbox} name="openTransfer">
-                    <input
-                      type="checkbox"
-                      name="openTransfer"
-                      onChange={() => {
-                        setOpenTransfer(!openTransfer);
-                      }}
-                    />
-                  </label>
-                </div>
-                {vipTransfer && openTransfer && (
-                  <TextField
-                    sx={{ width: '100%', marginTop: '10px' }}
-                    onChange={handleChange}
-                    name="transferId"
-                    value={values.transferId}
-                    select
-                    label="Choose a driver"
-                  >
-                    {vipTransfer.map(transfer => (
-                      <MenuItem key={transfer.id} value={transfer.id}>
-                        {transfer.name}
-                      </MenuItem>
-                    ))}
-                  </TextField>
-                )}
-
-                <Button
-                  disabled={submitPending}
-                  className={style.btn}
-                  type="submit"
+                  name="transferId"
+                  value={values.transferId}
+                  select
+                  label="Choose a driver"
                 >
-                  {carForm ? 'RENTAL CAR' : 'Contact Us'}
-                </Button>
-              </form>
-            )}
-          </Formik>
-        ) : (
-          <Skeleton width={375} height={250} />
-        )}
-      </ThemeProvider>
+                  {vipTransfer.map(transfer => (
+                    <MenuItem key={transfer.id} value={transfer.id}>
+                      {transfer.name}
+                    </MenuItem>
+                  ))}
+                </TextField>
+              )}
+
+              <Button
+                disabled={submitPending}
+                className={style.btn}
+                type="submit"
+              >
+                {carForm ? 'RENTAL CAR' : 'Contact Us'}
+              </Button>
+            </form>
+          )}
+        </Formik>
+      ) : (
+        <Skeleton width={375} height={250} />
+      )}
     </>
   );
 };

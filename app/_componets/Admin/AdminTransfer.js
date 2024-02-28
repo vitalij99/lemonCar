@@ -1,16 +1,11 @@
 'use client';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { ThemeProvider } from '@emotion/react';
-import { Button, createTheme } from '@mui/material';
+
+import { Button } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 import { newColumnsTransfer } from '@/lib/columns';
 
-const theme = createTheme({
-  palette: {
-    mode: 'dark',
-  },
-});
 const NEW_TRANSFER = [
   {
     id: 'new',
@@ -104,53 +99,51 @@ const AdminTransfer = () => {
   }
   return (
     <div>
-      <ThemeProvider theme={theme}>
-        <div style={{ height: 400, width: '100%' }}>
-          <DataGrid
-            className="tablet"
-            rows={rows}
-            columns={columns}
-            getRowHeight={() => 'auto'}
-            initialState={{
-              pagination: {
-                paginationModel: { page: 0, pageSize: 10 },
-              },
-              columns: {
-                ...rows.initialState?.columns,
-                columnVisibilityModel: {
-                  id: false,
-                },
-              },
-            }}
-            pageSizeOptions={[5, 10]}
-            processRowUpdate={updatedRow => {
-              handleProcessRowUpdate(updatedRow);
-            }}
-            onProcessRowUpdateError={handleProcessRowUpdateError}
-          />
-        </div>
-        <h1>ADD new</h1>
+      <div style={{ height: 400, width: '100%' }}>
         <DataGrid
           className="tablet"
-          rows={newTransver}
+          rows={rows}
           columns={columns}
-          processRowUpdate={updatedRow => {
-            setNewTransver([{ ...updatedRow }]);
-          }}
+          getRowHeight={() => 'auto'}
           initialState={{
+            pagination: {
+              paginationModel: { page: 0, pageSize: 10 },
+            },
             columns: {
               ...rows.initialState?.columns,
               columnVisibilityModel: {
                 id: false,
-                actions: false,
               },
             },
           }}
-          hideFooter={true}
+          pageSizeOptions={[5, 10]}
+          processRowUpdate={updatedRow => {
+            handleProcessRowUpdate(updatedRow);
+          }}
           onProcessRowUpdateError={handleProcessRowUpdateError}
         />
-        <Button onClick={handleAddNewTransfer}>Add new Transver</Button>
-      </ThemeProvider>
+      </div>
+      <h1>ADD new</h1>
+      <DataGrid
+        className="tablet"
+        rows={newTransver}
+        columns={columns}
+        processRowUpdate={updatedRow => {
+          setNewTransver([{ ...updatedRow }]);
+        }}
+        initialState={{
+          columns: {
+            ...rows.initialState?.columns,
+            columnVisibilityModel: {
+              id: false,
+              actions: false,
+            },
+          },
+        }}
+        hideFooter={true}
+        onProcessRowUpdateError={handleProcessRowUpdateError}
+      />
+      <Button onClick={handleAddNewTransfer}>Add new Transver</Button>
     </div>
   );
 };

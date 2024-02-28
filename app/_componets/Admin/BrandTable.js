@@ -1,16 +1,12 @@
 'use client';
 
 import { newColumnsBrand } from '@/lib/columns';
-import { Button, ThemeProvider, createTheme } from '@mui/material';
+import { Button } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 // brand
-const theme = createTheme({
-  palette: {
-    mode: 'dark',
-  },
-});
+
 const NEW_BRANDINFO = [
   {
     id: 'new',
@@ -93,53 +89,51 @@ const BrandTable = () => {
   }
   return (
     <div>
-      <ThemeProvider theme={theme}>
-        <div style={{ height: 400, width: '100%' }}>
-          <DataGrid
-            className="tablet"
-            rows={brands}
-            columns={newColumnsBrand({ handleUpdateImage, handleDeleteBrand })}
-            getRowHeight={() => 'auto'}
-            initialState={{
-              pagination: {
-                paginationModel: { page: 0, pageSize: 10 },
-              },
-              columns: {
-                ...brands.initialState?.columns,
-                columnVisibilityModel: {
-                  id: false,
-                },
-              },
-            }}
-            pageSizeOptions={[5, 10]}
-            processRowUpdate={(updatedRow, originalRow) => {
-              handleProcessRowUpdate(updatedRow);
-            }}
-            onProcessRowUpdateError={handleProcessRowUpdateError}
-          />
-        </div>
-        <h1>ADD new</h1>
+      <div style={{ height: 400, width: '100%' }}>
         <DataGrid
           className="tablet"
-          rows={newBrands}
+          rows={brands}
           columns={newColumnsBrand({ handleUpdateImage, handleDeleteBrand })}
-          hideFooter={true}
-          processRowUpdate={updatedRow => {
-            setNewBrands([updatedRow]);
-          }}
+          getRowHeight={() => 'auto'}
           initialState={{
+            pagination: {
+              paginationModel: { page: 0, pageSize: 10 },
+            },
             columns: {
               ...brands.initialState?.columns,
               columnVisibilityModel: {
                 id: false,
-                actions: false,
               },
             },
           }}
+          pageSizeOptions={[5, 10]}
+          processRowUpdate={(updatedRow, originalRow) => {
+            handleProcessRowUpdate(updatedRow);
+          }}
           onProcessRowUpdateError={handleProcessRowUpdateError}
         />
-        <Button onClick={handleAddNewBrand}>Add new brand</Button>
-      </ThemeProvider>
+      </div>
+      <h1>ADD new</h1>
+      <DataGrid
+        className="tablet"
+        rows={newBrands}
+        columns={newColumnsBrand({ handleUpdateImage, handleDeleteBrand })}
+        hideFooter={true}
+        processRowUpdate={updatedRow => {
+          setNewBrands([updatedRow]);
+        }}
+        initialState={{
+          columns: {
+            ...brands.initialState?.columns,
+            columnVisibilityModel: {
+              id: false,
+              actions: false,
+            },
+          },
+        }}
+        onProcessRowUpdateError={handleProcessRowUpdateError}
+      />
+      <Button onClick={handleAddNewBrand}>Add new brand</Button>
     </div>
   );
 };

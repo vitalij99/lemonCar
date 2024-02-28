@@ -1,5 +1,5 @@
 'use client';
-import { Box, ThemeProvider, createTheme } from '@mui/material';
+import { Box } from '@mui/material';
 
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -8,12 +8,8 @@ import styled from './RentalCar.module.scss';
 import dayjs from 'dayjs';
 import FormCar from '../FormCar/FormCar';
 import { CAR_DEPOSIT, getDiffInDays, procentraPrice } from '@/lib/values';
+import DarkProvider from '../DarkProvider/DarkProvider';
 
-const theme = createTheme({
-  palette: {
-    mode: 'dark',
-  },
-});
 const RentalCar = ({ carData }) => {
   const price = Number(carData.price);
 
@@ -52,7 +48,7 @@ const RentalCar = ({ carData }) => {
 
       <div>
         <div className={styled.data}>
-          <ThemeProvider theme={theme}>
+          <DarkProvider>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DatePicker
                 label="Start dates"
@@ -71,7 +67,7 @@ const RentalCar = ({ carData }) => {
                 }
               />
             </LocalizationProvider>
-          </ThemeProvider>
+          </DarkProvider>
         </div>
         <div className={styled.text}>
           <p>Price</p> <p>USDT accepted</p>
