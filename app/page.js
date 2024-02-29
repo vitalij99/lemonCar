@@ -16,7 +16,7 @@ export default async function Home() {
       <Hero />
       <Available />
       <Advantage />
-      <Box />
+
       <Carlist list={listCar} />
       <Steps />
       <Contact />
