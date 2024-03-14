@@ -6,6 +6,7 @@ import './styles/globals.scss';
 
 import { Header } from './_componets/Header/Header';
 import Footer from './_componets/Footer/Footer';
+import DarkProvider from './_componets/DarkProvider/DarkProvider';
 
 const heroFont = localFont({
   variable: '--font-monument',
@@ -42,9 +43,11 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${myFont.variable} ${heroFont.variable}`}>
-        <Header />
-        {children}
-        <Footer />
+        <DarkProvider>
+          <Header />
+          {children}
+          <Footer />
+        </DarkProvider>
       </body>
     </html>
   );
