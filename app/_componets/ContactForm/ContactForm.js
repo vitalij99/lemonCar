@@ -5,7 +5,7 @@ import axios from 'axios';
 
 import style from './contactForm.module.scss';
 import { Formik } from 'formik';
-import { Button, MenuItem, Skeleton, TextField } from '@mui/material';
+import { Box, Button, MenuItem, Skeleton, TextField } from '@mui/material';
 
 const INITIAL_VALUES = {
   phone: '',
@@ -103,14 +103,16 @@ const ContactForm = ({ carForm, handleClose }) => {
                   ))}
                 </TextField>
               )}
-
-              <Button
-                disabled={submitPending}
-                className={style.btn}
-                type="submit"
-              >
-                {carForm ? 'RENTAL CAR' : 'Contact Us'}
-              </Button>
+              <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+                <Button
+                  disabled={submitPending}
+                  className={style.btn}
+                  type="submit"
+                  variant="contained"
+                >
+                  {carForm ? 'RENTAL CAR' : 'Contact Us'}
+                </Button>
+              </Box>
             </form>
           )}
         </Formik>
