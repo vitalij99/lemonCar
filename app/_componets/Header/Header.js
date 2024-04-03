@@ -24,7 +24,7 @@ export const Header = () => {
             {HEADER_LINK.map((nav, index) => {
               return (
                 <li key={index}>
-                  <Link href={nav.link}>{nav.name}</Link>
+                  <Link href={nav.href}>{nav.name}</Link>
                 </li>
               );
             })}
