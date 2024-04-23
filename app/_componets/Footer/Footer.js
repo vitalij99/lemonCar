@@ -1,16 +1,9 @@
-import { HEADER_LINK } from '@/lib/link';
+import { CARLIST, HEADER_LINK } from '@/lib/link';
 import Contacts from '../Contacts/Contacts';
 import Container from '../Container/Container';
 import Dropdown from '../Dropdown/Dropdown';
 import LinkCircle from '../LinkCircle/LinkCircle';
 import style from './footer.module.scss';
-
-const CARLIST = [
-  { href: '/carlist/popular', name: 'Most popular' },
-  { href: '/carlist/suv', name: 'SUV' },
-  { href: '/carlist/cabriolet', name: 'Cabriolet' },
-  { href: '/carlist/sedan', name: 'Sedan' },
-];
 
 const Footer = () => {
   return (

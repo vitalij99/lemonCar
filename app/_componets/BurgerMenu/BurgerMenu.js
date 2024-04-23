@@ -41,7 +41,7 @@ const BurgerMenu = ({ list, className }) => {
               return (
                 <ListItem key={index}>
                   <Button sx={{ m: '0 auto' }} variant="contained">
-                    <Link href={nav.link} color="#fff" underline="none">
+                    <Link href={nav.href} color="#fff" underline="none">
                       {nav.name}
                     </Link>
                   </Button>
