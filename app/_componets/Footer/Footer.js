@@ -24,7 +24,7 @@ const Footer = () => {
           <Contacts
             className={style.list}
             title="For Customers"
-            list={CUSTOMERS}
+            list={HEADER_LINK}
             blank={false}
           />
           <Contacts
